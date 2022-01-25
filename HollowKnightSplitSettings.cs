@@ -1248,6 +1248,8 @@ namespace LiveSplit.HollowKnight {
         EnterHiveKnight,
         [Description("Enter Troupe Master Grimm (Transition)"), ToolTip("Splits when entering Grimm tent with requirements to trigger Troupe Master Grimm boss")]
         EnterTMG,
+        [Description("Tower of Love (Transition)"), ToolTip("Splits when entering the Tower of Love")]
+        EnterLoveTower,
 
         [Description("Vengefly King Killed (Transition)"), ToolTip("Splits on transition after Vengefly King in Greenpath killed")]
         VengeflyKingTrans,
@@ -1256,6 +1258,11 @@ namespace LiveSplit.HollowKnight {
 
         [Description("Spell Twister (Transition)"), ToolTip("Splits on transition after picking up Spell Twister")]
         SpellTwisterTrans,
+
+        [Description("Has Isma's Tear (Transition)"), ToolTip("Splits on entering a transition with Isma's Tear")]
+        TransIsmas,
+        [Description("Isma's Tear w/ Grub (Transition)"), ToolTip("Splits on entering a transition after picking up Isma's Tear and rescuing the grub in Isma's Grove")]
+        TransIsmasWithGrub,
 
         [Description("Glade Idol (Relic)"), ToolTip("Splits when picking up the King's Idol in the Spirits' Glade")]
         GladeIdol,

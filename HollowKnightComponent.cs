@@ -996,11 +996,17 @@ namespace LiveSplit.HollowKnight {
                     shouldSplit = nextScene.StartsWith("Grimm_Main_Tent") && nextScene != sceneName
                     && mem.PlayerData<int>(Offset.grimmChildLevel) == 2
                     && mem.PlayerData<int>(Offset.flamesCollected) == 3; break;
+                case SplitName.EnterLoveTower: shouldSplit = nextScene.StartsWith("Ruins2_11") && nextScene != sceneName; break;
 
                 case SplitName.VengeflyKingTrans: shouldSplit = mem.PlayerData<bool>(Offset.zoteRescuedBuzzer) && nextScene != sceneName; break;
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != sceneName; break;
 
                 case SplitName.SpellTwisterTrans: shouldSplit = mem.PlayerData<bool>(Offset.gotCharm_33) && nextScene != sceneName; break;
+
+                case SplitName.TransIsmas: shouldSplit = mem.PlayerData<bool>(Offset.hasAcidArmour) && nextScene != sceneName; break;
+                case SplitName.TransIsmasWithGrub: shouldSplit =
+                        mem.PlayerData<bool>(Offset.hasAcidArmour) && nextScene != sceneName
+                        && mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13"); break;
 
                 case SplitName.GladeIdol: shouldSplit = store.CheckIncreased(Offset.trinket3) && sceneName.StartsWith("RestingGrounds_08"); break;
 
