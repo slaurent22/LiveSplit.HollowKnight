@@ -191,6 +191,8 @@ namespace LiveSplit.HollowKnight {
         BroodingMawlek,
         [Description("Collector (Boss)"), ToolTip("Splits when killing Collector")]
         Collector,
+        [Description("Collector and Collector Grubs (Boss + Grubs)"), ToolTip("Splits when killing Collector and saving all 3 Grubs in the Tower of Love")]
+        CollectorAndGrubs,
         [Description("Crystal Guardian 1 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the first time")]
         CrystalGuardian1,
         [Description("Crystal Guardian 2 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the second time")]
@@ -438,7 +440,7 @@ namespace LiveSplit.HollowKnight {
         NightmareLantern,
         [Description("Nightmare Lantern Destroyed (Event)"), ToolTip("Splits when destroying the Nightmare Lantern")]
         NightmareLanternDestroyed,
-        [Description("Radiance Dream Entry (Event)"), ToolTip("Splits when going into the dream world for Hollow Knight to fight Radiance")]
+        [Description("Radiance Dream Entry (Event)"), ToolTip("Splits upon entering the Radiance dream, skips upon killing the Hollow Knight")]
         HollowKnightDreamnail,
         [Description("Seer Departs (Event)"), ToolTip("Splits when the Seer Departs after bringing back 2400 essence")]
         SeerDeparts,
@@ -615,6 +617,8 @@ namespace LiveSplit.HollowKnight {
         EnterAnyDream,
         [Description("Fog Canyon (Transition)"), ToolTip("Splits on transition to East Fog Canyon")]
         FogCanyonEntry,
+        [Description("Ancestral Mound (Transition)"), ToolTip("Splits on transition into Ancestral Mound")]
+        AncestralMound,
         [Description("Fungal Wastes Entry (Transition)"), ToolTip("Splits on transition to Fungal Wastes (scene below Crossroads, right of QS, left of Waterways or with Spore Shroom")]
         FungalWastesEntry,
         [Description("Gorgeous Husk Killed (Transition)"), ToolTip("Splits on transition after Gorgeous Husk defeated")]
@@ -635,7 +639,7 @@ namespace LiveSplit.HollowKnight {
         HiveEntry,
         [Description("King's Pass (Transition)"), ToolTip("Splits when leaving King's pass")]
         KingsPass,
-        [Description("King's Pass From Town (Transition)"), ToolTip("Splits on transition between Dirtmouth and King's Pass")]
+        [Description("King's Pass from Town (Transition)"), ToolTip("Splits on transition between Dirtmouth and King's Pass")]
         KingsPassEnterFromTown,
         [Description("Kingdom's Edge (Transition)"), ToolTip("Splits on transition to Kingdom's Edge from King's Station")]
         KingdomsEdgeEntry,
@@ -706,6 +710,8 @@ namespace LiveSplit.HollowKnight {
         WhiteFragmentLeft,
         [Description("Kingsoul Fragment - King's (Charm)"), ToolTip("Splits on picking up the right Kingsoul White Fragment")]
         WhiteFragmentRight,
+        [Description("Kingsoul Fragment - Any (Charm)"), ToolTip("Splits on picking up a Kingsoul White Fragment")]
+        WhiteFragmentAny,
         [Description("Kingsoul (Charm)"), ToolTip("Splits when obtaining the completed Kingsoul charm")]
         Kingsoul,
         [Description("Lifeblood Core (Charm)"), ToolTip("Splits when obtaining the Lifeblood Core charm")]
@@ -1357,6 +1363,122 @@ namespace LiveSplit.HollowKnight {
         OnObtainGrub,
         [Description("Pale Ore (Obtain)"), ToolTip("Splits when obtaining a Pale Ore")]
         OnObtainPaleOre,
+
+        [Description("36000 Geo (Geo Count)"), ToolTip("Splits when geo count ≥36000")]
+        Geo36000,
+
+        [Description("Colo 1 Wave 1a"), ToolTip("Splits upon killing the first Sheilded Fool in wave 1")]
+        Bronze1a,
+        [Description("Colo 1 Wave 1b"), ToolTip("Splits upon killing the pair of Sheilded fools in wave 1")]
+        Bronze1b,
+        [Description("Colo 1 Wave 1c"), ToolTip("Splits upon killing the pair of Sharp Baldurs at the end of wave 1")]
+        Bronze1c,
+        [Description("Colo 1 Wave 2"), ToolTip("Splits upon killing all five Sharp Baldurs in wave 2")]
+        Bronze2,
+        [Description("Colo 1 Wave 3a"), ToolTip("Splits upon killing the first Sturdy Fool in wave 3")]
+        Bronze3a,
+        [Description("Colo 1 Wave 3b"), ToolTip("Splits upon killing the pair of Sturdy Fools at the end of wave 3")]
+        Bronze3b,
+        [Description("Colo 1 Wave 4"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 4")]
+        Bronze4,
+        [Description("Colo 1 Wave 5"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 5")]
+        Bronze5,
+        [Description("Colo 1 Wave 6"), ToolTip("Splits upon killing all three Sturdy Fools on the raised platforms in wave 6")]
+        Bronze6,
+        [Description("Colo 1 Wave 7"), ToolTip("Splits upon killing both Primal Aspids and Sharp Baldurs in wave 7")]
+        Bronze7,
+        [Description("Colo 1 Wave 8a"), ToolTip("Splits upon killing all four Vengeflies in wave 8")]
+        Bronze8a,
+        [Description("Colo 1 Wave 8b"), ToolTip("Splits upon killing the Vengefly King in wave 8")]
+        Bronze8b,
+        [Description("Colo 1 Wave 9"), ToolTip("Splits upon killing the Sharp Baldur after the Primal Aspid at the end of wave 9")]
+        Bronze9,
+        [Description("Colo 1 Wave 10"), ToolTip("Splits upon killing the third Sharp Baldur in the low ceiling section in wave 10")]
+        Bronze10,
+        [Description("Colo 1 Wave 11a"), ToolTip("Splits upon killing the first pair of Volatile Gruzzers in wave 11")]
+        Bronze11a,
+        [Description("Colo 1 Wave 11b"), ToolTip("Splits upon killing the final group of Volatile Gruzzers at the end of wave 11")]
+        Bronze11b,
+        [Description("Colo 1 End"), ToolTip("Splits upon killing the pair Gruz Mothers at the end of Trial of the Warrior")]
+        BronzeEnd,
+
+        [Description("Colo 2 Wave 1"), ToolTip("Splits upon completing wave 1")]
+        Silver1,
+        [Description("Colo 2 Wave 2"), ToolTip("Splits upon completing wave 2")]
+        Silver2,
+        [Description("Colo 2 Wave 3"), ToolTip("Splits upon completing wave 3")]
+        Silver3,
+        [Description("Colo 2 Wave 4"), ToolTip("Splits upon completing wave 4")]
+        Silver4,
+        [Description("Colo 2 Wave 5"), ToolTip("Splits upon completing wave 5")]
+        Silver5,
+        [Description("Colo 2 Wave 6"), ToolTip("Splits upon the death of the 3 Belflies after the Heavy Fool")]
+        Silver6,
+        [Description("Colo 2 Wave 7"), ToolTip("Splits on the death of the single Belfly")]
+        Silver7,
+        [Description("Colo 2 Wave 8"), ToolTip("Splits upon killing the first Great Hopper")]
+        Silver8,
+        [Description("Colo 2 Wave 9"), ToolTip("Splits upon killing the second Great Hopper")]
+        Silver9,
+        [Description("Colo 2 Wave 10"), ToolTip("Splits upon killing the Mimic")]
+        Silver10,
+        [Description("Colo 2 Wave 11"), ToolTip("Splits upon completing wave 11")]
+        Silver11,
+        [Description("Colo 2 Wave 12"), ToolTip("Splits upon completing wave 12")]
+        Silver12,
+        [Description("Colo 2 Wave 13"), ToolTip("Splits upon completing wave 13")]
+        Silver13,
+        [Description("Colo 2 Wave 14"), ToolTip("Splits upon completing wave 14")]
+        Silver14,
+        [Description("Colo 2 Wave 15"), ToolTip("Splits upon completing wave 15")]
+        Silver15,
+        [Description("Colo 2 Wave 16"), ToolTip("Splits upon completing wave 16")]
+        Silver16,
+        [Description("Colo 2 End"), ToolTip("Splits upon killing both Oblobbles at the end of Trial of the Conqueror")]
+        SilverEnd,
+
+        [Description("Colo 3 Wave 1"), ToolTip("Splits upon completing wave 1")]
+        Gold1,
+        [Description("Colo 3 Wave 3"), ToolTip("Splits upon completing waves 2 and 3")]
+        Gold3,
+        [Description("Colo 3 Wave 4"), ToolTip("Splits upon completing wave 4")]
+        Gold4,
+        [Description("Colo 3 Wave 5"), ToolTip("Splits upon killing the first wave of 3 Loodles")]
+        Gold5,
+        [Description("Colo 3 Wave 6"), ToolTip("Splits upon killing the set of 5 Loodles")]
+        Gold6,
+        [Description("Colo 3 Wave 7"), ToolTip("Splits upon killing the second wave of 3 Loodles")]
+        Gold7,
+        [Description("Colo 3 Wave 8"), ToolTip("Splits upon completing wave 8")]
+        Gold8,
+        [Description("Colo 3 Wave 9a"), ToolTip("Splits upon killing the fools and mantises in wave 9")]
+        Gold9a,
+        [Description("Colo 3 Wave 9b"), ToolTip("Splits upon killing the Soul Warrior in wave 9")]
+        Gold9b,
+        [Description("Colo 3 Wave 10"), ToolTip("Splits upon completing wave 10")]
+        Gold10,
+        [Description("Colo 3 Wave 11"), ToolTip("Splits upon completing wave 11")]
+        Gold11,
+        [Description("Colo 3 Wave 12a"), ToolTip("Splits upon killing second set of 2 Lesser Mawleks and Winged Fool")]
+        Gold12a,
+        [Description("Colo 3 Wave 12b"), ToolTip("Splits upon killing the Brooding Mawlek")]
+        Gold12b,
+        [Description("Colo 3 Wave 14a"), ToolTip("Splits upon killing the Squits, Petras and Primal Aspids in wave 14")]
+        Gold14a,
+        [Description("Colo 3 Wave 14b"), ToolTip("Splits upon killing the Winged Fools and Battle Obbles in wave 14")]
+        Gold14b,
+        [Description("Colo 3 Wave 15"), ToolTip("Splits upon killing both Squits in wave 15")]
+        Gold15,
+        [Description("Colo 3 Wave 16"), ToolTip("Splits upon the death of all 14 Death Loodles in wave 16")]
+        Gold16,
+        [Description("Colo 3 Wave 17a"), ToolTip("Splits upon killing the first two phases of fools and mantises in wave 17")]
+        Gold17a,
+        [Description("Colo 3 Wave 17b"), ToolTip("Splits upon killing the fools, Volt Twister and Soul Twister in wave 17")]
+        Gold17b,
+        [Description("Colo 3 Wave 17c"), ToolTip("Splits upon killing all the regular enemies in wave 17")]
+        Gold17c,
+        [Description("Colo 3 End"), ToolTip("Splits upon killing God Tamer")]
+        GoldEnd,
 
         [Description("Any Transition (Transition)"), ToolTip("Splits when the knight enters a transition (only one will split per transition)")]
         AnyTransition,
