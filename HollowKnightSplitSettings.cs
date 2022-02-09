@@ -440,7 +440,7 @@ namespace LiveSplit.HollowKnight {
         NightmareLantern,
         [Description("Nightmare Lantern Destroyed (Event)"), ToolTip("Splits when destroying the Nightmare Lantern")]
         NightmareLanternDestroyed,
-        [Description("Radiance Dream Entry (Event)"), ToolTip("Splits upon entering the Radiance dream, skips upon killing the Hollow Knight")]
+        [Description("Radiance Dream Entry (Event)"), ToolTip("Splits upon entering the Radiance dream\nSkips upon killing the Hollow Knight")]
         HollowKnightDreamnail,
         [Description("Seer Departs (Event)"), ToolTip("Splits when the Seer Departs after bringing back 2400 essence")]
         SeerDeparts,
