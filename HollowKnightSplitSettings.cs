@@ -58,15 +58,15 @@ namespace LiveSplit.HollowKnight {
         }
     }
     public enum SplitName {
-        [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek (Shadow Scream)")]
+        [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
         AbyssShriek,
-        [Description("Crystal Heart (Skill)"), ToolTip("Splits when obtaining Crystal Heart (Super Dash)")]
+        [Description("Crystal Heart (Skill)"), ToolTip("Splits when obtaining Crystal Heart")]
         CrystalHeart,
-        [Description("Cyclone Slash (Skill)"), ToolTip("Splits when obtaining Cyclone Slash (Nail Art)")]
+        [Description("Cyclone Slash (Skill)"), ToolTip("Splits when obtaining Cyclone Slash")]
         CycloneSlash,
-        [Description("Dash Slash (Skill)"), ToolTip("Splits when obtaining Dash Slash (Nail Art)")]
+        [Description("Dash Slash (Skill)"), ToolTip("Splits when obtaining Dash Slash")]
         DashSlash,
-        [Description("Descending Dark (Skill)"), ToolTip("Splits when obtaining Descending Dark (Shadow Dive)")]
+        [Description("Descending Dark (Skill)"), ToolTip("Splits when obtaining Descending Dark")]
         DescendingDark,
         [Description("Desolate Dive (Skill)"), ToolTip("Splits when obtaining Desolate Dive")]
         DesolateDive,
@@ -76,21 +76,21 @@ namespace LiveSplit.HollowKnight {
         DreamNail2,
         [Description("Dream Gate (Skill)"), ToolTip("Splits when obtaining Dream Gate")]
         DreamGate,
-        [Description("Great Slash (Skill)"), ToolTip("Splits when obtaining Great Slash (Nail Art)")]
+        [Description("Great Slash (Skill)"), ToolTip("Splits when obtaining Great Slash")]
         GreatSlash,
-        [Description("Howling Wraiths (Skill)"), ToolTip("Splits when obtaining Howling Wraiths (Scream)")]
+        [Description("Howling Wraiths (Skill)"), ToolTip("Splits when obtaining Howling Wraiths")]
         HowlingWraiths,
-        [Description("Isma's Tear (Skill)"), ToolTip("Splits when obtaining Isma's Tear (Acid Armour)")]
+        [Description("Isma's Tear (Skill)"), ToolTip("Splits when obtaining Isma's Tear")]
         IsmasTear,
-        [Description("Mantis Claw (Skill)"), ToolTip("Splits when obtaining Mantis Claw (Wall Jump)")]
+        [Description("Mantis Claw (Skill)"), ToolTip("Splits when obtaining Mantis Claw")]
         MantisClaw,
-        [Description("Monarch Wings (Skill)"), ToolTip("Splits when obtaining Monarch Wings (Double Jump)")]
+        [Description("Monarch Wings (Skill)"), ToolTip("Splits when obtaining Monarch Wings")]
         MonarchWings,
-        [Description("Mothwing Cloak (Skill)"), ToolTip("Splits when obtaining Mothwing Cloak (Dash)")]
+        [Description("Mothwing Cloak (Skill)"), ToolTip("Splits when obtaining Mothwing Cloak")]
         MothwingCloak,
-        [Description("Shade Cloak (Skill)"), ToolTip("Splits when obtaining Shade Cloak (Shadow Dash)")]
+        [Description("Shade Cloak (Skill)"), ToolTip("Splits when obtaining Shade Cloak")]
         ShadeCloak,
-        [Description("Shade Soul (Skill)"), ToolTip("Splits when obtaining Shade Soul (Vengeful Spirit 2)")]
+        [Description("Shade Soul (Skill)"), ToolTip("Splits when obtaining Shade Soul")]
         ShadeSoul,
         [Description("Vengeful Spirit (Skill)"), ToolTip("Splits when obtaining Vengeful Spirit")]
         VengefulSpirit,
@@ -101,7 +101,7 @@ namespace LiveSplit.HollowKnight {
         HasDelicateFlower,
         [Description("Elegant Key (Item)"), ToolTip("Splits when obtaining the Elegant Key")]
         ElegantKey,
-        [Description("Elegant Key Shoptimisation (Item)"), ToolTip("Splits when obtaining both mask shard 1 and Elegant Key")]
+        [Description("Elegant Key Shoptimisation (Item)"), ToolTip("Splits when obtaining both Mask Shard 1 and Elegant Key")]
         ElegantKeyShoptimised,
         [Description("God Tuner (Item)"), ToolTip("Splits when obtaining the God Tuner")]
         GodTuner,
@@ -121,7 +121,7 @@ namespace LiveSplit.HollowKnight {
         SalubrasBlessing,
         [Description("Simple Key - First (Item)"), ToolTip("Splits when obtaining the first Simple Key")]
         SimpleKey,
-        [Description("Shopkeeper's Key (Item)"), ToolTip("Splits when obtaining the Shopkeeper's Key from the Crystal Peak key room")]
+        [Description("Shopkeeper's Key (Item)"), ToolTip("Splits when obtaining the Shopkeeper's Key")]
         SlyKey,
         [Description("Tram Pass (Item)"), ToolTip("Splits when obtaining the Tram Pass")]
         TramPass,
@@ -158,31 +158,31 @@ namespace LiveSplit.HollowKnight {
         MaskFragment15,
         [Description("Mask Fragment 16 (Upgrade)"), ToolTip("Splits when getting 16th Mask fragment (9 HP)")]
         Mask4,
-        [Description("Nail 1 (Upgrade)"), ToolTip("Splits when getting Nail Upgrade 1")]
+        [Description("Nail 1 (Upgrade)"), ToolTip("Splits upon upgrading to the Sharpened Nail")]
         NailUpgrade1,
-        [Description("Nail 2 (Upgrade)"), ToolTip("Splits when getting Nail Upgrade 2")]
+        [Description("Nail 2 (Upgrade)"), ToolTip("Splits upon upgrading to the Channeled Nail")]
         NailUpgrade2,
-        [Description("Nail 3 (Upgrade)"), ToolTip("Splits when getting Coil Nail (Upgrade 3)")]
+        [Description("Nail 3 (Upgrade)"), ToolTip("Splits upon upgrading to the Coiled Nail")]
         NailUpgrade3,
-        [Description("Nail 4 (Upgrade)"), ToolTip("Splits when getting Pure Nail (Upgrade 4)")]
+        [Description("Nail 4 (Upgrade)"), ToolTip("Splits upon upgrading to the Pure Nail")]
         NailUpgrade4,
         [Description("Vessel Fragment 1 (Fragment)"), ToolTip("Splits when getting 1st Vessel fragment")]
         VesselFragment1,
         [Description("Vessel Fragment 2 (Fragment)"), ToolTip("Splits when getting 2nd Vessel fragment")]
         VesselFragment2,
-        [Description("Vessel Fragment 3 (Upgrade)"), ToolTip("Splits when getting 3rd Vessel fragment (1 extra MP)")]
+        [Description("Vessel Fragment 3 (Upgrade)"), ToolTip("Splits when getting 3rd Vessel fragment (1 extra Soul Vessel)")]
         Vessel1,
         [Description("Vessel Fragment 4 (Fragment)"), ToolTip("Splits when getting 4th Vessel fragment")]
         VesselFragment4,
         [Description("Vessel Fragment 5 (Fragment)"), ToolTip("Splits when getting 5th Vessel fragment")]
         VesselFragment5,
-        [Description("Vessel Fragment 6 (Upgrade)"), ToolTip("Splits when getting 6th Vessel fragment (2 extra MP)")]
+        [Description("Vessel Fragment 6 (Upgrade)"), ToolTip("Splits when getting 6th Vessel fragment (2 extra Soul Vessel)")]
         Vessel2,
         [Description("Vessel Fragment 7 (Fragment)"), ToolTip("Splits when getting 7th Vessel fragment")]
         VesselFragment7,
         [Description("Vessel Fragment 8 (Fragment)"), ToolTip("Splits when getting 8th Vessel fragment")]
         VesselFragment8,
-        [Description("Vessel Fragment 9 (Upgrade)"), ToolTip("Splits when getting 9th Vessel fragment (3 extra MP)")]
+        [Description("Vessel Fragment 9 (Upgrade)"), ToolTip("Splits when getting 9th Vessel fragment (3 extra Soul Vessel)")]
         Vessel3,
 
         [Description("Broken Vessel (Boss)"), ToolTip("Splits when killing Broken Vessel")]
@@ -191,8 +191,8 @@ namespace LiveSplit.HollowKnight {
         BroodingMawlek,
         [Description("Collector (Boss)"), ToolTip("Splits when killing Collector")]
         Collector,
-        [Description("Collector and Collector Grubs (Boss + Grubs)"), ToolTip("Splits when killing Collector and saving all 3 Grubs in the Tower of Love")]
-        CollectorAndGrubs,
+        [Description("Collector Defeated (Transition)"), ToolTip("Splits when killing Collector and saving all 3 Grubs in the Tower of Love")]
+        TransCollector,
         [Description("Crystal Guardian 1 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the first time")]
         CrystalGuardian1,
         [Description("Crystal Guardian 2 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the second time")]
@@ -209,9 +209,9 @@ namespace LiveSplit.HollowKnight {
         ElderHuEssence,
         [Description("False Knight (Boss)"), ToolTip("Splits when killing False Knight")]
         FalseKnight,
-        [Description("Failed Champion (Boss)"), ToolTip("Splits when killing Failed Champion (False Knight Dream)")]
+        [Description("Failed Champion (Boss)"), ToolTip("Splits when killing Failed Champion")]
         FailedKnight,
-        [Description("Failed Champion (Essence)"), ToolTip("Splits when getting Failed Champion essence (False Knight Dream)")]
+        [Description("Failed Champion (Essence)"), ToolTip("Splits when getting Failed Champion essence")]
         FailedChampionEssence,
         [Description("Flukemarm (Boss)"), ToolTip("Splits when killing Flukemarm")]
         Flukemarm,
@@ -235,13 +235,13 @@ namespace LiveSplit.HollowKnight {
         GruzMother,
         [Description("Hive Knight (Boss)"), ToolTip("Splits when killing Hive Knight")]
         HiveKnight,
-        [Description("Hornet 1 (Boss)"), ToolTip("Splits when killing Hornet for the first time")]
+        [Description("Hornet 1 (Boss)"), ToolTip("Splits when killing Hornet Protector in Greenpath")]
         Hornet1,
-        [Description("Hornet 2 (Boss)"), ToolTip("Splits when killing Hornet for the second time")]
+        [Description("Hornet 2 (Boss)"), ToolTip("Splits when killing Hornet Sentinel in Kingdom's Edge")]
         Hornet2,
-        [Description("Lost Kin (Boss)"), ToolTip("Splits when killing Lost Kin (Broken Vessel Dream)")]
+        [Description("Lost Kin (Boss)"), ToolTip("Splits when killing Lost Kin")]
         LostKin,
-        [Description("Lost Kin (Essence)"), ToolTip("Splits when getting Lost Kin essence (Broken Vessel Dream)")]
+        [Description("Lost Kin (Essence)"), ToolTip("Splits when getting Lost Kin essence")]
         LostKinEssence,
         [Description("Mantis Lords (Boss)"), ToolTip("Splits when killing Mantis Lords")]
         MantisLords,
@@ -265,7 +265,7 @@ namespace LiveSplit.HollowKnight {
         Nosk,
         [Description("Oblobbles (Boss)"), ToolTip("Splits when 2 Oblobbles are deafeated (ideally the first pair you encounter in Colo 2)")]
         KilledOblobbles,
-        [Description("Oro & Mato Nail Bros (Boss)"), ToolTip("Splits when killing the Nail Bros (Pantheon)")]
+        [Description("Oro & Mato Nail Bros (Boss)"), ToolTip("Splits when killing the Nail Bros")]
         MatoOroNailBros,
         [Description("Pure Vessel (Boss)"), ToolTip("Splits when killing Pure Vessel")]
         PureVessel,
@@ -273,15 +273,15 @@ namespace LiveSplit.HollowKnight {
         RadianceBoss,
         [Description("Segment Practice - THK (Boss)"), ToolTip("Splits when killing The Hollow Knight")]
         HollowKnightBoss,
-        [Description("Sheo Paintmaster (Boss)"), ToolTip("Splits when killing Sheo (Pantheon)")]
+        [Description("Sheo Paintmaster (Boss)"), ToolTip("Splits when killing Sheo")]
         SheoPaintmaster,
-        [Description("Sly Nailsage (Boss)"), ToolTip("Splits when killing Nailsage Sly (Pantheon)")]
+        [Description("Sly Nailsage (Boss)"), ToolTip("Splits when killing Nailsage Sly")]
         SlyNailsage,
         [Description("Soul Master (Boss)"), ToolTip("Splits when killing Soul Master")]
         SoulMaster,
-        [Description("Soul Tyrant (Boss)"), ToolTip("Splits when killing Soul Tyrant (Soul Master Dream)")]
+        [Description("Soul Tyrant (Boss)"), ToolTip("Splits when killing Soul Tyrant")]
         SoulTyrant,
-        [Description("Soul Tyrant (Essence)"), ToolTip("Splits when getting Soul Tyrant essence (Soul Master Dream)")]
+        [Description("Soul Tyrant (Essence)"), ToolTip("Splits when getting Soul Tyrant essence")]
         SoulTyrantEssence,
         [Description("Soul Tyrant w/ Sanctum Grub (Essence)"), ToolTip("Splits when getting Soul Tyrant essence and Sanctum fakedive grub")]
         SoulTyrantEssenceWithSanctumGrub,
@@ -406,25 +406,25 @@ namespace LiveSplit.HollowKnight {
         [Description("Third Dreamer (Dreamer)"), ToolTip("Splits when you see the mask for the third dreamer killed")]
         Dreamer3,
 
-        [Description("106% Pre-Grimm Shop (Event)"), ToolTip("Splits when Lantern + Vessel Fragment(5) + Mask Shard(4) have been acquired")]
+        [Description("106% Pre-Grimm Shop (Event)"), ToolTip("Splits when Lantern + Vessel Fragment (5) + Mask Shard (4) have been acquired")]
         PreGrimmShop,
-        [Description("106% Pre-Grimm Shop (Transition)"), ToolTip("Splits when Lantern + Vessel Fragment(5) + Mask Shard(4) have been acquired")]
+        [Description("106% Pre-Grimm Shop (Transition)"), ToolTip("Splits when Lantern + Vessel Fragment (5) + Mask Shard (4) have been acquired")]
         PreGrimmShopTrans,
-        [Description("1xx% Sly Final Shop (Transition)"), ToolTip("Splits on leaving Sly's shop after having bough Sprintmaster and Vessel Frag 8")]
+        [Description("1xx% Sly Final Shop (Transition)"), ToolTip("Splits on leaving Sly's shop after having bough Sprintmaster and Vessel Fragment 8")]
         SlyShopFinished,
         [Description("Can Overcharm (Event)"), ToolTip("Splits when overcharming is enabled")]
         CanOvercharm,
         [Description("Chains Broken - Hollow Knight (Event)"), ToolTip("Splits at the end of the first Hollow Knight scream after the chains are broken")]
         UnchainedHollowKnight,
-        [Description("Chandelier - Watcher Knights (Event)"), ToolTip("Splits when dropping the chandelier on one of the watcher knights")]
+        [Description("Chandelier - Watcher Knights (Event)"), ToolTip("Splits when dropping the chandelier on one of the Watcher Knights")]
         WatcherChandelier,
-        [Description("City Gate (Event)"), ToolTip("Splits when using the City Key to open the gate")]
+        [Description("City Gate (Event)"), ToolTip("Splits when using the City Crest to open the gate")]
         CityGateOpen,
-        [Description("City Gate w/ Mantis Lords defeated (Event)"), ToolTip("to make sure you don't forget mantis lords")]
+        [Description("City Gate w/ Mantis Lords defeated (Event)"), ToolTip("To make sure you don't forget Mantis Lords")]
         CityGateAndMantisLords,
-        [Description("Death (Event)"), ToolTip("Splits when player hp is 0")]
+        [Description("Death (Event)"), ToolTip("Splits when player HP is 0")]
         PlayerDeath,
-        [Description("Shade Killed (Event)"), ToolTip("Splits when the shade is killed")]
+        [Description("Shade Killed (Event)"), ToolTip("Splits when the Shade is killed")]
         ShadeKilled,
         [Description("Ending (Event)"), ToolTip("Splits on any credits rolling")]
         EndingSplit,
@@ -444,7 +444,7 @@ namespace LiveSplit.HollowKnight {
         HollowKnightDreamnail,
         [Description("Seer Departs (Event)"), ToolTip("Splits when the Seer Departs after bringing back 2400 essence")]
         SeerDeparts,
-        [Description("Spirit Glade Door (Event)"), ToolTip("Splits when the Seer open Spirit Glade after bringing back 200 essence")]
+        [Description("Spirit Glade Door (Event)"), ToolTip("Splits when the Seer opens the Spirits' Glade after bringing back 200 essence")]
         SpiritGladeOpen,
         [Description("Trap Bench - Beasts Den (Event)"), ToolTip("Splits when getting the trap bench in Beasts Den")]
         BeastsDenTrapBench,
@@ -470,11 +470,11 @@ namespace LiveSplit.HollowKnight {
         ColosseumSilver,
         [Description("Colosseum Fight 3 (Trial)"), ToolTip("Splits when beating the third Colosseum trial")]
         ColosseumGold,
-        [Description("Colosseum Entrance 1 (Transition)"), ToolTip("Splits on the transition into the trial")]
+        [Description("Colosseum Entrance 1 (Transition)"), ToolTip("Splits on the transition into the first Colosseum trial")]
         ColosseumBronzeEntry,
-        [Description("Colosseum Entrance 2 (Transition)"), ToolTip("Splits on the transition into the trial")]
+        [Description("Colosseum Entrance 2 (Transition)"), ToolTip("Splits on the transition into the second Colosseum trial")]
         ColosseumSilverEntry,
-        [Description("Colosseum Entrance 3 (Transition)"), ToolTip("Splits on the transition into the trial")]
+        [Description("Colosseum Entrance 3 (Transition)"), ToolTip("Splits on the transition into the third Colosseum trial")]
         ColosseumGoldEntry,
         [Description("Colosseum Exit 1 (Transition)"), ToolTip("Splits on the transition out of the trial, or in the load-in after quitout")]
         ColosseumBronzeExit,
@@ -495,7 +495,7 @@ namespace LiveSplit.HollowKnight {
         [Description("Path of Pain (Completed)"), ToolTip("Splits when completing the Path of Pain section in White Palace")]
         PathOfPain,
 
-        [Description("Aspid Hunter (Mini Boss)"), ToolTip("Splits when killing the final Aspid Hunter")]
+        [Description("Aspid Hunter (Crossroads Arena)"), ToolTip("Splits when killing the final Aspid Hunter")]
         AspidHunter,
         [Description("Aluba (Killed)"), ToolTip("Splits when killing an Aluba")]
         Aluba,
@@ -509,7 +509,7 @@ namespace LiveSplit.HollowKnight {
         GorgeousHusk,
         [Description("Menderbug (Killed)"), ToolTip("Splits when killing Menderbug")]
         MenderBug,
-        [Description("Sanctum Warrior (Killed)"), ToolTip("Splits on first Sanctum Warrior kill")]
+        [Description("Soul Warrior (Killed)"), ToolTip("Splits on first Soul Warrior kill")]
         killedSanctumWarrior,
         [Description("Soul Twister (Killed)"), ToolTip("Splits on first Soul Twister kill")]
         killedSoulTwister,
@@ -523,7 +523,7 @@ namespace LiveSplit.HollowKnight {
         Zote1,
         [Description("Zote Rescued Deepnest (Mini Boss)"), ToolTip("Splits when rescuing Zote in Deepnest")]
         Zote2,
-        [Description("Zote Killed Colosseum (Mini Boss)"), ToolTip("Splits when killing Zote in the Colosseum")]
+        [Description("Zote Killed Colosseum (Mini Boss)"), ToolTip("Splits when defeating Zote in the Colosseum")]
         ZoteKilled,
 
         [Description("Forgotten Crossroads (Stag Station)"), ToolTip("Splits when opening the Forgotten Crossroads Stag Station")]
@@ -605,21 +605,21 @@ namespace LiveSplit.HollowKnight {
         [Description("White Palace - Workshop (Area)"), ToolTip("Splits when visiting the secret room in White Palace")]
         WhitePalaceSecretRoom,
 
-        [Description("Ancient Basin (Transition)"), ToolTip("Splits on transition to Basin, alternative to the (Area) split")]
+        [Description("Ancient Basin (Transition)"), ToolTip("Splits on transition to Ancient Basin")]
         BasinEntry,
-        [Description("Blue Lake (Transition)"), ToolTip("Splits on transition to Blue Lake (from either side)")]
+        [Description("Blue Lake (Transition)"), ToolTip("Splits on transition to Blue Lake from either side")]
         BlueLake,
         [Description("Crystal Peak Entry (Transition)"), ToolTip("Splits on transition to the room where the dive and toll entrances meet, or the room right of Dirtmouth")]
         CrystalPeakEntry,
         [Description("Crystal Mound Exit (Transition)"), ToolTip("Splits on transition from Crystal Mound")]
         CrystalMoundExit,
-        [Description("Enter Any Dream (Transition)"), ToolTip("Splits when entering any dream world")]
+        [Description("Enter Any Dream (Transition)"), ToolTip("Splits when entering the dream world")]
         EnterAnyDream,
         [Description("Fog Canyon (Transition)"), ToolTip("Splits on transition to East Fog Canyon")]
         FogCanyonEntry,
         [Description("Ancestral Mound (Transition)"), ToolTip("Splits on transition into Ancestral Mound")]
         AncestralMound,
-        [Description("Fungal Wastes Entry (Transition)"), ToolTip("Splits on transition to Fungal Wastes (scene below Crossroads, right of QS, left of Waterways or with Spore Shroom")]
+        [Description("Fungal Wastes Entry (Transition)"), ToolTip("Splits on transition to Fungal Wastes\n(Room below Crossroads, right of Queen's Station, left of Waterways or Spore Shroom room)")]
         FungalWastesEntry,
         [Description("Gorgeous Husk Killed (Transition)"), ToolTip("Splits on transition after Gorgeous Husk defeated")]
         TransGorgeousHusk,
@@ -637,27 +637,27 @@ namespace LiveSplit.HollowKnight {
         TransDescendingDark,
         [Description("Hive (Transition)"), ToolTip("Splits on transition to Hive")]
         HiveEntry,
-        [Description("King's Pass (Transition)"), ToolTip("Splits when leaving King's pass")]
+        [Description("King's Pass (Transition)"), ToolTip("Splits when entering Dirtmouth from King's Pass")]
         KingsPass,
-        [Description("King's Pass from Town (Transition)"), ToolTip("Splits on transition between Dirtmouth and King's Pass")]
+        [Description("King's Pass from Town (Transition)"), ToolTip("Splits when entering King's Pass from Dirtmouth")]
         KingsPassEnterFromTown,
         [Description("Kingdom's Edge (Transition)"), ToolTip("Splits on transition to Kingdom's Edge from King's Station")]
         KingdomsEdgeEntry,
         [Description("Kingdom's Edge Overcharmed (Transition)"), ToolTip("Splits on transition to Kingdom's Edge from King's Station while overcharmed")]
         KingdomsEdgeOvercharmedEntry,
-        [Description("NKG Dream (Transition)"), ToolTip("Splits on transition to NKG dream")]
+        [Description("NKG Dream (Transition)"), ToolTip("Splits on transition into Nightmare King Grimm dream")]
         EnterNKG,
         [Description("Queen's Garden Entry (Transition)"), ToolTip("Splits on transition to QG scene following QGA or above Deepnest")]
         QueensGardensEntry,
         [Description("Queen's Garden - Frogs (Transition)"), ToolTip("Splits on transition to QG frogs scene")]
         QueensGardensFrogsTrans,
-        [Description("Queen's Garden - Post-Upper Arena (Transition)"), ToolTip("Splits on transition to room after upper arena in QG. Useful for TE, 1xx, and other categories that go to upper QG")]
+        [Description("Queen's Garden - Post-Upper Arena (Transition)"), ToolTip("Splits on transition to room after upper arena in QG")]
         QueensGardensPostArenaTransition,
-        [Description("Sanctum (Transition)"), ToolTip("Splits when entering Sanctum")]
+        [Description("Soul Sanctum (Transition)"), ToolTip("Splits when entering Soul Sanctum")]
         EnterSanctum,
-        [Description("Sanctum w/ Shade Soul (Transition)"), ToolTip("Splits when entering Sanctum after obtaining shade soul")]
+        [Description("Soul Sanctum w/ Shade Soul (Transition)"), ToolTip("Splits when entering Soul Sanctum after obtaining Shade Soul")]
         EnterSanctumWithShadeSoul,
-        [Description("Waterways Manhole (Transition)"), ToolTip("Splits on transition to Waterways through Waterways")]
+        [Description("Waterways Manhole (Transition)"), ToolTip("Splits on transition to Waterways through the Simple Key manhole")]
         WaterwaysEntry,
         [Description("White Palace Entry (Transition)"), ToolTip("Splits when entering the first White Palace scene")]
         WhitePalaceEntry,
@@ -690,11 +690,11 @@ namespace LiveSplit.HollowKnight {
         GlowingWomb,
         [Description("Grimmchild (Charm)"), ToolTip("Splits when obtaining the Grimmchild charm")]
         Grimmchild,
-        [Description("Grimmchild Lvl 2 (Charm)"), ToolTip("Splits when obtaining the Grimmchild Lvl 2 charm")]
+        [Description("Grimmchild Lvl 2 (Charm)"), ToolTip("Splits when upgrading Grimmchild to level 2")]
         Grimmchild2,
-        [Description("Grimmchild Lvl 3 (Charm)"), ToolTip("Splits when obtaining the Grimmchild Lvl 3 charm")]
+        [Description("Grimmchild Lvl 3 (Charm)"), ToolTip("Splits when upgrading Grimmchild to level 3")]
         Grimmchild3,
-        [Description("Grimmchild Lvl 4 (Charm)"), ToolTip("Splits when obtaining the Grimmchild Lvl 4 charm")]
+        [Description("Grimmchild Lvl 4 (Charm)"), ToolTip("Splits when upgrading Grimmchild to level 4")]
         Grimmchild4,
         [Description("Grubberfly's Elegy (Charm)"), ToolTip("Splits when obtaining the Grubberfly's Elegy charm")]
         GrubberflysElegy,
@@ -706,11 +706,11 @@ namespace LiveSplit.HollowKnight {
         Hiveblood,
         [Description("Joni's Blessing (Charm)"), ToolTip("Splits when obtaining the Joni's Blessing charm")]
         JonisBlessing,
-        [Description("Kingsoul Fragment - Queen's (Charm)"), ToolTip("Splits on picking up the left Kingsoul White Fragment")]
+        [Description("Kingsoul Fragment - Queen's (Charm)"), ToolTip("Splits on picking up the left White Fragment from the White Lady")]
         WhiteFragmentLeft,
-        [Description("Kingsoul Fragment - King's (Charm)"), ToolTip("Splits on picking up the right Kingsoul White Fragment")]
+        [Description("Kingsoul Fragment - King's (Charm)"), ToolTip("Splits on picking up the right Kingsoul White Fragment from the Pale King")]
         WhiteFragmentRight,
-        [Description("Kingsoul Fragment - Any (Charm)"), ToolTip("Splits on picking up a Kingsoul White Fragment")]
+        [Description("Kingsoul Fragment - Any (Charm)"), ToolTip("Splits on picking up any White Fragment")]
         WhiteFragmentAny,
         [Description("Kingsoul (Charm)"), ToolTip("Splits when obtaining the completed Kingsoul charm")]
         Kingsoul,
@@ -1039,53 +1039,53 @@ namespace LiveSplit.HollowKnight {
         [Description("Whispering Root (Spirits' Glade)"), ToolTip("Splits upon completing the whispering root in the Spirits' Glade")]
         TreeGlade,
 
-        [Description("100 Essence (Essence)"), ToolTip("Essence")]
+        [Description("100 Essence (Essence)"), ToolTip("Splits upon obtaining 100 Essence")]
         Essence100,
-        [Description("200 Essence (Essence)"), ToolTip("Essence")]
+        [Description("200 Essence (Essence)"), ToolTip("Splits upon obtaining 200 Essence")]
         Essence200,
-        [Description("300 Essence (Essence)"), ToolTip("Essence")]
+        [Description("300 Essence (Essence)"), ToolTip("Splits upon obtaining 300 Essence")]
         Essence300,
-        [Description("400 Essence (Essence)"), ToolTip("Essence")]
+        [Description("400 Essence (Essence)"), ToolTip("Splits upon obtaining 400 Essence")]
         Essence400,
-        [Description("500 Essence (Essence)"), ToolTip("Essence")]
+        [Description("500 Essence (Essence)"), ToolTip("Splits upon obtaining 500 Essence")]
         Essence500,
-        [Description("600 Essence (Essence)"), ToolTip("Essence")]
+        [Description("600 Essence (Essence)"), ToolTip("Splits upon obtaining 600 Essence")]
         Essence600,
-        [Description("700 Essence (Essence)"), ToolTip("Essence")]
+        [Description("700 Essence (Essence)"), ToolTip("Splits upon obtaining 700 Essence")]
         Essence700,
-        [Description("800 Essence (Essence)"), ToolTip("Essence")]
+        [Description("800 Essence (Essence)"), ToolTip("Splits upon obtaining 800 Essence")]
         Essence800,
-        [Description("900 Essence (Essence)"), ToolTip("Essence")]
+        [Description("900 Essence (Essence)"), ToolTip("Splits upon obtaining 900 Essence")]
         Essence900,
-        [Description("1000 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1000 Essence (Essence)"), ToolTip("Splits upon obtaining 1000 Essence")]
         Essence1000,
-        [Description("1100 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1100 Essence (Essence)"), ToolTip("Splits upon obtaining 1100 Essence")]
         Essence1100,
-        [Description("1200 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1200 Essence (Essence)"), ToolTip("Splits upon obtaining 1200 Essence")]
         Essence1200,
-        [Description("1300 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1300 Essence (Essence)"), ToolTip("Splits upon obtaining 1300 Essence")]
         Essence1300,
-        [Description("1400 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1400 Essence (Essence)"), ToolTip("Splits upon obtaining 1400 Essence")]
         Essence1400,
-        [Description("1500 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1500 Essence (Essence)"), ToolTip("Splits upon obtaining 1500 Essence")]
         Essence1500,
-        [Description("1600 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1600 Essence (Essence)"), ToolTip("Splits upon obtaining 1600 Essence")]
         Essence1600,
-        [Description("1700 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1700 Essence (Essence)"), ToolTip("Splits upon obtaining 1700 Essence")]
         Essence1700,
-        [Description("1800 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1800 Essence (Essence)"), ToolTip("Splits upon obtaining 1800 Essence")]
         Essence1800,
-        [Description("1900 Essence (Essence)"), ToolTip("Essence")]
+        [Description("1900 Essence (Essence)"), ToolTip("Splits upon obtaining 1900 Essence")]
         Essence1900,
-        [Description("2000 Essence (Essence)"), ToolTip("Essence")]
+        [Description("2000 Essence (Essence)"), ToolTip("Splits upon obtaining 2000 Essence")]
         Essence2000,
-        [Description("2100 Essence (Essence)"), ToolTip("Essence")]
+        [Description("2100 Essence (Essence)"), ToolTip("Splits upon obtaining 2100 Essence")]
         Essence2100,
-        [Description("2200 Essence (Essence)"), ToolTip("Essence")]
+        [Description("2200 Essence (Essence)"), ToolTip("Splits upon obtaining 2200 Essence")]
         Essence2200,
-        [Description("2300 Essence (Essence)"), ToolTip("Essence")]
+        [Description("2300 Essence (Essence)"), ToolTip("Splits upon obtaining 2300 Essence")]
         Essence2300,
-        [Description("2400 Essence (Essence)"), ToolTip("Essence")]
+        [Description("2400 Essence (Essence)"), ToolTip("Splits upon obtaining 2400 Essence")]
         Essence2400,
 
         [Description("Any Bench (Bench)"), ToolTip("Splits when sitting on a bench")]
@@ -1266,16 +1266,16 @@ namespace LiveSplit.HollowKnight {
         GodhomeBench,
         [Description("Godhome Lore Room (Transition)"), ToolTip("Splits when leaving a Godhome lore room")]
         GodhomeLoreRoom,
-        [Description("Pantheon 1-4 (Transition)"), ToolTip("Splits on entry to any of pantheon 1 - 4")]
+        [Description("Pantheon 1-4 (Transition)"), ToolTip("Splits on entry to any of Pantheon 1 - 4")]
         Pantheon1to4Entry,
-        [Description("Pantheon 5 (Transition)"), ToolTip("Splits on entry to pantheon 5")]
+        [Description("Pantheon 5 (Transition)"), ToolTip("Splits on entry to Pantheon 5")]
         Pantheon5Entry,
 
-        [Description("Main Menu (Menu)"), ToolTip("Splits on main menu")]
+        [Description("Main Menu (Menu)"), ToolTip("Splits on the main menu")]
         Menu,
-        [Description("Main Menu w/ Claw (Menu)"), ToolTip("Splits on transition to menu after Mantis Claw acquired")]
+        [Description("Main Menu w/ Claw (Menu)"), ToolTip("Splits on transition to the main menu after Mantis Claw acquired")]
         MenuClaw,
-        [Description("Main Menu w/ Ghusk (Menu)"), ToolTip("Splits on transition to menu after Gorgeous Husk defeated")]
+        [Description("Main Menu w/ Ghusk (Menu)"), ToolTip("Splits on transition to the main menu after Gorgeous Husk defeated")]
         MenuGorgeousHusk,
 
         [Description("Cornifer at Home (Transition)"), ToolTip("Splits when entering Iselda's hut while Cornifer is sleeping")]
@@ -1330,11 +1330,11 @@ namespace LiveSplit.HollowKnight {
         OnObtainGhostPoggy,
         [Description("Dream Nail Gravedigger (Obtain)"), ToolTip("Splits when obtaining the essence from Gravedigger")]
         OnObtainGhostGravedigger,
-        [Description("Dream Nail Joni (Obtain)"), ToolTip("Splits when obtaining the essence from Joni")]
+        [Description("Dream Nail Joni (Obtain)"), ToolTip("Splits when obtaining the essence from Blue Child Joni")]
         OnObtainGhostJoni,
         [Description("Dream Nail Cloth (Obtain)"), ToolTip("Splits when obtaining the essence from Cloth")]
         OnObtainGhostCloth,
-        [Description("Dream Nail Vespa (Obtain)"), ToolTip("Splits when obtaining the essence from Vespa")]
+        [Description("Dream Nail Vespa (Obtain)"), ToolTip("Splits when obtaining the essence from Hive Queen Vespa")]
         OnObtainGhostVespa,
         [Description("Dream Nail Revek (Obtain)"), ToolTip("Splits when 19 essence has been obtained in Spirits' Glade")]
         OnObtainGhostRevek,
@@ -1364,120 +1364,117 @@ namespace LiveSplit.HollowKnight {
         [Description("Pale Ore (Obtain)"), ToolTip("Splits when obtaining a Pale Ore")]
         OnObtainPaleOre,
 
-        [Description("36000 Geo (Geo Count)"), ToolTip("Splits when geo count ≥36000")]
-        Geo36000,
-
-        [Description("Colo 1 Wave 1a"), ToolTip("Splits upon killing the first Sheilded Fool in wave 1")]
+        [Description("Colo 1 Wave 1a"), ToolTip("Splits upon killing the first Sheilded Fool in wave 1\nRecommended for use with a pre-set save file")]
         Bronze1a,
-        [Description("Colo 1 Wave 1b"), ToolTip("Splits upon killing the pair of Sheilded fools in wave 1")]
+        [Description("Colo 1 Wave 1b"), ToolTip("Splits upon killing the pair of Sheilded fools in wave 1\nRecommended for use with a pre-set save file")]
         Bronze1b,
-        [Description("Colo 1 Wave 1c"), ToolTip("Splits upon killing the pair of Sharp Baldurs at the end of wave 1")]
+        [Description("Colo 1 Wave 1c"), ToolTip("Splits upon killing the pair of Sharp Baldurs at the end of wave 1\nRecommended for use with a pre-set save file")]
         Bronze1c,
-        [Description("Colo 1 Wave 2"), ToolTip("Splits upon killing all five Sharp Baldurs in wave 2")]
+        [Description("Colo 1 Wave 2"), ToolTip("Splits upon killing all five Sharp Baldurs in wave 2\nRecommended for use with a pre-set save file")]
         Bronze2,
-        [Description("Colo 1 Wave 3a"), ToolTip("Splits upon killing the first Sturdy Fool in wave 3")]
+        [Description("Colo 1 Wave 3a"), ToolTip("Splits upon killing the first Sturdy Fool in wave 3\nRecommended for use with a pre-set save file")]
         Bronze3a,
-        [Description("Colo 1 Wave 3b"), ToolTip("Splits upon killing the pair of Sturdy Fools at the end of wave 3")]
+        [Description("Colo 1 Wave 3b"), ToolTip("Splits upon killing the pair of Sturdy Fools at the end of wave 3\nRecommended for use with a pre-set save file")]
         Bronze3b,
-        [Description("Colo 1 Wave 4"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 4")]
+        [Description("Colo 1 Wave 4"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 4\nRecommended for use with a pre-set save file")]
         Bronze4,
-        [Description("Colo 1 Wave 5"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 5")]
+        [Description("Colo 1 Wave 5"), ToolTip("Splits upon killing the pair of Primal Aspids in wave 5\nRecommended for use with a pre-set save file")]
         Bronze5,
-        [Description("Colo 1 Wave 6"), ToolTip("Splits upon killing all three Sturdy Fools on the raised platforms in wave 6")]
+        [Description("Colo 1 Wave 6"), ToolTip("Splits upon killing all three Sturdy Fools on the raised platforms in wave 6\nRecommended for use with a pre-set save file")]
         Bronze6,
-        [Description("Colo 1 Wave 7"), ToolTip("Splits upon killing both Primal Aspids and Sharp Baldurs in wave 7")]
+        [Description("Colo 1 Wave 7"), ToolTip("Splits upon killing both Primal Aspids and Sharp Baldurs in wave 7\nRecommended for use with a pre-set save file")]
         Bronze7,
-        [Description("Colo 1 Wave 8a"), ToolTip("Splits upon killing all four Vengeflies in wave 8")]
+        [Description("Colo 1 Wave 8a"), ToolTip("Splits upon killing all four Vengeflies in wave 8\nRecommended for use with a pre-set save file")]
         Bronze8a,
-        [Description("Colo 1 Wave 8b"), ToolTip("Splits upon killing the Vengefly King in wave 8")]
+        [Description("Colo 1 Wave 8b"), ToolTip("Splits upon killing the Vengefly King in wave 8\nRecommended for use with a pre-set save file")]
         Bronze8b,
-        [Description("Colo 1 Wave 9"), ToolTip("Splits upon killing the Sharp Baldur after the Primal Aspid at the end of wave 9")]
+        [Description("Colo 1 Wave 9"), ToolTip("Splits upon killing the Sharp Baldur after the Primal Aspid at the end of wave 9\nRecommended for use with a pre-set save file")]
         Bronze9,
-        [Description("Colo 1 Wave 10"), ToolTip("Splits upon killing the third Sharp Baldur in the low ceiling section in wave 10")]
+        [Description("Colo 1 Wave 10"), ToolTip("Splits upon killing the third Sharp Baldur in the low ceiling section in wave 10\nRecommended for use with a pre-set save file")]
         Bronze10,
-        [Description("Colo 1 Wave 11a"), ToolTip("Splits upon killing the first pair of Volatile Gruzzers in wave 11")]
+        [Description("Colo 1 Wave 11a"), ToolTip("Splits upon killing the first pair of Volatile Gruzzers in wave 11\nRecommended for use with a pre-set save file")]
         Bronze11a,
-        [Description("Colo 1 Wave 11b"), ToolTip("Splits upon killing the final group of Volatile Gruzzers at the end of wave 11")]
+        [Description("Colo 1 Wave 11b"), ToolTip("Splits upon killing the final group of Volatile Gruzzers at the end of wave 11\nRecommended for use with a pre-set save file")]
         Bronze11b,
-        [Description("Colo 1 End"), ToolTip("Splits upon killing the pair Gruz Mothers at the end of Trial of the Warrior")]
+        [Description("Colo 1 End"), ToolTip("Splits upon killing the pair Gruz Mothers at the end of Trial of the Warrior\nRecommended for use with a pre-set save file")]
         BronzeEnd,
 
-        [Description("Colo 2 Wave 1"), ToolTip("Splits upon completing wave 1")]
+        [Description("Colo 2 Wave 1"), ToolTip("Splits upon completing wave 1\nRecommended for use with a pre-set save file")]
         Silver1,
-        [Description("Colo 2 Wave 2"), ToolTip("Splits upon completing wave 2")]
+        [Description("Colo 2 Wave 2"), ToolTip("Splits upon completing wave 2\nRecommended for use with a pre-set save file")]
         Silver2,
-        [Description("Colo 2 Wave 3"), ToolTip("Splits upon completing wave 3")]
+        [Description("Colo 2 Wave 3"), ToolTip("Splits upon completing wave 3\nRecommended for use with a pre-set save file")]
         Silver3,
-        [Description("Colo 2 Wave 4"), ToolTip("Splits upon completing wave 4")]
+        [Description("Colo 2 Wave 4"), ToolTip("Splits upon completing wave 4\nRecommended for use with a pre-set save file")]
         Silver4,
-        [Description("Colo 2 Wave 5"), ToolTip("Splits upon completing wave 5")]
+        [Description("Colo 2 Wave 5"), ToolTip("Splits upon completing wave 5\nRecommended for use with a pre-set save file")]
         Silver5,
-        [Description("Colo 2 Wave 6"), ToolTip("Splits upon the death of the 3 Belflies after the Heavy Fool")]
+        [Description("Colo 2 Wave 6"), ToolTip("Splits upon the death of the 3 Belflies after the Heavy Fool\nRecommended for use with a pre-set save file")]
         Silver6,
-        [Description("Colo 2 Wave 7"), ToolTip("Splits on the death of the single Belfly")]
+        [Description("Colo 2 Wave 7"), ToolTip("Splits on the death of the single Belfly\nRecommended for use with a pre-set save file")]
         Silver7,
-        [Description("Colo 2 Wave 8"), ToolTip("Splits upon killing the first Great Hopper")]
+        [Description("Colo 2 Wave 8"), ToolTip("Splits upon killing the first Great Hopper\nRecommended for use with a pre-set save file")]
         Silver8,
-        [Description("Colo 2 Wave 9"), ToolTip("Splits upon killing the second Great Hopper")]
+        [Description("Colo 2 Wave 9"), ToolTip("Splits upon killing the second Great Hopper\nRecommended for use with a pre-set save file")]
         Silver9,
-        [Description("Colo 2 Wave 10"), ToolTip("Splits upon killing the Mimic")]
+        [Description("Colo 2 Wave 10"), ToolTip("Splits upon killing the Mimic\nRecommended for use with a pre-set save file")]
         Silver10,
-        [Description("Colo 2 Wave 11"), ToolTip("Splits upon completing wave 11")]
+        [Description("Colo 2 Wave 11"), ToolTip("Splits upon completing wave 11\nRecommended for use with a pre-set save file")]
         Silver11,
-        [Description("Colo 2 Wave 12"), ToolTip("Splits upon completing wave 12")]
+        [Description("Colo 2 Wave 12"), ToolTip("Splits upon completing wave 12\nRecommended for use with a pre-set save file")]
         Silver12,
-        [Description("Colo 2 Wave 13"), ToolTip("Splits upon completing wave 13")]
+        [Description("Colo 2 Wave 13"), ToolTip("Splits upon completing wave 13\nRecommended for use with a pre-set save file")]
         Silver13,
-        [Description("Colo 2 Wave 14"), ToolTip("Splits upon completing wave 14")]
+        [Description("Colo 2 Wave 14"), ToolTip("Splits upon completing wave 14\nRecommended for use with a pre-set save file")]
         Silver14,
-        [Description("Colo 2 Wave 15"), ToolTip("Splits upon completing wave 15")]
+        [Description("Colo 2 Wave 15"), ToolTip("Splits upon completing wave 15\nRecommended for use with a pre-set save file")]
         Silver15,
-        [Description("Colo 2 Wave 16"), ToolTip("Splits upon completing wave 16")]
+        [Description("Colo 2 Wave 16"), ToolTip("Splits upon completing wave 16\nRecommended for use with a pre-set save file")]
         Silver16,
-        [Description("Colo 2 End"), ToolTip("Splits upon killing both Oblobbles at the end of Trial of the Conqueror")]
+        [Description("Colo 2 End"), ToolTip("Splits upon killing both Oblobbles at the end of Trial of the Conqueror\nRecommended for use with a pre-set save file")]
         SilverEnd,
 
-        [Description("Colo 3 Wave 1"), ToolTip("Splits upon completing wave 1")]
+        [Description("Colo 3 Wave 1"), ToolTip("Splits upon completing wave 1\nRecommended for use with a pre-set save file")]
         Gold1,
-        [Description("Colo 3 Wave 3"), ToolTip("Splits upon completing waves 2 and 3")]
+        [Description("Colo 3 Wave 3"), ToolTip("Splits upon completing waves 2 and 3\nRecommended for use with a pre-set save file")]
         Gold3,
-        [Description("Colo 3 Wave 4"), ToolTip("Splits upon completing wave 4")]
+        [Description("Colo 3 Wave 4"), ToolTip("Splits upon completing wave 4\nRecommended for use with a pre-set save file")]
         Gold4,
-        [Description("Colo 3 Wave 5"), ToolTip("Splits upon killing the first wave of 3 Loodles")]
+        [Description("Colo 3 Wave 5"), ToolTip("Splits upon killing the first wave of 3 Loodles\nRecommended for use with a pre-set save file")]
         Gold5,
-        [Description("Colo 3 Wave 6"), ToolTip("Splits upon killing the set of 5 Loodles")]
+        [Description("Colo 3 Wave 6"), ToolTip("Splits upon killing the set of 5 Loodles\nRecommended for use with a pre-set save file")]
         Gold6,
-        [Description("Colo 3 Wave 7"), ToolTip("Splits upon killing the second wave of 3 Loodles")]
+        [Description("Colo 3 Wave 7"), ToolTip("Splits upon killing the second wave of 3 Loodles\nRecommended for use with a pre-set save file")]
         Gold7,
-        [Description("Colo 3 Wave 8"), ToolTip("Splits upon completing wave 8")]
+        [Description("Colo 3 Wave 8"), ToolTip("Splits upon completing wave 8\nRecommended for use with a pre-set save file")]
         Gold8,
-        [Description("Colo 3 Wave 9a"), ToolTip("Splits upon killing the fools and mantises in wave 9")]
+        [Description("Colo 3 Wave 9a"), ToolTip("Splits upon killing the fools and mantises in wave 9\nRecommended for use with a pre-set save file")]
         Gold9a,
-        [Description("Colo 3 Wave 9b"), ToolTip("Splits upon killing the Soul Warrior in wave 9")]
+        [Description("Colo 3 Wave 9b"), ToolTip("Splits upon killing the Soul Warrior in wave 9\nRecommended for use with a pre-set save file")]
         Gold9b,
-        [Description("Colo 3 Wave 10"), ToolTip("Splits upon completing wave 10")]
+        [Description("Colo 3 Wave 10"), ToolTip("Splits upon completing wave 10\nRecommended for use with a pre-set save file")]
         Gold10,
-        [Description("Colo 3 Wave 11"), ToolTip("Splits upon completing wave 11")]
+        [Description("Colo 3 Wave 11"), ToolTip("Splits upon completing wave 11\nRecommended for use with a pre-set save file")]
         Gold11,
-        [Description("Colo 3 Wave 12a"), ToolTip("Splits upon killing second set of 2 Lesser Mawleks and Winged Fool")]
+        [Description("Colo 3 Wave 12a"), ToolTip("Splits upon killing second set of 2 Lesser Mawleks and Winged Fool\nRecommended for use with a pre-set save file")]
         Gold12a,
-        [Description("Colo 3 Wave 12b"), ToolTip("Splits upon killing the Brooding Mawlek")]
+        [Description("Colo 3 Wave 12b"), ToolTip("Splits upon killing the Brooding Mawlek\nRecommended for use with a pre-set save file")]
         Gold12b,
-        [Description("Colo 3 Wave 14a"), ToolTip("Splits upon killing the Squits, Petras and Primal Aspids in wave 14")]
+        [Description("Colo 3 Wave 14a"), ToolTip("Splits upon killing the Squits, Petras and Primal Aspids in wave 14\nRecommended for use with a pre-set save file")]
         Gold14a,
-        [Description("Colo 3 Wave 14b"), ToolTip("Splits upon killing the Winged Fools and Battle Obbles in wave 14")]
+        [Description("Colo 3 Wave 14b"), ToolTip("Splits upon killing the Winged Fools and Battle Obbles in wave 14\nRecommended for use with a pre-set save file")]
         Gold14b,
-        [Description("Colo 3 Wave 15"), ToolTip("Splits upon killing both Squits in wave 15")]
+        [Description("Colo 3 Wave 15"), ToolTip("Splits upon killing both Squits in wave 15\nRecommended for use with a pre-set save file")]
         Gold15,
-        [Description("Colo 3 Wave 16"), ToolTip("Splits upon the death of all 14 Death Loodles in wave 16")]
+        [Description("Colo 3 Wave 16"), ToolTip("Splits upon the death of all 14 Death Loodles in wave 16\nRecommended for use with a pre-set save file")]
         Gold16,
-        [Description("Colo 3 Wave 17a"), ToolTip("Splits upon killing the first two phases of fools and mantises in wave 17")]
+        [Description("Colo 3 Wave 17a"), ToolTip("Splits upon killing the first two phases of fools and mantises in wave 17\nRecommended for use with a pre-set save file")]
         Gold17a,
-        [Description("Colo 3 Wave 17b"), ToolTip("Splits upon killing the fools, Volt Twister and Soul Twister in wave 17")]
+        [Description("Colo 3 Wave 17b"), ToolTip("Splits upon killing the fools, Volt Twister and Soul Twister in wave 17\nRecommended for use with a pre-set save file")]
         Gold17b,
-        [Description("Colo 3 Wave 17c"), ToolTip("Splits upon killing all the regular enemies in wave 17")]
+        [Description("Colo 3 Wave 17c"), ToolTip("Splits upon killing all the regular enemies in wave 17\nRecommended for use with a pre-set save file")]
         Gold17c,
-        [Description("Colo 3 End"), ToolTip("Splits upon killing God Tamer")]
+        [Description("Colo 3 End"), ToolTip("Splits upon killing God Tamer\nRecommended for use with a pre-set save file")]
         GoldEnd,
 
         [Description("Any Transition (Transition)"), ToolTip("Splits when the knight enters a transition (only one will split per transition)")]
