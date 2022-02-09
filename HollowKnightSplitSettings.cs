@@ -191,11 +191,11 @@ namespace LiveSplit.HollowKnight {
         BroodingMawlek,
         [Description("Collector (Boss)"), ToolTip("Splits when killing Collector")]
         Collector,
-        [Description("Collector Defeated (Transition)"), ToolTip("Splits when killing Collector and saving all 3 Grubs in the Tower of Love")]
+        [Description("Collector Defeated (Transition)"), ToolTip("Splits on transition after defeating the Collector")]
         TransCollector,
-        [Description("Crystal Guardian 1 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the first time")]
+        [Description("Crystal Guardian (Boss)"), ToolTip("Splits when killing the Crystal Guardian")]
         CrystalGuardian1,
-        [Description("Crystal Guardian 2 (Boss)"), ToolTip("Splits when killing the Crystal Guardian for the second time")]
+        [Description("Enraged Guardian (Boss)"), ToolTip("Splits when killing the Enraged Guardian")]
         CrystalGuardian2,
         [Description("Dung Defender (Boss)"), ToolTip("Splits when killing Dung Defender")]
         DungDefender,
@@ -304,100 +304,100 @@ namespace LiveSplit.HollowKnight {
         [Description("Xero (Essence)"), ToolTip("Splits when absorbing essence from Xero")]
         XeroEssence,
 
-        [Description("Vengefly King (Pantheon)"), ToolTip("Splits after killing Vengefly King in Pantheon 1")]
+        [Description("Vengefly King (Pantheon)"), ToolTip("Splits after killing Vengefly King in Pantheon 1 or Pantheon 5")]
         VengeflyKingP,
-        [Description("Gruz Mother (Pantheon)"), ToolTip("Splits after killing Gruz Mother in Pantheon 1")]
+        [Description("Gruz Mother (Pantheon)"), ToolTip("Splits after killing Gruz Mother in Pantheon 1 or Pantheon 5")]
         GruzMotherP,
-        [Description("False Knight (Pantheon)"), ToolTip("Splits after killing False Knight in Pantheon 1")]
+        [Description("False Knight (Pantheon)"), ToolTip("Splits after killing False Knight in Pantheon 1 or Pantheon 5")]
         FalseKnightP,
-        [Description("Massive Moss Charger (Pantheon)"), ToolTip("Splits after killing Massive Moss Charger in Pantheon 1")]
+        [Description("Massive Moss Charger (Pantheon)"), ToolTip("Splits after killing Massive Moss Charger in Pantheon 1 or Pantheon 5")]
         MassiveMossChargerP,
-        [Description("Hornet 1 (Pantheon)"), ToolTip("Splits after killing Hornet 1 in Pantheon 1")]
+        [Description("Hornet 1 (Pantheon)"), ToolTip("Splits after killing Hornet Protector in Pantheon 1 or Pantheon 5")]
         Hornet1P,
-        [Description("Gorb (Pantheon)"), ToolTip("Splits after killing Gorb in Pantheon 1")]
+        [Description("Gorb (Pantheon)"), ToolTip("Splits after killing Gorb in Pantheon 1 or Pantheon 5")]
         GorbP,
-        [Description("Dung Defender (Pantheon)"), ToolTip("Splits after killing Dung Defender in Pantheon 1")]
+        [Description("Dung Defender (Pantheon)"), ToolTip("Splits after killing Dung Defender in Pantheon 1 or Pantheon 5")]
         DungDefenderP,
-        [Description("Soul Warrior (Pantheon)"), ToolTip("Splits after killing Soul Warrior in Pantheon 1")]
+        [Description("Soul Warrior (Pantheon)"), ToolTip("Splits after killing Soul Warrior in Pantheon 1 or Pantheon 5")]
         SoulWarriorP,
-        [Description("Brooding Mawlek (Pantheon)"), ToolTip("Splits after killing Brooding Mawlek in Pantheon 1")]
+        [Description("Brooding Mawlek (Pantheon)"), ToolTip("Splits after killing Brooding Mawlek in Pantheon 1 or Pantheon 5")]
         BroodingMawlekP,
-        [Description("Oro & Mato Nail Bros (Pantheon)"), ToolTip("Splits after killing Oro & Mato in Pantheon 1")]
+        [Description("Oro & Mato Nail Bros (Pantheon)"), ToolTip("Splits after killing Brothers Oro & Mato in Pantheon 1 or Pantheon 5")]
         OroMatoNailBrosP,
 
-        [Description("Xero (Pantheon)"), ToolTip("Splits after killing Xero in Pantheon 2")]
+        [Description("Xero (Pantheon)"), ToolTip("Splits after killing Xero in Pantheon 2 or Pantheon 5")]
         XeroP,
-        [Description("Crystal Guardian (Pantheon)"), ToolTip("Splits after killing Crystal Guardian in Pantheon 2")]
+        [Description("Crystal Guardian (Pantheon)"), ToolTip("Splits after killing Crystal Guardian in Pantheon 2 or Pantheon 5")]
         CrystalGuardianP,
-        [Description("Soul Master (Pantheon)"), ToolTip("Splits after killing Soul Master in Pantheon 2")]
+        [Description("Soul Master (Pantheon)"), ToolTip("Splits after killing Soul Master in Pantheon 2 or Pantheon 5")]
         SoulMasterP,
-        [Description("Oblobbles (Pantheon)"), ToolTip("Splits after killing Oblobbles in Pantheon 2")]
+        [Description("Oblobbles (Pantheon)"), ToolTip("Splits after killing Oblobbles in Pantheon 2 or Pantheon 5")]
         OblobblesP,
-        [Description("Mantis Lords (Pantheon)"), ToolTip("Splits after killing Mantis Lords in Pantheon 2")]
+        [Description("Mantis Lords (Pantheon)"), ToolTip("Splits after killing Mantis Lords in Pantheon 2 or Sisters of Battle Pantheon 5")]
         MantisLordsP,
-        [Description("Marmu (Pantheon)"), ToolTip("Splits after killing Marmu in Pantheon 2")]
+        [Description("Marmu (Pantheon)"), ToolTip("Splits after killing Marmu in Pantheon 2 or Pantheon 5")]
         MarmuP,
         [Description("Nosk (Pantheon)"), ToolTip("Splits after killing Nosk in Pantheon 2")]
         NoskP,
-        [Description("Flukemarm (Pantheon)"), ToolTip("Splits after killing Flukemarm in Pantheon 2")]
+        [Description("Flukemarm (Pantheon)"), ToolTip("Splits after killing Flukemarm in Pantheon 2 or Pantheon 5")]
         FlukemarmP,
-        [Description("Broken Vessel (Pantheon)"), ToolTip("Splits after killing Broken Vessel in Pantheon 2")]
+        [Description("Broken Vessel (Pantheon)"), ToolTip("Splits after killing Broken Vessel in Pantheon 2 or Pantheon 5")]
         BrokenVesselP,
-        [Description("Sheo Paintmaster (Pantheon)"), ToolTip("Splits after killing Sheo Paintmaster in Pantheon 2")]
+        [Description("Paintmaster Sheo (Pantheon)"), ToolTip("Splits after killing Paintmaster Sheo in Pantheon 2 or Pantheon 5")]
         SheoPaintmasterP,
 
-        [Description("Hive Knight (Pantheon)"), ToolTip("Splits after killing Hive Knight in Pantheon 3")]
+        [Description("Hive Knight (Pantheon)"), ToolTip("Splits after killing Hive Knight in Pantheon 3 or Pantheon 5")]
         HiveKnightP,
-        [Description("Elder Hu (Pantheon)"), ToolTip("Splits after killing Elder Hu in Pantheon 3")]
+        [Description("Elder Hu (Pantheon)"), ToolTip("Splits after killing Elder Hu in Pantheon 3 or Pantheon 5")]
         ElderHuP,
-        [Description("Collector (Pantheon)"), ToolTip("Splits after killing The Collector in Pantheon 3")]
+        [Description("Collector (Pantheon)"), ToolTip("Splits after killing The Collector in Pantheon 3 or Pantheon 5")]
         CollectorP,
-        [Description("God Tamer (Pantheon)"), ToolTip("Splits after killing God Tamer in Pantheon 3")]
+        [Description("God Tamer (Pantheon)"), ToolTip("Splits after killing God Tamer in Pantheon 3 or Pantheon 5")]
         GodTamerP,
-        [Description("Troupe Master Grimm (Pantheon)"), ToolTip("Splits after killing Troupe Master Grimm in Pantheon 3")]
+        [Description("Troupe Master Grimm (Pantheon)"), ToolTip("Splits after killing Troupe Master Grimm in Pantheon 3 or Pantheon 5")]
         TroupeMasterGrimmP,
-        [Description("Galien (Pantheon)"), ToolTip("Splits after killing Galien in Pantheon 3")]
+        [Description("Galien (Pantheon)"), ToolTip("Splits after killing Galien in Pantheon 3 or Pantheon 5")]
         GalienP,
-        [Description("Grey Prince Zote (Pantheon)"), ToolTip("Splits after killing Grey Prince Zote in Pantheon 3")]
+        [Description("Grey Prince Zote (Pantheon)"), ToolTip("Splits after killing Grey Prince Zote in Pantheon 3 or Pantheon 5")]
         GreyPrinceZoteP,
-        [Description("Uumuu (Pantheon)"), ToolTip("Splits after killing Uumuu in Pantheon 3")]
+        [Description("Uumuu (Pantheon)"), ToolTip("Splits after killing Uumuu in Pantheon 3 or Pantheon 5")]
         UumuuP,
-        [Description("Hornet 2 (Pantheon)"), ToolTip("Splits after killing Hornet 2 in Pantheon 3")]
+        [Description("Hornet 2 (Pantheon)"), ToolTip("Splits after killing Hornet Sentinel in Pantheon 3 or Pantheon 5")]
         Hornet2P,
-        [Description("Sly Nailsage (Pantheon)"), ToolTip("Splits after killing Sly Nailsage in Pantheon 3")]
+        [Description("Great Nailsage Sly (Pantheon)"), ToolTip("Splits after killing Great Nailsage Sly in Pantheon 3 or Pantheon 5")]
         SlyP,
 
-        [Description("Enraged Guardian (Pantheon)"), ToolTip("Splits after killing Enraged Guardian in Pantheon 4")]
+        [Description("Enraged Guardian (Pantheon)"), ToolTip("Splits after killing Enraged Guardian in Pantheon 4 or Pantheon 5")]
         EnragedGuardianP,
-        [Description("Lost Kin (Pantheon)"), ToolTip("Splits after killing Lost Kin in Pantheon 4")]
+        [Description("Lost Kin (Pantheon)"), ToolTip("Splits after killing Lost Kin in Pantheon 4 or Pantheon 5")]
         LostKinP,
-        [Description("No Eyes (Pantheon)"), ToolTip("Splits after killing No Eyes in Pantheon 4")]
+        [Description("No Eyes (Pantheon)"), ToolTip("Splits after killing No Eyes in Pantheon 4 or Pantheon 5")]
         NoEyesP,
-        [Description("Traitor Lord (Pantheon)"), ToolTip("Splits after killing Traitor Lord in Pantheon 4")]
+        [Description("Traitor Lord (Pantheon)"), ToolTip("Splits after killing Traitor Lord in Pantheon 4 or Pantheon 5")]
         TraitorLordP,
-        [Description("White Defender (Pantheon)"), ToolTip("Splits after killing White Defender in Pantheon 4")]
+        [Description("White Defender (Pantheon)"), ToolTip("Splits after killing White Defender in Pantheon 4 or Pantheon 5")]
         WhiteDefenderP,
-        [Description("Failed Champion (Pantheon)"), ToolTip("Splits after killing Failed Champion in Pantheon 4")]
+        [Description("Failed Champion (Pantheon)"), ToolTip("Splits after killing Failed Champion in Pantheon 4 or Pantheon 5")]
         FailedChampionP,
-        [Description("Markoth (Pantheon)"), ToolTip("Splits after killing Markoth in Pantheon 4")]
+        [Description("Markoth (Pantheon)"), ToolTip("Splits after killing Markoth in Pantheon 4 or Pantheon 5")]
         MarkothP,
-        [Description("Watcher Knights (Pantheon)"), ToolTip("Splits after killing Watcher Knights in Pantheon 4")]
+        [Description("Watcher Knights (Pantheon)"), ToolTip("Splits after killing Watcher Knights in Pantheon 4 or Pantheon 5")]
         WatcherKnightsP,
-        [Description("Soul Tyrant (Pantheon)"), ToolTip("Splits after killing Soul Tyrant in Pantheon 4")]
+        [Description("Soul Tyrant (Pantheon)"), ToolTip("Splits after killing Soul Tyrant in Pantheon 4 or Pantheon 5")]
         SoulTyrantP,
-        [Description("Pure Vessel (Pantheon)"), ToolTip("Splits after killing Pure Vessel in Pantheon 4")]
+        [Description("Pure Vessel (Pantheon)"), ToolTip("Splits after killing Pure Vessel in Pantheon 4 or Pantheon 5")]
         PureVesselP,
 
-        [Description("Nosk Hornet (Pantheon)"), ToolTip("Splits after killing Nosk Hornet in Pantheon 5")]
+        [Description("Winged Nosk (Pantheon)"), ToolTip("Splits after killing Winged Nosk in Pantheon 5")]
         NoskHornetP,
         [Description("Nightmare King Grimm (Pantheon)"), ToolTip("Splits after killing Nightmare King Grimm in Pantheon 5")]
         NightmareKingGrimmP,
 
-        [Description("Herrah the Beast (Dreamer)"), ToolTip("Splits when you see the mask for Herrah (In Spider Area)")]
+        [Description("Herrah the Beast (Dreamer)"), ToolTip("Splits when you see the mask for Herrah")]
         Hegemol,
-        [Description("Lurien the Watcher (Dreamer)"), ToolTip("Splits when you see the mask for Lurien (After killing Watcher Knight)")]
+        [Description("Lurien the Watcher (Dreamer)"), ToolTip("Splits when you see the mask for Lurien")]
         Lurien,
-        [Description("Monomon the Teacher (Dreamer)"), ToolTip("Splits when you see the mask for Monomon (After killing Uumuu)")]
+        [Description("Monomon the Teacher (Dreamer)"), ToolTip("Splits when you see the mask for Monomon")]
         Monomon,
         [Description("First Dreamer (Dreamer)"), ToolTip("Splits when you see the mask for the first dreamer killed")]
         Dreamer1,
@@ -410,7 +410,7 @@ namespace LiveSplit.HollowKnight {
         PreGrimmShop,
         [Description("106% Pre-Grimm Shop (Transition)"), ToolTip("Splits when Lantern + Vessel Fragment (5) + Mask Shard (4) have been acquired")]
         PreGrimmShopTrans,
-        [Description("1xx% Sly Final Shop (Transition)"), ToolTip("Splits on leaving Sly's shop after having bough Sprintmaster and Vessel Fragment 8")]
+        [Description("1xx% Sly Final Shop (Transition)"), ToolTip("Splits on leaving Sly's shop after having bought Sprintmaster and Vessel Fragment 8")]
         SlyShopFinished,
         [Description("Can Overcharm (Event)"), ToolTip("Splits when overcharming is enabled")]
         CanOvercharm,
@@ -434,7 +434,7 @@ namespace LiveSplit.HollowKnight {
         FlowerRewardGiven,
         [Description("Happy Couple (Event)"), ToolTip("Splits when talking to Nailsmith in Sheo's hut for the first time")]
         HappyCouplePlayerDataEvent,
-        [Description("Nailsmith - Killed (Event)"), ToolTip("Splits when Nailsmith is killed")]
+        [Description("Nailsmith Killed (Event)"), ToolTip("Splits when Nailsmith is killed")]
         NailsmithKilled,
         [Description("Nightmare Lantern Lit (Event)"), ToolTip("Splits when initially lighting the Nightmare Lantern")]
         NightmareLantern,
@@ -446,7 +446,7 @@ namespace LiveSplit.HollowKnight {
         SeerDeparts,
         [Description("Spirit Glade Door (Event)"), ToolTip("Splits when the Seer opens the Spirits' Glade after bringing back 200 essence")]
         SpiritGladeOpen,
-        [Description("Trap Bench - Beasts Den (Event)"), ToolTip("Splits when getting the trap bench in Beasts Den")]
+        [Description("Trap Bench (Event)"), ToolTip("Splits when getting the trap bench in Beasts Den")]
         BeastsDenTrapBench,
         [Description("Eternal Ordeal Unlocked (Event)"), ToolTip("Splits when breaking the wall to the Zote statue in Godhome")]
         EternalOrdealUnlocked,
@@ -456,7 +456,7 @@ namespace LiveSplit.HollowKnight {
         RidingStag,
         [Description("Saved Cloth (Event)"), ToolTip("Splits when saving Cloth in Ancient Basin")]
         SavedCloth,
-        [Description("Crystal Peaks Lift Opened (Event)"), ToolTip("Splits when opening the lever for the lift between Dirtmouth and Crystal Peaks")]
+        [Description("Crystal Peak Lift Opened (Event)"), ToolTip("Splits when opening the lever for the lift between Dirtmouth and Crystal Peak")]
         MineLiftOpened,
         [Description("Colosseum Unlocked 1 (Trial)"), ToolTip("Splits when the knight unlocks the trial at Little Fool")]
         ColosseumBronzeUnlocked,
@@ -517,13 +517,13 @@ namespace LiveSplit.HollowKnight {
         //Revek,
         [Description("Moss Knight (Mini Boss)"), ToolTip("Splits when killing Moss Knight")]
         MossKnight,
-        [Description("Shrumal Ogre (Mini Boss)"), ToolTip("Splits when killing the final Shrumal Ogre")]
+        [Description("Shrumal Ogres (Mini Boss)"), ToolTip("Splits when killing the final Shrumal Ogre")]
         MushroomBrawler,
-        [Description("Zote Rescued Vengefly King (Mini Boss)"), ToolTip("Splits when rescuing Zote from the Vengefly King")]
+        [Description("Zote Rescued - Vengefly King (Mini Boss)"), ToolTip("Splits when rescuing Zote from the Vengefly King")]
         Zote1,
-        [Description("Zote Rescued Deepnest (Mini Boss)"), ToolTip("Splits when rescuing Zote in Deepnest")]
+        [Description("Zote Rescued - Deepnest (Mini Boss)"), ToolTip("Splits when rescuing Zote in Deepnest")]
         Zote2,
-        [Description("Zote Killed Colosseum (Mini Boss)"), ToolTip("Splits when defeating Zote in the Colosseum")]
+        [Description("Zote Defeated - Colosseum (Mini Boss)"), ToolTip("Splits when defeating Zote in the Colosseum")]
         ZoteKilled,
 
         [Description("Forgotten Crossroads (Stag Station)"), ToolTip("Splits when opening the Forgotten Crossroads Stag Station")]
@@ -947,19 +947,19 @@ namespace LiveSplit.HollowKnight {
         GrubCrossroadsVengefly,
         [Description("Rescued Grub Crossroads Wall (Grub)"), ToolTip("Splits when rescuing the grub in Crossroads_03")]
         GrubCrossroadsWall,
-        [Description("Rescued Grub Crystal Peaks Bottom Lever (Grub)"), ToolTip("Splits when rescuing the grub in Mines_04")]
+        [Description("Rescued Grub Crystal Peak Bottom Lever (Grub)"), ToolTip("Splits when rescuing the grub in Mines_04")]
         GrubCrystalPeaksBottomLever,
-        [Description("Rescued Grub Crystal Peaks Crown (Grub)"), ToolTip("Splits when rescuing the grub in Mines_24")]
+        [Description("Rescued Grub Crystal Peak Crown (Grub)"), ToolTip("Splits when rescuing the grub in Mines_24")]
         GrubCrystalPeaksCrown,
-        [Description("Rescued Grub Crystal Peaks Crushers (Grub)"), ToolTip("Splits when rescuing the grub in Mines_19")]
+        [Description("Rescued Grub Crystal Peak Crushers (Grub)"), ToolTip("Splits when rescuing the grub in Mines_19")]
         GrubCrystalPeaksCrushers,
-        [Description("Rescued Grub Crystal Peaks Crystal Heart (Grub)"), ToolTip("Splits when rescuing the grub in Mines_31")]
+        [Description("Rescued Grub Crystal Peak Crystal Heart (Grub)"), ToolTip("Splits when rescuing the grub in Mines_31")]
         GrubCrystalPeaksCrystalHeart,
-        [Description("Rescued Grub Crystal Peaks Mimic (Grub)"), ToolTip("Splits when rescuing the grub in Mines_16")]
+        [Description("Rescued Grub Crystal Peak Mimic (Grub)"), ToolTip("Splits when rescuing the grub in Mines_16")]
         GrubCrystalPeaksMimics,
-        [Description("Rescued Grub Crystal Peaks Mound (Grub)"), ToolTip("Splits when rescuing the grub in Mines_35")]
+        [Description("Rescued Grub Crystal Peak Mound (Grub)"), ToolTip("Splits when rescuing the grub in Mines_35")]
         GrubCrystalPeaksMound,
-        [Description("Rescued Grub Crystal Peaks Spikes (Grub)"), ToolTip("Splits when rescuing the grub in Mines_03")]
+        [Description("Rescued Grub Crystal Peak Spikes (Grub)"), ToolTip("Splits when rescuing the grub in Mines_03")]
         GrubCrystalPeaksSpikes,
         [Description("Rescued Grub Deepnest Beast's Den (Grub)"), ToolTip("Splits when rescuing the grub in Deepnest_Spider_Town")]
         GrubDeepnestBeastsDen,

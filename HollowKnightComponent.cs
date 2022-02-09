@@ -272,14 +272,14 @@ namespace LiveSplit.HollowKnight {
             return false;
         }
 
-        private SplitterAction CheckSplit(SplitName Split, string nextScene, string sceneName) {
+        private SplitterAction CheckSplit(SplitName split, string nextScene, string sceneName) {
             bool shouldSplit = false;
             bool shouldSkip = false;
             bool shouldReset = false;
             bool clearKills = false;
             SplitterAction action;
 
-            switch (Split) {
+            switch (split) {
                 case SplitName.Abyss: shouldSplit = mem.PlayerData<bool>(Offset.visitedAbyss); break;
                 case SplitName.AbyssShriek: shouldSplit = mem.PlayerData<int>(Offset.screamLevel) == 2; break;
                 case SplitName.Aluba: shouldSplit = mem.PlayerData<bool>(Offset.killedLazyFlyer); break;
@@ -538,7 +538,7 @@ namespace LiveSplit.HollowKnight {
                     int oreFromUpgrades = (upgrades * (upgrades - 1)) / 2;
                     int ore = oreFromUpgrades + mem.PlayerData<int>(Offset.ore);
 
-                    switch (Split) {
+                    switch (split) {
                         case SplitName.Ore1: shouldSplit = ore == 1; break;
                         case SplitName.Ore2: shouldSplit = ore == 2; break;
                         case SplitName.Ore3: shouldSplit = ore == 3; break;
@@ -1631,9 +1631,9 @@ namespace LiveSplit.HollowKnight {
                 #endregion
 
                 default:
-                    //throw new Exception(Split + " does not have a defined shouldsplit value");
-                    if (!failedValues.Contains(Split)) {
-                        failedValues.Add(Split);
+                    //throw new Exception(split + " does not have a defined shouldsplit value");
+                    if (!failedValues.Contains(split)) {
+                        failedValues.Add(split);
                     }
                     break;
             }
