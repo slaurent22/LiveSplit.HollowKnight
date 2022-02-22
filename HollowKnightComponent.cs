@@ -953,7 +953,8 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.TransTear: shouldSplit = mem.PlayerData<bool>(Offset.hasAcidArmour) && nextScene != sceneName; break;
                 case SplitName.TransTearWithGrub: shouldSplit =
                         mem.PlayerData<bool>(Offset.hasAcidArmour) &&
-                        mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13"); break;
+                        mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13") &&
+
                         nextScene != sceneName; break;
                 case SplitName.PlayerDeath: shouldSplit = mem.PlayerData<int>(Offset.health) == 0; break;
                 case SplitName.ShadeKilled: shouldSplit = store.CheckToggledFalse(Offset.soulLimited); break;
