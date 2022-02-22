@@ -692,7 +692,7 @@ namespace LiveSplit.HollowKnight {
         [Description("Soul Sanctum w/ Shade Soul (Transition)"), ToolTip("Splits when entering Soul Sanctum after obtaining Shade Soul")]
         EnterSanctumWithShadeSoul,
         [Description("Tower of Love (Transition)"), ToolTip("Splits when entering the Tower of Love")]
-        TowerOfLove,
+        EnterLoveTower,
         [Description("Waterways Manhole (Transition)"), ToolTip("Splits on transition to Waterways through the Simple Key manhole")]
         WaterwaysEntry,
         [Description("White Palace Entry (Transition)"), ToolTip("Splits when entering the first White Palace scene")]
