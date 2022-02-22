@@ -1101,7 +1101,6 @@ namespace LiveSplit.HollowKnight {
 
                 case SplitName.VengeflyKingTrans: shouldSplit = mem.PlayerData<bool>(Offset.zoteRescuedBuzzer) && nextScene != sceneName; break;
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != sceneName; break;
-                
                 case SplitName.GladeIdol: shouldSplit = store.CheckIncreased(Offset.trinket3) && sceneName.StartsWith("RestingGrounds_08"); break;
                 case SplitName.AbyssDoor: shouldSplit = mem.PlayerData<bool>(Offset.abyssGateOpened); break;
                 case SplitName.AbyssLighthouse: shouldSplit = mem.PlayerData<bool>(Offset.abyssLighthouse); break;
