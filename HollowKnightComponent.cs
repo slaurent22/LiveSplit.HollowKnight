@@ -915,7 +915,6 @@ namespace LiveSplit.HollowKnight {
                         || nextScene.StartsWith("Fungus2_23") // Bretta from Waterways
                         || nextScene.StartsWith("Fungus2_20") // Spore Shroom room, from QG (this one's unlikely to come up)
                         ) && nextScene != sceneName; break;
-                case SplitName.TowerOfLove: shouldSplit = nextScene.StartsWith("Ruins2_11"); break;
                 case SplitName.SoulMasterEncountered: shouldSplit = mem.PlayerData<bool>(Offset.mageLordEncountered); break;
 
                 case SplitName.CrystalMoundExit: shouldSplit = sceneName.StartsWith("Mines_35") && nextScene != sceneName; break;
