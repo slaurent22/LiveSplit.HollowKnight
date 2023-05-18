@@ -912,7 +912,7 @@ namespace LiveSplit.HollowKnight {
                     break;
                 case SplitName.EnterJunkPit: shouldSplit = nextScene.Equals("GG_Waterways") && nextScene != sceneName; break;
                 case SplitName.EnterDeepnest:
-                    shouldSplit = 
+                    shouldSplit =
                         (nextScene.Equals("Fungus2_25") ||
                         nextScene.Equals("Deepnest_42") ||
                         nextScene.Equals("Abyss_03b") ||
@@ -1126,6 +1126,7 @@ namespace LiveSplit.HollowKnight {
 
                 case SplitName.OnObtainWanderersJournal: shouldSplit = store.CheckIncremented(Offset.trinket1); break;
                 case SplitName.OnObtainHallownestSeal: shouldSplit = store.CheckIncremented(Offset.trinket2); break;
+                case SplitName.SoulSanctumSeal: shouldSplit = store.CheckIncremented(Offset.trinket2) && sceneName == "Ruins1_32"; break;
                 case SplitName.OnObtainKingsIdol: shouldSplit = store.CheckIncremented(Offset.trinket3); break;
                 case SplitName.ArcaneEgg8: shouldSplit = mem.PlayerData<int>(Offset.trinket4) == 8; break;
                 case SplitName.OnObtainArcaneEgg: shouldSplit = store.CheckIncremented(Offset.trinket4); break;
