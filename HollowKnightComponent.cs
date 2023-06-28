@@ -991,6 +991,14 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.Menu: shouldSplit = sceneName == "Menu_Title"; break;
                 case SplitName.MenuClaw: shouldSplit = mem.PlayerData<bool>(Offset.hasWallJump); break;
                 case SplitName.MenuGorgeousHusk: shouldSplit = mem.PlayerData<bool>(Offset.killedGorgeousHusk); break;
+
+                case SplitName.MenuCloak: shouldSplit = mem.PlayerData<bool>(Offset.hasDash); break;
+                case SplitName.MenuDashmaster: shouldSplit = mem.PlayerData<bool>(Offset.gotCharm_31); break;
+                case SplitName.MenuDreamNail: shouldSplit = mem.PlayerData<bool>(Offset.hasDreamNail); break;
+                case SplitName.MenuDreamGate: shouldSplit = mem.PlayerData<bool>(Offset.hasDreamGate); break;
+                case SplitName.MenuVoidHeart: shouldSplit = mem.PlayerData<bool>(Offset.gotShadeCharm); break;
+                case SplitName.MenuDreamer3: shouldSplit = mem.PlayerData<int>(Offset.guardiansDefeated) == 3; break;
+
                 case SplitName.TransClaw: shouldSplit = mem.PlayerData<bool>(Offset.hasWallJump) && nextScene != sceneName; break;
                 case SplitName.TransGorgeousHusk: shouldSplit = mem.PlayerData<bool>(Offset.killedGorgeousHusk) && nextScene != sceneName; break;
                 case SplitName.TransDescendingDark: shouldSplit = mem.PlayerData<int>(Offset.quakeLevel) == 2 && nextScene != sceneName; break;
@@ -999,8 +1007,9 @@ namespace LiveSplit.HollowKnight {
                     shouldSplit =
                         mem.PlayerData<bool>(Offset.hasAcidArmour) &&
                         mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13") &&
-
                         nextScene != sceneName; break;
+                case SplitName.TransShadeSoul: shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2 && nextScene != sceneName; break;
+
                 case SplitName.PlayerDeath: shouldSplit = mem.PlayerData<int>(Offset.health) == 0; break;
                 case SplitName.ShadeKilled: shouldSplit = store.CheckToggledFalse(Offset.soulLimited); break;
                 case SplitName.SlyShopFinished:

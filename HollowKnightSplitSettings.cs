@@ -734,8 +734,10 @@ namespace LiveSplit.HollowKnight {
 
         [Description("Has Claw (Transition)"), ToolTip("Splits on transition after Mantis Claw acquired")]
         TransClaw,
-        [Description("Has Fireball (Transition)"), ToolTip("Splits on transition after Vengeful Spirit acquired")]
+        [Description("Has Vengeful Spirit (Transition)"), ToolTip("Splits on transition after Vengeful Spirit acquired")]
         TransVS,
+        [Description("Has Shade Soul (Transition)"), ToolTip("Splits on transition after Shade Soul acquired")]
+        TransShadeSoul,
         [Description("Has Descending Dark (Transition)"), ToolTip("Splits on transition after Descending Dark acquired")]
         TransDescendingDark,
         [Description("Has Isma's Tear (Transition)"), ToolTip("Splits on transition after Isma's Tear acquired")]
@@ -1393,13 +1395,25 @@ namespace LiveSplit.HollowKnight {
 
         [Description("Main Menu (Menu)"), ToolTip("Splits on the main menu")]
         Menu,
+        [Description("Main Menu w/ Mothwing Cloak (Menu)"), ToolTip("Splits on transition to the main menu after Mothwing Cloak acquired")]
+        MenuCloak,
         [Description("Main Menu w/ Claw (Menu)"), ToolTip("Splits on transition to the main menu after Mantis Claw acquired")]
         MenuClaw,
         [Description("Main Menu w/ Ghusk (Menu)"), ToolTip("Splits on transition to the main menu after Gorgeous Husk defeated")]
         MenuGorgeousHusk,
         [Description("Main Menu w/ Isma's Tear (Menu)"), ToolTip("Splits on transition to the main menu after Isma's Tear acquired")]
         MenuIsmasTear,
-        
+        [Description("Main Menu w/ Dream Nail (Menu)"), ToolTip("Splits on transition to the main menu after Dream Nail acquired")]
+        MenuDreamNail,
+        [Description("Main Menu w/ Dream Gate (Menu)"), ToolTip("Splits on transition to the main menu after Dream Gate acquired")]
+        MenuDreamGate,
+        [Description("Main Menu w/ Void Heart (Menu)"), ToolTip("Splits on transition to the main menu after Void Heart acquired")]
+        MenuVoidHeart,
+        [Description("Main Menu w/ 3 Dreamers (Menu)"), ToolTip("Splits on transition to the main menu after 3 Dreamers acquired")]
+        MenuDreamer3,
+        [Description("Main Menu w/ Dashmaster (Menu)"), ToolTip("Splits on transition to the main menu after Dashmaster acquired")]
+        MenuDashmaster,
+
         [Description("Cornifer at Home (Transition)"), ToolTip("Splits when entering Iselda's hut while Cornifer is sleeping")]
         CorniferAtHome,
         [Description("All Seals (Item)"), ToolTip("Splits when 17 Hallownest Seals have been collected")]
