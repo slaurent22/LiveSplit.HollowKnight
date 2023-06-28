@@ -57,6 +57,7 @@
         openedDeepnest,
         openedStagNest,
         openedHiddenStation,
+        charmSlots,
         gotCharm_1,
         gotCharm_2,
         gotCharm_3,
@@ -288,7 +289,8 @@
         metXun,
         hasXunFlower,
         xunRewardGiven,
-
+        ghostCoins,
+        
         currentArea,
         killedMageKnight,
         killedMage,
@@ -396,8 +398,7 @@
         killsMawlek,
         killsSuperSpitter,
         killsGreatShieldZombie,
-
-        ghostCoins
+        
     }
     public enum GameState {
         INACTIVE,
