@@ -254,7 +254,6 @@ namespace LiveSplit.HollowKnight {
             if (splitResult != SplitterAction.Pass
                 && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
             ) {
-                menuSplitHelper = false; // clear the saved should split flag value
                 if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime($"{splitResult.ToString()}: " + Split);
             }
 
@@ -976,8 +975,8 @@ namespace LiveSplit.HollowKnight {
                 #region menu splits
 
                 case SplitName.Menu: // this case is used for all main menu splits, be careful if you modify it
-                    menuSplitHelper = true;
-                    shouldSplit = sceneName == "Menu_Title";
+                    shouldSplit = sceneName == "Menu_Title" && nextScene != sceneName;
+                    menuSplitHelper = !shouldSplit; // this properly sets and resets menuSplitHelper, kinda jank but if it works 🤷
                     break;
 
                 // menuSplitHelper is set to true in case SplitName.Menu, and is only set back to false once it splits
