@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Xml;
 namespace LiveSplit.HollowKnight {
@@ -164,7 +165,7 @@ namespace LiveSplit.HollowKnight {
                         }
                         if (action == SplitterAction.Pass) {
                             if (!settings.Ordered) {
-                                action = NotOrderedSplits(gameState, uIState, nextScene, sceneName); // unordered splits not compatible with Skip splits
+                                action = NotOrderedSplits(gameState, uIState, nextScene, sceneName); // note: unordered splits not compatible with Skip splits
                             } else if (currentSplit < settings.Splits.Count) {
                                 action = OrderedSplits(gameState, uIState, nextScene, sceneName);
                             }
@@ -212,6 +213,8 @@ namespace LiveSplit.HollowKnight {
             lastGameState = gameState;
         }
 
+
+        // note: menu splits require ordered splits
         private SplitterAction NotOrderedSplits(GameState gameState, UIState uIState, string nextScene, string sceneName) {
 
             foreach (SplitName Split in settings.Splits) {
@@ -244,37 +247,18 @@ namespace LiveSplit.HollowKnight {
         }
 
         private SplitterAction OrderedSplits(GameState gameState, UIState uIState, string nextScene, string sceneName) {
-            SplitName Split = settings.Splits[currentSplit];
 
-            if (Split.ToString().StartsWith("Menu")) {
-                if (!menuSplitHelper) menuSplitHelper = Split == SplitName.Menu || CheckSplit(Split, nextScene, sceneName) != SplitterAction.Pass;
-                if (menuSplitHelper) {
-                    if (CheckSplit(SplitName.Menu, nextScene, sceneName) == SplitterAction.Split) {
-                        menuSplitHelper = false;
-                        if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime("Split: " + Split);
-                        return SplitterAction.Split;
-                    } else if (CheckSplit(SplitName.Menu, nextScene, sceneName) == SplitterAction.Skip) {
-                        menuSplitHelper = false;
-                        if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime("Skip: " + Split);
-                        return SplitterAction.Skip;
-                    }
-                }
-            } else {
-                if (CheckSplit(Split, nextScene, sceneName) == SplitterAction.Split
-                        && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || (gameState == GameState.MAIN_MENU))) {
-                    if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime("Split: " + Split);
-                    return SplitterAction.Split;
-                } else if (CheckSplit(Split, nextScene, sceneName) == SplitterAction.Skip
-                        && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || (gameState == GameState.MAIN_MENU))) {
-                    if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime("Skip: " + Split);
-                    return SplitterAction.Skip;
-                } else if (CheckSplit(Split, nextScene, sceneName) == SplitterAction.Reset
-                        && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || (gameState == GameState.MAIN_MENU))) {
-                    if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime("Reset: " + Split);
-                    return SplitterAction.Reset;
-                }
+            SplitName Split = settings.Splits[currentSplit];
+            SplitterAction splitResult = CheckSplit(Split, nextScene, sceneName);
+
+            if (splitResult != SplitterAction.Pass
+                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
+            ) {
+                menuSplitHelper = false; // clear the saved should split flag value
+                if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime($"{splitResult.ToString()}: " + Split);
             }
-            return SplitterAction.Pass;
+
+            return splitResult;
         }
 
         private bool shouldSplitTransition(string nextScene, string sceneName) {
@@ -988,16 +972,28 @@ namespace LiveSplit.HollowKnight {
                         && sceneName != nextScene
                         && !store.SplitThisTransition;
                     break;
-                case SplitName.Menu: shouldSplit = sceneName == "Menu_Title"; break;
-                case SplitName.MenuClaw: shouldSplit = mem.PlayerData<bool>(Offset.hasWallJump); break;
-                case SplitName.MenuGorgeousHusk: shouldSplit = mem.PlayerData<bool>(Offset.killedGorgeousHusk); break;
 
-                case SplitName.MenuCloak: shouldSplit = mem.PlayerData<bool>(Offset.hasDash); break;
-                case SplitName.MenuDashmaster: shouldSplit = mem.PlayerData<bool>(Offset.gotCharm_31); break;
-                case SplitName.MenuDreamNail: shouldSplit = mem.PlayerData<bool>(Offset.hasDreamNail); break;
-                case SplitName.MenuDreamGate: shouldSplit = mem.PlayerData<bool>(Offset.hasDreamGate); break;
-                case SplitName.MenuVoidHeart: shouldSplit = mem.PlayerData<bool>(Offset.gotShadeCharm); break;
-                case SplitName.MenuDreamer3: shouldSplit = mem.PlayerData<int>(Offset.guardiansDefeated) == 3; break;
+                #region menu splits
+
+                case SplitName.Menu: // this case is used for all main menu splits, be careful if you modify it
+                    menuSplitHelper = true;
+                    shouldSplit = sceneName == "Menu_Title";
+                    break;
+
+                // menuSplitHelper is set to true in case SplitName.Menu, and is only set back to false once it splits
+                // playerdata doesn't exist when you quit out or something so it can't check any additional conditions
+                // menuSplitHelper basically just remembers that you've met the conditions and lets you pass on to the
+                // SplitName.Menu case.
+                case SplitName.MenuClaw: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasWallJump)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuGorgeousHusk: if (menuSplitHelper || mem.PlayerData<bool>(Offset.killedGorgeousHusk)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuCloak: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDash)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuDashmaster: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotCharm_31)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuDreamNail: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamNail)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuDreamGate: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamGate)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuDreamer3: if (menuSplitHelper || mem.PlayerData<int>(Offset.guardiansDefeated) == 3) { goto case SplitName.Menu; } break;
+
+                #endregion menu splits
 
                 case SplitName.TransClaw: shouldSplit = mem.PlayerData<bool>(Offset.hasWallJump) && nextScene != sceneName; break;
                 case SplitName.TransGorgeousHusk: shouldSplit = mem.PlayerData<bool>(Offset.killedGorgeousHusk) && nextScene != sceneName; break;
