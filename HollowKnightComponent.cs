@@ -155,21 +155,12 @@ namespace LiveSplit.HollowKnight {
                 UIState uIState = mem.UIState();
 
                 // Ending the timer
-                if (settings.AutosplitEndRuns) { // if autoend timer
-                    if (currentSplit < Model.CurrentState.Run.Count) {
-                        if (currentSplit + 1 == Model.CurrentState.Run.Count) { // check if you're on the last split
-                            action = (nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence") ? SplitterAction.Split : SplitterAction.Pass;
-                        }
-                        if (action == SplitterAction.Pass) {
-                            action = OrderedSplits(gameState, uIState, nextScene, sceneName);
-                        }
-                    }
-                } else {
-                    if (currentSplit + 1 < Model.CurrentState.Run.Count) { // check if you're not on the last split
-                        action = OrderedSplits(gameState, uIState, nextScene, sceneName);
-                    } else {
-                        action = (nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence") ? SplitterAction.Split : SplitterAction.Pass;
-                    }
+                if (currentSplit + 1 == Model.CurrentState.Run.Count) {
+                    action = (nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence") ? SplitterAction.Split : SplitterAction.Pass;
+                }
+
+                if (actions == SplitterAction.Pass) {
+                    action = OrderedSplits(gameState, uIState, nextScene, sceneName);
                 }
 
                 // remove loads if timer is running
