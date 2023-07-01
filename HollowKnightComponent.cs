@@ -159,7 +159,7 @@ namespace LiveSplit.HollowKnight {
                     action = (nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence") ? SplitterAction.Split : SplitterAction.Pass;
                 }
 
-                if (actions == SplitterAction.Pass) {
+                if (action == SplitterAction.Pass) {
                     action = OrderedSplits(gameState, uIState, nextScene, sceneName);
                 }
 
@@ -220,19 +220,6 @@ namespace LiveSplit.HollowKnight {
 
             return splitResult;
         }
-
-        private bool shouldSplitTransition(string nextScene, string sceneName) {
-            if (nextScene != sceneName && !store.SplitThisTransition) {
-                return !(
-                    string.IsNullOrEmpty(sceneName) ||
-                    string.IsNullOrEmpty(nextScene) ||
-                    menuingSceneNames.Contains(sceneName) ||
-                    menuingSceneNames.Contains(nextScene)
-                );
-            }
-            return false;
-        }
-
 
         private SplitterAction CheckSplit(SplitName split, string nextScene, string sceneName) {
             bool shouldSplit = false;
@@ -1022,18 +1009,23 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.KilledOblobbles: shouldSplit = mem.PlayerData<int>(Offset.killsOblobble) == 1; break;
                 case SplitName.WhitePalaceEntry: shouldSplit = nextScene.StartsWith("White_Palace_11") && nextScene != sceneName; break;
                 case SplitName.ManualSplit: shouldSplit = false; break;
-                case SplitName.AnyTransition: shouldSplit = shouldSplitTransition(nextScene, sceneName); break;
+
+                case SplitName.AnyTransition:
+                    shouldSplit = nextScene != sceneName && !store.SplitThisTransition
+                                    && !(string.IsNullOrEmpty(sceneName) || string.IsNullOrEmpty(nextScene)
+                                        || menuingSceneNames.Contains(sceneName) || menuingSceneNames.Contains(nextScene));
+                    break;
                 case SplitName.TransitionAfterSaveState:
-                    if (shouldSplitTransition(nextScene, sceneName)) {
-                        shouldSplit = !(debugSaveStateSceneNames.Contains(nextScene) || debugSaveStateSceneNames.Contains(sceneName));
+                    if (!(debugSaveStateSceneNames.Contains(nextScene)
+                        || debugSaveStateSceneNames.Contains(sceneName))) {
+                        goto case SplitName.AnyTransition;
                     }
                     break;
+
                 case SplitName.RandoWake:
                     shouldSplit = !mem.PlayerData<bool>(Offset.disablePause) && mem.GameState() == GameState.PLAYING && !menuingSceneNames.Contains(sceneName);
                     break;
-                case SplitName.OnGhostCoinsIncremented:
-                    shouldSplit = store.CheckIncremented(Offset.ghostCoins);
-                    break;
+                case SplitName.OnGhostCoinsIncremented: shouldSplit = store.CheckIncremented(Offset.ghostCoins); break;
                 case SplitName.RidingStag: shouldSplit = mem.PlayerData<bool>(Offset.travelling); break;
                 case SplitName.WhitePalaceLowerEntry: shouldSplit = nextScene.StartsWith("White_Palace_01") && nextScene != sceneName; break;
                 case SplitName.WhitePalaceLowerOrb: shouldSplit = nextScene.StartsWith("White_Palace_02") && nextScene != sceneName; break;
