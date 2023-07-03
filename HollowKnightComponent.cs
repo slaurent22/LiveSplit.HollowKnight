@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Xml;
 namespace LiveSplit.HollowKnight {
@@ -42,9 +41,8 @@ namespace LiveSplit.HollowKnight {
         private bool hasLog = false;
         private Dictionary<string, string> currentValues = new Dictionary<string, string>();
         private HollowKnightSettings settings;
-        private HashSet<SplitName> splitsDone = new HashSet<SplitName>();
         private List<SplitName> failedValues = new List<SplitName>();
-        private SplitName lastSplitDone;
+        //private SplitName lastSplitDone;
         private static string LOGFILE = "_HollowKnight.log";
         private PlayerData pdata = new PlayerData();
         private GameState lastGameState;
@@ -129,71 +127,6 @@ namespace LiveSplit.HollowKnight {
             LogValues();
         }
 #if !Info
-        private void xHandleSplits() {
-
-            SplitterAction action = SplitterAction.Pass;
-            string nextScene = mem.NextSceneName();
-            string sceneName = mem.SceneName();
-
-            SplitName split = currentSplit >= 0 ? settings.Splits[currentSplit] : SplitName.Start;
-
-            // Starting the timer
-            if (currentSplit == -1) { // checks current split
-                if (settings.AutosplitStartRuns != null) { // if autosplits start runs
-                    action = CheckSplit(settings.AutosplitStartRuns.Value, nextScene, sceneName); // check autosplit start split
-                } else if ((nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase) && // check for starting normally
-                          mem.GameState() == GameState.ENTERING_LEVEL) ||
-                          nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene") {
-                    action = SplitterAction.Split;
-                }
-
-            } // starting
-
-            // if the timer is running
-            else if (Model.CurrentState.CurrentPhase == TimerPhase.Running && settings.Splits.Count > 0) {
-
-                // update states
-                GameState gameState = mem.GameState();
-                UIState uIState = mem.UIState();
-
-                // Ending the timer
-                if (currentSplit + 1 == Model.CurrentState.Run.Count) {
-                    action = (nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence") ? SplitterAction.Split : SplitterAction.Pass;
-                }
-
-                if (action == SplitterAction.Pass) {
-                    action = GetAction(gameState, uIState, nextScene, sceneName);
-                }
-
-                // remove loads if timer is running
-                LoadRemoval(gameState, uIState, nextScene, sceneName);
-
-            } // running
-
-            
-            
-            // log if the split is not a pass and the game is not inactive or in the main menu
-            if (
-                splitResult != SplitterAction.Pass
-                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
-                && (hasLog || !Console.IsOutputRedirected)
-            ) {
-                WriteLogWithTime($"{splitResult.ToString()}: " + Split);
-            }
-
-            store.Update();
-            ExecuteAction(action);
-
-        }
-
-        private SplitterAction GetAction(GameState gameState, UIState uIState, string nextScene, string sceneName) {
-
-            SplitName Split = settings.Splits[currentSplit];
-            SplitterAction splitResult = CheckSplit(Split, nextScene, sceneName);
-
-            return splitResult;
-        }
-
         private void HandleSplits() {
             SplitterAction action = SplitterAction.Pass;
             string sceneNext = mem.NextSceneName();
@@ -201,12 +134,11 @@ namespace LiveSplit.HollowKnight {
             GameState gameState = mem.GameState();
             UIState uiState = mem.UIState();
 
-            var _GetStartSpilt = () => {
+            var _GetStartSplit = () => {
                 if (settings.AutosplitStartRuns != null)
                     return settings.AutosplitStartRuns.Value;
                 return SplitName.LegacyStart;
-                };
-
+            };
             var split = currentSplit == -1 ? _GetStartSplit() : // if timer hasn't started
                         currentSplit + 1 == Model.CurrentState.Run.Count ? SplitName.LegacyEnd : // if it's the last split
                         settings.Splits[currentSplit]; // otherwise
@@ -216,19 +148,19 @@ namespace LiveSplit.HollowKnight {
                 && settings.Splits.Count > 0 // there are splits
                 || currentSplit < 0 // current split is the start
             ) {
-                action = GetAction(gameState, uiState, sceneNext, sceneCurr);
+                action = GetAction(split, sceneNext, sceneCurr);
             }
 
             // log if the split is not a pass and the game is not inactive or in the main menu
             if (
                 action != SplitterAction.Pass
-                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
+                && !((gameState == GameState.INACTIVE && uiState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
                 && (hasLog || !Console.IsOutputRedirected)
             ) {
-                WriteLogWithTime($"{action.ToString()}: " + Split);
+                WriteLogWithTime($"{action.ToString()}: " + split);
             }
 
-            LoadRemoval(gameState, uIState, nextScene, sceneName);
+            LoadRemoval(gameState, uiState, sceneNext, sceneCurr);
 
             store.Update();
             ExecuteAction(action);
@@ -236,10 +168,10 @@ namespace LiveSplit.HollowKnight {
         }
 
         private void LoadRemoval(GameState gameState, UIState uIState, string nextScene, string sceneName) {
-            
+
             // only remove loads if timer is running
             if (Model.CurrentState.CurrentPhase != TimerPhase.Running) return;
-            
+
             uIState = mem.UIState();
             bool loadingMenu = (sceneName != "Menu_Title" && string.IsNullOrEmpty(nextScene))
                 || (sceneName != "Menu_Title" && nextScene == "Menu_Title"
@@ -273,32 +205,36 @@ namespace LiveSplit.HollowKnight {
             lastGameState = gameState;
         }
 
-        private SplitterAction CheckSplit(SplitName split, string nextScene, string sceneName) {
+        private SplitterAction GetAction(SplitName split, string nextScene, string sceneName) {
             bool shouldSplit = false;
             bool shouldSkip = false;
             bool shouldReset = false;
             SplitterAction action;
 
             switch (split) {
-                case SplitName.LegacyStart: shouldSplit =
+                case SplitName.LegacyStart:
+                    shouldSplit =
                 (nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase)
                     && mem.GameState() == GameState.ENTERING_LEVEL)
                 || nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene"; break;
-                
-                case SplitName.LegacyEnd: shouldSplit =
+
+                case SplitName.LegacyEnd:
+                    shouldSplit =
                     nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase)
                     || nextScene == "GG_End_Sequence"; break;
 
-                case Splitname.StartNewGame: shouldSplit =
+                case SplitName.StartNewGame:
+                    shouldSplit =
                     (nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase)
                     && mem.GameState() == GameState.ENTERING_LEVEL); break;
-                case Splitname.StartPantheon = shouldSplit =
+                case SplitName.StartPantheon:
+                    shouldSplit =
                     nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene"; break;
 
-                case Splitname.EndingA: shouldSplit = nextScene.Equals("Cinematic_Ending_A", StringComparison.OrdinalIgnoreCase)"); break;
-                case Splitname.EndingB: shouldSplit = nextScene.Equals("Cinematic_Ending_B", StringComparison.OrdinalIgnoreCase)"); break;
-                case Splitname.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase)"); break;
-                case Splitname.EndingGodhome: nextScene == "GG_End_Sequence"; break;
+                case SplitName.EndingA: shouldSplit = nextScene.Equals("Cinematic_Ending_A", StringComparison.OrdinalIgnoreCase); break;
+                case SplitName.EndingB: shouldSplit = nextScene.Equals("Cinematic_Ending_B", StringComparison.OrdinalIgnoreCase); break;
+                case SplitName.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase); break;
+                case SplitName.EndingGodhome: shouldSplit = nextScene == "GG_End_Sequence"; break;
 
                 case SplitName.Abyss: shouldSplit = mem.PlayerData<bool>(Offset.visitedAbyss); break;
                 case SplitName.AbyssShriek: shouldSplit = mem.PlayerData<int>(Offset.screamLevel) == 2; break;
@@ -1925,7 +1861,6 @@ namespace LiveSplit.HollowKnight {
             state = 0;
             lookForTeleporting = false;
             Model.CurrentState.IsGameTimePaused = true;
-            splitsDone.Clear();
             store.Reset();
             if (failedValues.Count > 0) {
                 WriteLog("---------Splits without match-------------------");
@@ -1947,7 +1882,6 @@ namespace LiveSplit.HollowKnight {
             state = 0;
             Model.CurrentState.IsGameTimePaused = true;
             Model.CurrentState.SetGameTime(Model.CurrentState.CurrentTime.RealTime);
-            splitsDone.Clear();
             store.Reset();
             failedValues.Clear();
             store.SplitThisTransition = true;
@@ -1956,7 +1890,6 @@ namespace LiveSplit.HollowKnight {
         }
         public void OnUndoSplit(object sender, EventArgs e) {
             currentSplit--;
-            //if (!settings.Ordered) splitsDone.Remove(lastSplitDone); Reminder of THIS BREAKS THINGS
             state = 0;
         }
         public void OnSkipSplit(object sender, EventArgs e) {
@@ -1967,7 +1900,6 @@ namespace LiveSplit.HollowKnight {
             currentSplit++;
             store.SplitThisTransition = true;
             store.Update();
-
             state = 0;
         }
         public Control GetSettingsControl(LayoutMode mode) { return settings; }
