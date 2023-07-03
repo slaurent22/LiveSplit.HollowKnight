@@ -129,16 +129,18 @@ namespace LiveSplit.HollowKnight {
             LogValues();
         }
 #if !Info
-        private void HandleSplits() {
+        private void xHandleSplits() {
 
             SplitterAction action = SplitterAction.Pass;
             string nextScene = mem.NextSceneName();
             string sceneName = mem.SceneName();
 
+            SplitName split = currentSplit >= 0 ? settings.Splits[currentSplit] : SplitName.Start;
+
             // Starting the timer
             if (currentSplit == -1) { // checks current split
-                if (settings.AutosplitStartRuns != null) { // check the autostart split
-                    action = CheckSplit(settings.AutosplitStartRuns.Value, nextScene, sceneName);
+                if (settings.AutosplitStartRuns != null) { // if autosplits start runs
+                    action = CheckSplit(settings.AutosplitStartRuns.Value, nextScene, sceneName); // check autosplit start split
                 } else if ((nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase) && // check for starting normally
                           mem.GameState() == GameState.ENTERING_LEVEL) ||
                           nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene") {
@@ -160,7 +162,7 @@ namespace LiveSplit.HollowKnight {
                 }
 
                 if (action == SplitterAction.Pass) {
-                    action = OrderedSplits(gameState, uIState, nextScene, sceneName);
+                    action = GetAction(gameState, uIState, nextScene, sceneName);
                 }
 
                 // remove loads if timer is running
@@ -168,12 +170,76 @@ namespace LiveSplit.HollowKnight {
 
             } // running
 
+            
+            
+            // log if the split is not a pass and the game is not inactive or in the main menu
+            if (
+                splitResult != SplitterAction.Pass
+                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
+                && (hasLog || !Console.IsOutputRedirected)
+            ) {
+                WriteLogWithTime($"{splitResult.ToString()}: " + Split);
+            }
+
             store.Update();
-            HandleSplit(action);
+            ExecuteAction(action);
+
+        }
+
+        private SplitterAction GetAction(GameState gameState, UIState uIState, string nextScene, string sceneName) {
+
+            SplitName Split = settings.Splits[currentSplit];
+            SplitterAction splitResult = CheckSplit(Split, nextScene, sceneName);
+
+            return splitResult;
+        }
+
+        private void HandleSplits() {
+            SplitterAction action = SplitterAction.Pass;
+            string sceneNext = mem.NextSceneName();
+            string sceneCurr = mem.SceneName();
+            GameState gameState = mem.GameState();
+            UIState uiState = mem.UIState();
+
+            var _GetStartSpilt = () => {
+                if (settings.AutosplitStartRuns != null)
+                    return settings.AutosplitStartRuns.Value;
+                return SplitName.LegacyStart;
+                };
+
+            var split = currentSplit == -1 ? _GetStartSplit() : // if timer hasn't started
+                        currentSplit + 1 == Model.CurrentState.Run.Count ? SplitName.LegacyEnd : // if it's the last split
+                        settings.Splits[currentSplit]; // otherwise
+
+            if (
+                Model.CurrentState.CurrentPhase == TimerPhase.Running // timer is running
+                && settings.Splits.Count > 0 // there are splits
+                || currentSplit < 0 // current split is the start
+            ) {
+                action = GetAction(gameState, uiState, sceneNext, sceneCurr);
+            }
+
+            // log if the split is not a pass and the game is not inactive or in the main menu
+            if (
+                action != SplitterAction.Pass
+                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
+                && (hasLog || !Console.IsOutputRedirected)
+            ) {
+                WriteLogWithTime($"{action.ToString()}: " + Split);
+            }
+
+            LoadRemoval(gameState, uIState, nextScene, sceneName);
+
+            store.Update();
+            ExecuteAction(action);
 
         }
 
         private void LoadRemoval(GameState gameState, UIState uIState, string nextScene, string sceneName) {
+            
+            // only remove loads if timer is running
+            if (Model.CurrentState.CurrentPhase != TimerPhase.Running) return;
+            
             uIState = mem.UIState();
             bool loadingMenu = (sceneName != "Menu_Title" && string.IsNullOrEmpty(nextScene))
                 || (sceneName != "Menu_Title" && nextScene == "Menu_Title"
@@ -207,20 +273,6 @@ namespace LiveSplit.HollowKnight {
             lastGameState = gameState;
         }
 
-        private SplitterAction OrderedSplits(GameState gameState, UIState uIState, string nextScene, string sceneName) {
-
-            SplitName Split = settings.Splits[currentSplit];
-            SplitterAction splitResult = CheckSplit(Split, nextScene, sceneName);
-
-            if (splitResult != SplitterAction.Pass
-                && !((gameState == GameState.INACTIVE && uIState == UIState.INACTIVE) || gameState == GameState.MAIN_MENU)
-            ) {
-                if (hasLog || !Console.IsOutputRedirected) WriteLogWithTime($"{splitResult.ToString()}: " + Split);
-            }
-
-            return splitResult;
-        }
-
         private SplitterAction CheckSplit(SplitName split, string nextScene, string sceneName) {
             bool shouldSplit = false;
             bool shouldSkip = false;
@@ -228,6 +280,26 @@ namespace LiveSplit.HollowKnight {
             SplitterAction action;
 
             switch (split) {
+                case SplitName.LegacyStart: shouldSplit =
+                (nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase)
+                    && mem.GameState() == GameState.ENTERING_LEVEL)
+                || nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene"; break;
+                
+                case SplitName.LegacyEnd: shouldSplit =
+                    nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase)
+                    || nextScene == "GG_End_Sequence"; break;
+
+                case Splitname.StartNewGame: shouldSplit =
+                    (nextScene.Equals("Tutorial_01", StringComparison.OrdinalIgnoreCase)
+                    && mem.GameState() == GameState.ENTERING_LEVEL); break;
+                case Splitname.StartPantheon = shouldSplit =
+                    nextScene is "GG_Vengefly_V" or "GG_Boss_Door_Entrance" or "GG_Entrance_Cutscene"; break;
+
+                case Splitname.EndingA: shouldSplit = nextScene.Equals("Cinematic_Ending_A", StringComparison.OrdinalIgnoreCase)"); break;
+                case Splitname.EndingB: shouldSplit = nextScene.Equals("Cinematic_Ending_B", StringComparison.OrdinalIgnoreCase)"); break;
+                case Splitname.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase)"); break;
+                case Splitname.EndingGodhome: nextScene == "GG_End_Sequence"; break;
+
                 case SplitName.Abyss: shouldSplit = mem.PlayerData<bool>(Offset.visitedAbyss); break;
                 case SplitName.AbyssShriek: shouldSplit = mem.PlayerData<int>(Offset.screamLevel) == 2; break;
                 case SplitName.Aluba: shouldSplit = mem.PlayerData<bool>(Offset.killedLazyFlyer); break;
@@ -481,6 +553,7 @@ namespace LiveSplit.HollowKnight {
 
                 case SplitName.HiveKnight: shouldSplit = mem.PlayerData<bool>(Offset.killedHiveKnight); break;
 
+                #region Pale Ore
                 case SplitName.Ore1:
                 case SplitName.Ore2:
                 case SplitName.Ore3:
@@ -501,7 +574,9 @@ namespace LiveSplit.HollowKnight {
                     }
 
                     break;
+                #endregion
 
+                #region Grubs
                 case SplitName.Grub1: shouldSplit = mem.PlayerData<int>(Offset.grubsCollected) == 1; break;
                 case SplitName.Grub2: shouldSplit = mem.PlayerData<int>(Offset.grubsCollected) == 2; break;
                 case SplitName.Grub3: shouldSplit = mem.PlayerData<int>(Offset.grubsCollected) == 3; break;
@@ -595,6 +670,8 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.GrubWaterwaysHwurmps: shouldSplit = store.CheckIncremented(Offset.grubsCollected) && sceneName == "Waterways_14"; break;
                 case SplitName.GrubWaterwaysIsma: shouldSplit = store.CheckIncremented(Offset.grubsCollected) && sceneName == "Waterways_13"; break;
 
+                #endregion Grubs
+
                 case SplitName.Mimic1: shouldSplit = mem.PlayerData<int>(Offset.killsGrubMimic) == 4; break;
                 case SplitName.Mimic2: shouldSplit = mem.PlayerData<int>(Offset.killsGrubMimic) == 3; break;
                 case SplitName.Mimic3: shouldSplit = mem.PlayerData<int>(Offset.killsGrubMimic) == 2; break;
@@ -647,6 +724,7 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.BlueLake: shouldSplit = !sceneName.StartsWith("Crossroads_50") && nextScene.StartsWith("Crossroads_50"); break;
                 case SplitName.CatacombsEntry: shouldSplit = !sceneName.StartsWith("RestingGrounds_10") && nextScene.StartsWith("RestingGrounds_10"); break;
 
+                #region Pantheons
                 case SplitName.VengeflyKingP: shouldSplit = sceneName.StartsWith("GG_Vengefly") && nextScene.StartsWith("GG_Gruz_Mother"); break;
                 case SplitName.GruzMotherP: shouldSplit = sceneName.StartsWith("GG_Gruz_Mother") && nextScene.StartsWith("GG_False_Knight"); break;
                 case SplitName.FalseKnightP: shouldSplit = sceneName.StartsWith("GG_False_Knight") && nextScene.StartsWith("GG_Mega_Moss_Charger"); break;
@@ -694,6 +772,9 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.NoskHornetP: shouldSplit = sceneName.StartsWith("GG_Nosk_Hornet") && nextScene.StartsWith("GG_Sly"); break;
                 case SplitName.NightmareKingGrimmP: shouldSplit = sceneName.StartsWith("GG_Grimm_Nightmare") && nextScene == "GG_Spa"; break;
 
+                #endregion Pantheons
+
+                #region Palace
                 case SplitName.WhitePalaceOrb1: shouldSplit = mem.PlayerData<bool>(Offset.whitePalaceOrb_1); break;
                 case SplitName.WhitePalaceOrb2: shouldSplit = mem.PlayerData<bool>(Offset.whitePalaceOrb_2); break;
                 case SplitName.WhitePalaceOrb3: shouldSplit = mem.PlayerData<bool>(Offset.whitePalaceOrb_3); break;
@@ -717,10 +798,12 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.PathOfPainTransition2: shouldSplit = nextScene.StartsWith("White_Palace_19") && sceneName.StartsWith("White_Palace_17"); break;
                 case SplitName.PathOfPainTransition3: shouldSplit = nextScene.StartsWith("White_Palace_20") && sceneName.StartsWith("White_Palace_19"); break;
 
+                #endregion Palace
+
                 case SplitName.WhiteFragmentLeft: shouldSplit = mem.PlayerData<bool>(Offset.gotQueenFragment); break;
                 case SplitName.WhiteFragmentRight: shouldSplit = mem.PlayerData<bool>(Offset.gotKingFragment); break;
 
-                // sit at benches
+                #region Benches
                 case SplitName.BenchAny: shouldSplit = mem.PlayerData<bool>(Offset.atBench); break;
                 /*
                 case SplitName.BenchDirtmouth : shouldSplit = mem.PlayerData<bool>(Offset.atBench) && sceneName == "Town"; break;
@@ -777,6 +860,8 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.TollBenchQG: shouldSplit = mem.PlayerData<bool>(Offset.tollBenchQueensGardens); break;
                 case SplitName.TollBenchCity: shouldSplit = mem.PlayerData<bool>(Offset.tollBenchCity); break;
                 case SplitName.TollBenchBasin: shouldSplit = mem.PlayerData<bool>(Offset.tollBenchAbyss); break;
+
+                #endregion Benches
 
                 case SplitName.CityGateOpen: shouldSplit = mem.PlayerData<bool>(Offset.openedCityGate); break;
                 case SplitName.CityGateAndMantisLords: shouldSplit = mem.PlayerData<bool>(Offset.openedCityGate) && mem.PlayerData<bool>(Offset.defeatedMantisLords); break;
@@ -920,7 +1005,7 @@ namespace LiveSplit.HollowKnight {
                         && !store.SplitThisTransition;
                     break;
 
-                #region menu splits
+                #region Main Menu
 
                 case SplitName.Menu: // this case is used for all main menu splits, be careful if you modify it
                     shouldSplit = sceneName == "Menu_Title" && nextScene != sceneName;
@@ -940,7 +1025,7 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamer3: if (menuSplitHelper || mem.PlayerData<int>(Offset.guardiansDefeated) == 3) { goto case SplitName.Menu; } break;
 
-                #endregion menu splits
+                #endregion Main Menu
 
                 case SplitName.TransClaw: shouldSplit = mem.PlayerData<bool>(Offset.hasWallJump) && nextScene != sceneName; break;
                 case SplitName.TransGorgeousHusk: shouldSplit = mem.PlayerData<bool>(Offset.killedGorgeousHusk) && nextScene != sceneName; break;
@@ -1719,7 +1804,7 @@ namespace LiveSplit.HollowKnight {
             return action;
         }
 
-        private void HandleSplit(SplitterAction action, bool shouldReset = false) {
+        private void ExecuteAction(SplitterAction action, bool shouldReset = false) {
             bool splitAdvanced = false;
 
             if (action == SplitterAction.Reset || shouldReset) {

@@ -58,6 +58,25 @@ namespace LiveSplit.HollowKnight {
         }
     }
     public enum SplitName {
+        [Description("Legacy Start Run"), ToolTip("Splits when autosplitter would have previously automatically started runs")]
+        LegacyStart,
+        [Description("Legacy End Run"), ToolTip("Splits when autosplitter would have previously automatically ended runs")]
+        LegacyEnd,
+
+        [Description("Start New Game"), ToolTip("Splits on entry into King's Pass when starting a new game")]
+        LegacyEnd,
+        [Description("Start Godhome/Pantheon Run"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
+        LegacyEnd,
+
+        [Description("Ending A"), ToolTip("Splits on Cinematic_Ending_A (I think it's any%)")]
+        LegacyEnd,
+        [Description("Ending B"), ToolTip("Splits on Cinematic_Ending_B (I think it's sealed siblings)")]
+        LegacyEnd,
+        [Description("Ending C"), ToolTip("Splits on Cinematic_Ending_C (I think it's true ending)")]
+        LegacyEnd,
+        [Description("Ending Godhome"), ToolTip("Splits when getting the Embrace the Void Ending")]
+        LegacyEnd,
+
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
         AbyssShriek,
         [Description("Crystal Heart (Skill)"), ToolTip("Splits when obtaining Crystal Heart")]
