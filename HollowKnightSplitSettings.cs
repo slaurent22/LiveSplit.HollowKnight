@@ -755,7 +755,7 @@ namespace LiveSplit.HollowKnight {
         TransClaw,
         [Description("Has Vengeful Spirit (Transition)"), ToolTip("Splits on transition after Vengeful Spirit acquired")]
         TransVS,
-        [Description("Has Shade Soul (Transition)"), ToolTip("Splits on transition after Shade Soul acquired")]
+        [Description("Has Shade Soul TE NMMS (Transition)"), ToolTip("Splits on transition after Shade Soul acquired\nonly works in Ruins1_31b to Ruins1_05 in the TE NMMS dupe")]
         TransShadeSoul,
         [Description("Has Descending Dark (Transition)"), ToolTip("Splits on transition after Descending Dark acquired")]
         TransDescendingDark,

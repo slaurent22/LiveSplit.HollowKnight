@@ -564,7 +564,11 @@ namespace LiveSplit.HollowKnight {
                         mem.PlayerData<bool>(Offset.hasAcidArmour)
                         && mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13")
                         && nextScene != currScene; break;
-                case SplitName.TransShadeSoul: shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2 && nextScene != currScene; break;
+                case SplitName.TransShadeSoul: // this probably only works in a dupe
+                    shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2
+                        && nextScene.Equals("Ruins1_05")
+                        && currScene.Equals("Ruins1_31b");
+                    break;
                 case SplitName.AnyTransition:
                     shouldSplit = nextScene != currScene && !store.SplitThisTransition
                                     && !(string.IsNullOrEmpty(currScene) || string.IsNullOrEmpty(nextScene)
@@ -592,6 +596,8 @@ namespace LiveSplit.HollowKnight {
                         && mem.PlayerData<int>(Offset.grimmChildLevel) == 2
                         && mem.PlayerData<int>(Offset.flamesCollected) == 3; break;
                 case SplitName.EnterLoveTower: shouldSplit = nextScene.StartsWith("Ruins2_11") && nextScene != currScene; break;
+
+                case SplitName.EnterCityTollBenchRoom: shouldSplit = nextScene.Startswith("Ruins1_18") && nextScene != currScene
 
                 case SplitName.VengeflyKingTrans: shouldSplit = mem.PlayerData<bool>(Offset.zoteRescuedBuzzer) && nextScene != currScene; break;
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != currScene; break;
