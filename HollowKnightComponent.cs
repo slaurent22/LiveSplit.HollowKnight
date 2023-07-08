@@ -148,7 +148,7 @@ namespace LiveSplit.HollowKnight {
                 && settings.Splits.Count > 0 // there are splits
                 || currentSplit < 0 // current split is the start
             ) {
-                GetAction(action, split, sceneNext, sceneCurr);
+                GetAction(ref action, split, sceneNext, sceneCurr);
             }
 
             // log if the split is not a pass and the game is not inactive or in the main menu
@@ -209,7 +209,9 @@ namespace LiveSplit.HollowKnight {
         }
 
         private void GetAction(ref SplitterAction action, SplitName split, string nextScene, string currScene) {
-            bool shouldSplit, shouldSkip, shouldReset;
+            bool shouldSplit = false;
+            bool shouldSkip = false;
+            bool shouldReset = false;
 
             switch (split) {
 
@@ -597,7 +599,7 @@ namespace LiveSplit.HollowKnight {
                         && mem.PlayerData<int>(Offset.flamesCollected) == 3; break;
                 case SplitName.EnterLoveTower: shouldSplit = nextScene.StartsWith("Ruins2_11") && nextScene != currScene; break;
 
-                case SplitName.EnterCityTollBenchRoom: shouldSplit = nextScene.Startswith("Ruins1_18") && nextScene != currScene
+                case SplitName.EnterCityTollBenchRoom: shouldSplit = nextScene.StartsWith("Ruins1_18") && nextScene != currScene;
 
                 case SplitName.VengeflyKingTrans: shouldSplit = mem.PlayerData<bool>(Offset.zoteRescuedBuzzer) && nextScene != currScene; break;
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != currScene; break;
@@ -1627,7 +1629,7 @@ namespace LiveSplit.HollowKnight {
                         store.killsColWormStart - mem.PlayerData<int>(Offset.killsColWorm) == 3                     // 2 Heavy Fool
                         && store.killsCeilingDropperStart - mem.PlayerData<int>(Offset.killsCeilingDropper) == 6;   // 6 Belflies
                     shouldSkip =
-                        || mem.PlayerData<int>(Offset.killsColWorm) == 0
+                        mem.PlayerData<int>(Offset.killsColWorm) == 0
                         || mem.PlayerData<int>(Offset.killsCeilingDropper) == 0
                         || store.killsColWormStart - mem.PlayerData<int>(Offset.killsColWorm) > 3
                         || store.killsCeilingDropperStart - mem.PlayerData<int>(Offset.killsCeilingDropper) > 6;
@@ -1896,7 +1898,7 @@ namespace LiveSplit.HollowKnight {
                         failedValues.Add(split);
                     }
                     shouldSkip = true; // skip the split if it doesn't exist
-
+                    break;
             }
 
             if (shouldReset) {

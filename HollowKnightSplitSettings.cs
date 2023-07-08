@@ -64,19 +64,19 @@ namespace LiveSplit.HollowKnight {
         LegacyEnd,
 
         [Description("Start New Game"), ToolTip("Splits on entry into King's Pass when starting a new game")]
-        LegacyEnd,
+        StartNewGame,
         [Description("Start Godhome/Pantheon Run"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
-        LegacyEnd,
+        StartPantheon,
 
         [Description("Ending A"), ToolTip("Splits on Cinematic_Ending_A (I think it's any%)")]
-        LegacyEnd,
+        EndingA,
         [Description("Ending B"), ToolTip("Splits on Cinematic_Ending_B (I think it's sealed siblings)")]
-        LegacyEnd,
+        EndingB,
         [Description("Ending C"), ToolTip("Splits on Cinematic_Ending_C (I think it's true ending)")]
-        LegacyEnd,
+        EndingC,
         [Description("Ending Godhome"), ToolTip("Splits when getting the Embrace the Void Ending")]
-        LegacyEnd,
-
+        EndingGodhome,
+        
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
         AbyssShriek,
         [Description("Crystal Heart (Skill)"), ToolTip("Splits when obtaining Crystal Heart")]
@@ -793,6 +793,8 @@ namespace LiveSplit.HollowKnight {
         WaterwaysEntry,
         [Description("White Palace Entry (Transition)"), ToolTip("Splits when entering the first White Palace scene")]
         WhitePalaceEntry,
+        [Description("City Toll Bench Room (Transition)"), ToolTip("Splits when entiering the city toll bench room")]
+        EnterCityTollBenchRoom,
 
         [Description("Baldur Shell (Charm)"), ToolTip("Splits when obtaining the Baldur Shell charm")]
         BaldurShell,
