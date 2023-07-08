@@ -148,7 +148,7 @@ namespace LiveSplit.HollowKnight {
                 && settings.Splits.Count > 0 // there are splits
                 || currentSplit < 0 // current split is the start
             ) {
-                GetAction(ref action, split, sceneNext, sceneCurr);
+                action = GetAction(split, sceneNext, sceneCurr); // check for split
             }
 
             // log if the split is not a pass and the game is not inactive or in the main menu
@@ -208,10 +208,11 @@ namespace LiveSplit.HollowKnight {
             lastGameState = gameState;
         }
 
-        private void GetAction(ref SplitterAction action, SplitName split, string nextScene, string currScene) {
+        private SplitterAction GetAction(SplitName split, string nextScene, string currScene) {
             bool shouldSplit = false;
             bool shouldSkip = false;
             bool shouldReset = false;
+            var action = SplitterAction.Pass;
 
             switch (split) {
 
@@ -568,8 +569,7 @@ namespace LiveSplit.HollowKnight {
                         && nextScene != currScene; break;
                 case SplitName.TransShadeSoul: // this probably only works in a dupe
                     shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2
-                        && nextScene.Equals("Ruins1_05")
-                        && currScene.Equals("Ruins1_31b");
+                        && mem.HeroTransitionState() == HeroTransitionState.WAITING_TO_ENTER_LEVEL;
                     break;
                 case SplitName.AnyTransition:
                     shouldSplit = nextScene != currScene && !store.SplitThisTransition
@@ -1908,7 +1908,11 @@ namespace LiveSplit.HollowKnight {
                 action = SplitterAction.Skip;
             } else if (shouldSplit) {
                 action = SplitterAction.Split;
+            } else {
+                action = SplitterAction.Pass;
             }
+
+            return action;
 
         }
 
@@ -1929,9 +1933,9 @@ namespace LiveSplit.HollowKnight {
             }
             
             else if (action == SplitterAction.Split) {
-                if (currentSplit < 0) {
+                if (currentSplit < 0) { // if start of run
                     Model.Start();
-                } else {
+                } else { // if anywhere else in run
                     Model.Split();
                 }
                 splitAdvanced = true;
@@ -1941,6 +1945,7 @@ namespace LiveSplit.HollowKnight {
                 store.SplitThisTransition = true;
                 store.Update();
             }
+            
         }
 #endif
         private void LogValues() {
