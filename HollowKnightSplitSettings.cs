@@ -1649,28 +1649,6 @@ namespace LiveSplit.HollowKnight {
         [Description("Ghost Coins Incremented (Event)"), ToolTip("Splits when the ghostCoins PlayerData is updated. Unused by unmodded game, intended for use with mods.")]
         OnGhostCoinsIncremented,
 
-        /*
-        [Description("Mage Door (Test)"), ToolTip("Splits when Nailsmith is spared")]
-        MageDoor,
-        [Description("Sanctum Warrior Window (Test)"), ToolTip("Splits when Nailsmith is killed")]
-        MageWindow,
-        [Description("Mage Lord Enc. (Test)"), ToolTip("Splits when Nailsmith is spared")]
-        MageLordEncountered,
-        [Description("Mage Lord 2 Enc. (Test)"), ToolTip("Splits when Nailsmith is killed")]
-        MageDoor2,
-        [Description("Mage Window (Test)"), ToolTip("Splits when Nailsmith is spared")]
-        MageWindowGlass,
-        [Description("Mage Window Glass (Test)"), ToolTip("Splits when Nailsmith is killed")]
-        MageLordEncountered2,
-        */
-
-
-
-        /*
-        [Description("Equipped fr. health (menu testing)"), ToolTip("Splits when equipping charm23, for timing menuing")]
-        EquippedFragileHealth,
-        */
-
     }
     public class ToolTipAttribute : Attribute {
         public string ToolTip { get; set; }

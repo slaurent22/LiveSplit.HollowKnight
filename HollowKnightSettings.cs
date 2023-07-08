@@ -9,7 +9,6 @@ using System.Xml;
 namespace LiveSplit.HollowKnight {
     public partial class HollowKnightSettings : UserControl {
         public List<SplitName> Splits { get; private set; }
-        public bool Ordered { get; set; }
         public bool AutosplitEndRuns { get; set; }
         public SplitName? AutosplitStartRuns { get; set; }
         private bool isLoading;
@@ -44,7 +43,6 @@ namespace LiveSplit.HollowKnight {
                 flowMain.Controls.RemoveAt(i);
             }
 
-            chkOrdered.Checked = Ordered;
             chkAutosplitEndRuns.Checked = AutosplitEndRuns;
             chkAutosplitStartRuns.Checked = AutosplitStartRuns != null;
 
@@ -137,7 +135,6 @@ namespace LiveSplit.HollowKnight {
         public void UpdateSplits() {
             if (isLoading) return;
 
-            Ordered = chkOrdered.Checked;
             AutosplitEndRuns = chkAutosplitEndRuns.Checked;
             AutosplitStartRuns = chkAutosplitStartRuns.Checked ?
                 HollowKnightSplitSettings.GetSplitName(cboStartTriggerName.Text) : null;
@@ -155,10 +152,6 @@ namespace LiveSplit.HollowKnight {
         }
         public XmlNode UpdateSettings(XmlDocument document) {
             XmlElement xmlSettings = document.CreateElement("Settings");
-
-            XmlElement xmlOrdered = document.CreateElement("Ordered");
-            xmlOrdered.InnerText = Ordered.ToString();
-            xmlSettings.AppendChild(xmlOrdered);
 
             XmlElement xmlAutosplitEndRuns = document.CreateElement("AutosplitEndRuns");
             xmlAutosplitEndRuns.InnerText = AutosplitEndRuns.ToString();
@@ -181,15 +174,10 @@ namespace LiveSplit.HollowKnight {
             return xmlSettings;
         }
         public void SetSettings(XmlNode settings) {
-            XmlNode orderedNode = settings.SelectSingleNode(".//Ordered");
             XmlNode AutosplitEndRunsNode = settings.SelectSingleNode(".//AutosplitEndRuns");
             XmlNode AutosplitStartRunsNode = settings.SelectSingleNode(".//AutosplitStartRuns");
-            bool isOrdered = false;
             bool isAutosplitEndRuns = false;
 
-            if (orderedNode != null) {
-                bool.TryParse(orderedNode.InnerText, out isOrdered);
-            }
             if (AutosplitEndRunsNode != null) {
                 bool.TryParse(AutosplitEndRunsNode.InnerText, out isAutosplitEndRuns);
             }
@@ -204,7 +192,6 @@ namespace LiveSplit.HollowKnight {
                     chkAutosplitStartRuns.Checked = true;
                 }
             }
-            Ordered = isOrdered;
             AutosplitEndRuns = isAutosplitEndRuns;
 
             Splits.Clear();

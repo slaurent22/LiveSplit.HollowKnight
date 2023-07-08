@@ -32,7 +32,6 @@
             this.RunBehaviour_GroupBox = new System.Windows.Forms.GroupBox();
             this.cboStartTriggerName = new System.Windows.Forms.ComboBox();
             this.chkAutosplitStartRuns = new System.Windows.Forms.CheckBox();
-            this.chkOrdered = new System.Windows.Forms.CheckBox();
             this.chkAutosplitEndRuns = new System.Windows.Forms.CheckBox();
             this.SortBy_GroupBox = new System.Windows.Forms.GroupBox();
             this.rdAlpha = new System.Windows.Forms.RadioButton();
@@ -111,7 +110,6 @@
             // 
             this.RunBehaviour_GroupBox.Controls.Add(this.cboStartTriggerName);
             this.RunBehaviour_GroupBox.Controls.Add(this.chkAutosplitStartRuns);
-            this.RunBehaviour_GroupBox.Controls.Add(this.chkOrdered);
             this.RunBehaviour_GroupBox.Controls.Add(this.chkAutosplitEndRuns);
             this.RunBehaviour_GroupBox.Location = new System.Drawing.Point(143, 15);
             this.RunBehaviour_GroupBox.Name = "RunBehaviour_GroupBox";
@@ -138,20 +136,9 @@
             this.chkAutosplitStartRuns.Size = new System.Drawing.Size(139, 17);
             this.chkAutosplitStartRuns.TabIndex = 6;
             this.chkAutosplitStartRuns.Text = "Start-triggering autosplit:";
-            this.ToolTips.SetToolTip(this.chkAutosplitStartRuns, "The specified autosplit starts the timer. Use for ILs");
+            this.ToolTips.SetToolTip(this.chkAutosplitStartRuns, "The specified autosplit starts the timer\nIt is recommended you turn this on and add a start split for your run");
             this.chkAutosplitStartRuns.UseVisualStyleBackColor = true;
             this.chkAutosplitStartRuns.CheckedChanged += new System.EventHandler(this.AutosplitStartChanged);
-            // 
-            // chkOrdered
-            // 
-            this.chkOrdered.Location = new System.Drawing.Point(6, 17);
-            this.chkOrdered.Name = "chkOrdered";
-            this.chkOrdered.Size = new System.Drawing.Size(92, 19);
-            this.chkOrdered.TabIndex = 4;
-            this.chkOrdered.Text = "Ordered Splits";
-            this.ToolTips.SetToolTip(this.chkOrdered, "Required for runs with Pantheon and/or transition splits");
-            this.chkOrdered.UseVisualStyleBackColor = true;
-            this.chkOrdered.CheckedChanged += new System.EventHandler(this.ControlChanged);
             // 
             // chkAutosplitEndRuns
             // 
@@ -161,7 +148,7 @@
             this.chkAutosplitEndRuns.Size = new System.Drawing.Size(133, 19);
             this.chkAutosplitEndRuns.TabIndex = 5;
             this.chkAutosplitEndRuns.Text = "End-triggering autosplit";
-            this.ToolTips.SetToolTip(this.chkAutosplitEndRuns, "Any autosplit can stop the timer on final split to finish a run");
+            this.ToolTips.SetToolTip(this.chkAutosplitEndRuns, "Any autosplit can stop the timer on final split to finish a run\nIt is recommended you turn this on and add an ending split to all runs");
             this.chkAutosplitEndRuns.UseVisualStyleBackColor = true;
             this.chkAutosplitEndRuns.CheckedChanged += new System.EventHandler(this.AutosplitEndChanged);
             // 
@@ -235,7 +222,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowOptions;
         private System.Windows.Forms.RadioButton rdType;
         private System.Windows.Forms.RadioButton rdAlpha;
-        private System.Windows.Forms.CheckBox chkOrdered;
         private System.Windows.Forms.CheckBox chkAutosplitEndRuns;
         private System.Windows.Forms.GroupBox Options_GroupBox;
         private System.Windows.Forms.ToolTip ToolTips;
