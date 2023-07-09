@@ -37,12 +37,10 @@ namespace LiveSplit.HollowKnight {
             "LookFor"
         };
         private HollowKnightMemory mem;
-        private int currentSplit = -1, state = 0, lastLogCheck = 0;
+        private int currentSplitIndex = -1, state = 0, lastLogCheck = 0;
         private bool hasLog = false;
         private Dictionary<string, string> currentValues = new Dictionary<string, string>();
         private HollowKnightSettings settings;
-        private List<SplitName> failedValues = new List<SplitName>();
-        //private SplitName lastSplitDone;
         private static string LOGFILE = "_HollowKnight.log";
         private PlayerData pdata = new PlayerData();
         private GameState lastGameState;
@@ -128,7 +126,7 @@ namespace LiveSplit.HollowKnight {
         }
 #if !Info
         private void HandleSplits() {
-            SplitterAction action = SplitterAction.Pass;
+            var action = SplitterAction.Pass;
             string sceneNext = mem.NextSceneName();
             string sceneCurr = mem.SceneName();
             GameState gameState = mem.GameState();
@@ -139,14 +137,23 @@ namespace LiveSplit.HollowKnight {
                     return settings.AutosplitStartRuns.Value;
                 return SplitName.LegacyStart;
             };
-            var split = currentSplit == -1 ? _GetStartSplit() : // if timer hasn't started
-                        currentSplit + 1 == Model.CurrentState.Run.Count ? SplitName.LegacyEnd : // if it's the last split
-                        settings.Splits[currentSplit]; // otherwise
+
+            var _GetCurrentSplit = () = {
+                // if the timer hasn't started
+                if (currentSplitIndex == -1) { return _GetStartSplit(); }
+                
+                // if the timer has started
+                try { var s = settings.Splits[currentSplitIndex]; } // gets the current split
+                catch () { var s = SplitName.LegacyEnd; } // defaults to ending split if there is no current split
+                finally { return s; }
+            }
+
+            var split = _GetCurrentSplit();
 
             if (
                 Model.CurrentState.CurrentPhase == TimerPhase.Running // timer is running
                 && settings.Splits.Count > 0 // there are splits
-                || currentSplit < 0 // current split is the start
+                || currentSplitIndex < 0 // current split is the start
             ) {
                 action = GetAction(split, sceneNext, sceneCurr); // check for split
             }
@@ -209,9 +216,9 @@ namespace LiveSplit.HollowKnight {
         }
 
         private SplitterAction GetAction(SplitName split, string nextScene, string currScene) {
-            bool shouldSplit = false;
-            bool shouldSkip = false;
-            bool shouldReset = false;
+            var shouldSplit = false;
+            var shouldSkip = false;
+            var shouldReset = false;
             var action = SplitterAction.Pass;
 
             switch (split) {
@@ -1893,11 +1900,7 @@ namespace LiveSplit.HollowKnight {
                 #endregion Colosseum
 
                 default:
-                    //throw new Exception(split + " does not have a defined shouldsplit value");
-                    if (!failedValues.Contains(split)) {
-                        failedValues.Add(split);
-                    }
-                    shouldSkip = true; // skip the split if it doesn't exist
+                    shouldSkip = true;
                     break;
             }
 
@@ -1920,20 +1923,20 @@ namespace LiveSplit.HollowKnight {
             bool splitAdvanced = false;
 
             if (action == SplitterAction.Reset || shouldReset) {
-                if (currentSplit >= 0) {
+                if (currentSplitIndex >= 0) {
                     Model.Reset();
                 }
             }
 
             else if (action == SplitterAction.Skip) {
-                if (currentSplit >= 0) {
+                if (currentSplitIndex >= 0) {
                     Model.SkipSplit();
                     splitAdvanced = true;
                 }
             }
             
             else if (action == SplitterAction.Split) {
-                if (currentSplit < 0) { // if start of run
+                if (currentSplitIndex < 0) { // if start of run
                     Model.Start();
                 } else { // if anywhere else in run
                     Model.Split();
@@ -1945,7 +1948,7 @@ namespace LiveSplit.HollowKnight {
                 store.SplitThisTransition = true;
                 store.Update();
             }
-            
+
         }
 #endif
         private void LogValues() {
@@ -1966,7 +1969,7 @@ namespace LiveSplit.HollowKnight {
 
                     switch (key) {
                         case "CurrentSplit":
-                            curr = currentSplit.ToString();
+                            curr = currentSplitIndex.ToString();
                             break;
                         case "State": curr = state.ToString(); break;
                         case "GameState": curr = mem.GameState().ToString(); break;
@@ -2038,18 +2041,11 @@ namespace LiveSplit.HollowKnight {
         }
 
         public void OnReset(object sender, TimerPhase e) {
-            currentSplit = -1;
+            currentSplitIndex = -1;
             state = 0;
             lookForTeleporting = false;
             Model.CurrentState.IsGameTimePaused = true;
             store.Reset();
-            if (failedValues.Count > 0) {
-                WriteLog("---------Splits without match-------------------");
-                foreach (var value in failedValues) {
-                    WriteLogWithTime(value.ToString() + " - does not have a defined shouldsplit value");
-                }
-                failedValues.Clear();
-            }
             WriteLog("---------Reset----------------------------------");
         }
         public void OnResume(object sender, EventArgs e) {
@@ -2059,26 +2055,25 @@ namespace LiveSplit.HollowKnight {
             WriteLog("---------Paused---------------------------------");
         }
         public void OnStart(object sender, EventArgs e) {
-            currentSplit = 0;
+            currentSplitIndex = 0;
             state = 0;
             Model.CurrentState.IsGameTimePaused = true;
             Model.CurrentState.SetGameTime(Model.CurrentState.CurrentTime.RealTime);
             store.Reset();
-            failedValues.Clear();
             store.SplitThisTransition = true;
             store.Update();
             WriteLog("---------New Game-------------------------------");
         }
         public void OnUndoSplit(object sender, EventArgs e) {
-            currentSplit--;
+            currentSplitIndex--;
             state = 0;
         }
         public void OnSkipSplit(object sender, EventArgs e) {
-            currentSplit++;
+            currentSplitIndex++;
             state = 0;
         }
         public void OnSplit(object sender, EventArgs e) {
-            currentSplit++;
+            currentSplitIndex++;
             store.SplitThisTransition = true;
             store.Update();
             state = 0;
