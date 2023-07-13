@@ -20,7 +20,7 @@
 
         /// <summary> 
         /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
+        /// the contents of this method with the code editor. // oop sorry 'bout that
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
@@ -51,7 +51,7 @@
             this.btnAddSplit.Size = new System.Drawing.Size(57, 21);
             this.btnAddSplit.TabIndex = 0;
             this.btnAddSplit.Text = "Add Split";
-            this.ToolTips.SetToolTip(this.btnAddSplit, "All game endings automatically stop timer when on final split");
+            this.ToolTips.SetToolTip(this.btnAddSplit, "Add another autosplit");
             this.btnAddSplit.UseVisualStyleBackColor = true;
             this.btnAddSplit.Click += new System.EventHandler(this.btnAddSplit_Click);
             // 
@@ -116,13 +116,13 @@
             this.RunBehaviour_GroupBox.Size = new System.Drawing.Size(301, 71);
             this.RunBehaviour_GroupBox.TabIndex = 7;
             this.RunBehaviour_GroupBox.TabStop = false;
-            this.RunBehaviour_GroupBox.Text = "Run behaviour";
+            this.RunBehaviour_GroupBox.Text = "Explicit Start and End Autosplits (Recommended)";
             // 
             // cboStartTriggerName
             // 
             this.cboStartTriggerName.Enabled = false;
             this.cboStartTriggerName.FormattingEnabled = true;
-            this.cboStartTriggerName.Location = new System.Drawing.Point(148, 42);
+            this.cboStartTriggerName.Location = new System.Drawing.Point(148, 17);
             this.cboStartTriggerName.Name = "cboStartTriggerName";
             this.cboStartTriggerName.Size = new System.Drawing.Size(145, 21);
             this.cboStartTriggerName.TabIndex = 7;
@@ -131,11 +131,11 @@
             // chkAutosplitStartRuns
             // 
             this.chkAutosplitStartRuns.AutoSize = true;
-            this.chkAutosplitStartRuns.Location = new System.Drawing.Point(6, 42);
+            this.chkAutosplitStartRuns.Location = new System.Drawing.Point(6, 17);
             this.chkAutosplitStartRuns.Name = "chkAutosplitStartRuns";
             this.chkAutosplitStartRuns.Size = new System.Drawing.Size(139, 17);
             this.chkAutosplitStartRuns.TabIndex = 6;
-            this.chkAutosplitStartRuns.Text = "Start-triggering autosplit:";
+            this.chkAutosplitStartRuns.Text = "Explicit start autosplit:";
             this.ToolTips.SetToolTip(this.chkAutosplitStartRuns, "The specified autosplit starts the timer\nIt is recommended you turn this on and add a start split for your run");
             this.chkAutosplitStartRuns.UseVisualStyleBackColor = true;
             this.chkAutosplitStartRuns.CheckedChanged += new System.EventHandler(this.AutosplitStartChanged);
@@ -143,11 +143,11 @@
             // chkAutosplitEndRuns
             // 
             this.chkAutosplitEndRuns.AutoEllipsis = true;
-            this.chkAutosplitEndRuns.Location = new System.Drawing.Point(148, 17);
+            this.chkAutosplitEndRuns.Location = new System.Drawing.Point(6, 42);
             this.chkAutosplitEndRuns.Name = "chkAutosplitEndRuns";
             this.chkAutosplitEndRuns.Size = new System.Drawing.Size(133, 19);
             this.chkAutosplitEndRuns.TabIndex = 5;
-            this.chkAutosplitEndRuns.Text = "End-triggering autosplit";
+            this.chkAutosplitEndRuns.Text = "Explicit ending autosplit";
             this.ToolTips.SetToolTip(this.chkAutosplitEndRuns, "Any autosplit can stop the timer on final split to finish a run\nIt is recommended you turn this on and add an ending split to all runs");
             this.chkAutosplitEndRuns.UseVisualStyleBackColor = true;
             this.chkAutosplitEndRuns.CheckedChanged += new System.EventHandler(this.AutosplitEndChanged);

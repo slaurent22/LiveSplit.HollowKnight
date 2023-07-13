@@ -138,15 +138,16 @@ namespace LiveSplit.HollowKnight {
                 return SplitName.LegacyStart;
             };
 
-            var _GetCurrentSplit = () = {
+            var _GetCurrentSplit = () => {
                 // if the timer hasn't started
                 if (currentSplitIndex == -1) { return _GetStartSplit(); }
                 
                 // if the timer has started
-                try { var s = settings.Splits[currentSplitIndex]; } // gets the current split
-                catch () { var s = SplitName.LegacyEnd; } // defaults to ending split if there is no current split
-                finally { return s; }
-            }
+                var s = SplitName.LegacyEnd; // defaults to ending split if there is no current split
+                try { s = settings.Splits[currentSplitIndex]; } // gets the current split
+                catch { } 
+                return s;
+            };
 
             var split = _GetCurrentSplit();
 
@@ -606,7 +607,7 @@ namespace LiveSplit.HollowKnight {
                         && mem.PlayerData<int>(Offset.flamesCollected) == 3; break;
                 case SplitName.EnterLoveTower: shouldSplit = nextScene.StartsWith("Ruins2_11") && nextScene != currScene; break;
 
-                case SplitName.EnterCityTollBenchRoom: shouldSplit = nextScene.StartsWith("Ruins1_18") && nextScene != currScene;
+                case SplitName.EnterCityTollBenchRoom: shouldSplit = nextScene.StartsWith("Ruins1_18") && nextScene != currScene; break;
 
                 case SplitName.VengeflyKingTrans: shouldSplit = mem.PlayerData<bool>(Offset.zoteRescuedBuzzer) && nextScene != currScene; break;
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != currScene; break;
@@ -1195,14 +1196,14 @@ namespace LiveSplit.HollowKnight {
                 // playerdata doesn't exist when you quit out or something so it can't check any additional conditions
                 // menuSplitHelper basically just remembers that you've met the conditions and lets you pass on to the
                 // SplitName.Menu case.
-                case SplitName.MenuClaw: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasWallJump)) { goto case SplitName.Menu; } break;
-                case SplitName.MenuGorgeousHusk: if (menuSplitHelper || mem.PlayerData<bool>(Offset.killedGorgeousHusk)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuCloak: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDash)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuClaw: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasWallJump)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDashmaster: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotCharm_31)) { goto case SplitName.Menu; } break;
+                case SplitName.MenuGorgeousHusk: if (menuSplitHelper || mem.PlayerData<bool>(Offset.killedGorgeousHusk)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamNail: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamNail)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamGate: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamGate)) { goto case SplitName.Menu; } break;
-                case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamer3: if (menuSplitHelper || mem.PlayerData<int>(Offset.guardiansDefeated) == 3) { goto case SplitName.Menu; } break;
+                case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
 
                 #endregion Main Menu
 
@@ -2043,6 +2044,7 @@ namespace LiveSplit.HollowKnight {
         public void OnReset(object sender, TimerPhase e) {
             currentSplitIndex = -1;
             state = 0;
+            menuSplitHelper = false;
             lookForTeleporting = false;
             Model.CurrentState.IsGameTimePaused = true;
             store.Reset();
@@ -2057,6 +2059,7 @@ namespace LiveSplit.HollowKnight {
         public void OnStart(object sender, EventArgs e) {
             currentSplitIndex = 0;
             state = 0;
+            menuSplitHelper = false;
             Model.CurrentState.IsGameTimePaused = true;
             Model.CurrentState.SetGameTime(Model.CurrentState.CurrentTime.RealTime);
             store.Reset();
@@ -2071,12 +2074,14 @@ namespace LiveSplit.HollowKnight {
         public void OnSkipSplit(object sender, EventArgs e) {
             currentSplitIndex++;
             state = 0;
+            menuSplitHelper = false;
         }
         public void OnSplit(object sender, EventArgs e) {
             currentSplitIndex++;
+            state = 0;
+            menuSplitHelper = false;
             store.SplitThisTransition = true;
             store.Update();
-            state = 0;
         }
         public Control GetSettingsControl(LayoutMode mode) { return settings; }
         public void SetSettings(XmlNode document) { settings.SetSettings(document); }

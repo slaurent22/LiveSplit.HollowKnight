@@ -152,7 +152,9 @@ namespace LiveSplit.HollowKnight {
         }
         public XmlNode UpdateSettings(XmlDocument document) {
             XmlElement xmlSettings = document.CreateElement("Settings");
-
+            
+            // TODO: have livesplit automatically change starting and ending split to just another split
+            
             XmlElement xmlAutosplitEndRuns = document.CreateElement("AutosplitEndRuns");
             xmlAutosplitEndRuns.InnerText = AutosplitEndRuns.ToString();
             xmlSettings.AppendChild(xmlAutosplitEndRuns);
