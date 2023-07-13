@@ -267,9 +267,9 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingD: shouldSplit = nextScene.Equals("Cinematic_Ending_D", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingE: shouldSplit = nextScene.Equals("Cinematic_Ending_E", StringComparison.OrdinalIgnoreCase); break;
-                case SplitName.EndingGodhome: shouldSplit = nextScene == "GG_End_Sequence"; break;
+                case SplitName.EndingGodhome: shouldSplit = nextScene.Equals("Cinematic_Ending_D", StringComparison.OrdinalIgnoreCase) || nextScene.Equals("Cinematic_Ending_E", StringComparison.OrdinalIgnoreCase); break;
 
-                case SplitName.EndingSplit: shouldSplit = nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence"; break;
+                case SplitName.EndingSplit: shouldSplit = nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase); break;
 
                 #endregion Start and End
 
