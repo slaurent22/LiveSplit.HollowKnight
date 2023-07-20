@@ -575,6 +575,11 @@ namespace LiveSplit.HollowKnight {
                         mem.PlayerData<bool>(Offset.hasAcidArmour)
                         && mem.PlayerDataStringList(Offset.scenesGrubRescued).Contains("Waterways_13")
                         && nextScene != currScene; break;
+                case SplitName.TransShadeSoul: // Should work with both normal movement and room dupes
+                    shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2
+                        && mem.HeroTransitionState() == HeroTransitionState.WAITING_TO_ENTER_LEVEL;
+                    break;
+
                 case SplitName.TransShadeSoulTENMMS: // this probably only works in a dupe
                     shouldSplit = mem.PlayerData<int>(Offset.fireballLevel) == 2
                         && currScene.StartsWith("Ruins1_05")
