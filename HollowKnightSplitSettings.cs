@@ -58,23 +58,31 @@ namespace LiveSplit.HollowKnight {
         }
     }
     public enum SplitName {
-        [Description("Legacy Start Run"), ToolTip("Splits when autosplitter would have previously automatically started runs")]
+
+        [Description("[DEPRECATED] Start Run (Start)"), ToolTip("Splits when autosplitter would have previously automatically started runs")]
         LegacyStart,
-        [Description("Legacy End Run"), ToolTip("Splits when autosplitter would have previously automatically ended runs")]
+
+        [Description("Start New Game (Start)"), ToolTip("Splits on entry into King's Pass when starting a new game")]
+        StartNewGame,
+        [Description("Start Pantheon (Start)"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
+        StartPantheon,
+        [Description("Start New Godseeker Game (Start)"), ToolTip("Splits when starting a Godseeker save")]
+        StartGodhome,
+
+        [Description("[DEPRECATED] End Run (Ending)"), ToolTip("Splits when autosplitter would have previously automatically ended runs")]
         LegacyEnd,
 
-        [Description("Start New Game"), ToolTip("Splits on entry into King's Pass when starting a new game")]
-        StartNewGame,
-        [Description("Start Godhome/Pantheon Run"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
-        StartPantheon,
-
-        [Description("Ending A"), ToolTip("Splits on Cinematic_Ending_A (I think it's any%)")]
+        [Description("Ending A (Ending)"), ToolTip("Splits on The Hollow Knight ending")]
         EndingA,
-        [Description("Ending B"), ToolTip("Splits on Cinematic_Ending_B (I think it's sealed siblings)")]
+        [Description("Ending B (Ending)"), ToolTip("Splits on Sealed Siblings ending")]
         EndingB,
-        [Description("Ending C"), ToolTip("Splits on Cinematic_Ending_C (I think it's true ending)")]
+        [Description("Ending C (Ending)"), ToolTip("Splits on Dream No More ending")]
         EndingC,
-        [Description("Ending Godhome"), ToolTip("Splits when getting the Embrace the Void Ending")]
+        [Description("Ending D (Ending)"), ToolTip("Splits on Embrace the Void ending")]
+        EndingD,
+        [Description("Ending E (Ending)"), ToolTip("Splits on Delicate Flower ending")]
+        EndingE,
+        [Description("Finished Pantheon (Ending)"), ToolTip("Splits when on completion of a pantheon")]
         EndingGodhome,
         
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
@@ -523,7 +531,7 @@ namespace LiveSplit.HollowKnight {
         CityGateOpen,
         [Description("City Gate w/ Mantis Lords defeated (Event)"), ToolTip("To make sure you don't forget Mantis Lords")]
         CityGateAndMantisLords,
-        [Description("Credits Roll (Event)"), ToolTip("Splits on any credits rolling")]
+        [Description("[DEPRECATED] Credits Roll (Event)"), ToolTip("Splits on any credits rolling")]
         EndingSplit,
         [Description("Death (Event)"), ToolTip("Splits when player HP is 0")]
         PlayerDeath,
@@ -559,6 +567,8 @@ namespace LiveSplit.HollowKnight {
         EternalOrdealAchieved,
         [Description("Riding Stag (Event)"), ToolTip("Splits while riding the stag")]
         RidingStag,
+        [Description("Stag Position Updated (Event)"), ToolTip("Splits when the stag is called")]
+        StagMoved,
         [Description("Saved Cloth (Event)"), ToolTip("Splits when saving Cloth in Ancient Basin")]
         SavedCloth,
         [Description("Crystal Peak Lift Opened (Event)"), ToolTip("Splits when opening the lever for the lift between Dirtmouth and Crystal Peak")]
