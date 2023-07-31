@@ -82,7 +82,7 @@ namespace LiveSplit.HollowKnight {
         EndingD,
         [Description("Ending E (Ending)"), ToolTip("Splits on Delicate Flower ending")]
         EndingE,
-        [Description("Finished Pantheon (Ending)"), ToolTip("Splits when on completion of a pantheon")]
+        [Description("Godhome Ending"), ToolTip("Splits on Godhome Ending, either Embrace the Void or Delicate Flower")]
         EndingGodhome,
         
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
