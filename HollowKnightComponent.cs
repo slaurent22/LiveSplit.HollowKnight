@@ -173,7 +173,7 @@ namespace LiveSplit.HollowKnight {
 
             LoadRemoval(gameState, uiState, sceneNext, sceneCurr);
 
-            return DoAction(action);
+            DoAction(action);
         }
 
         private void LoadRemoval(GameState gameState, UIState uIState, string nextScene, string sceneName) {
