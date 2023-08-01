@@ -173,7 +173,7 @@ namespace LiveSplit.HollowKnight {
 
             LoadRemoval(gameState, uiState, sceneNext, sceneCurr);
 
-            return DoAction(action);
+            DoAction(action);
         }
 
         private void LoadRemoval(GameState gameState, UIState uIState, string nextScene, string sceneName) {
@@ -267,9 +267,8 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingD: shouldSplit = nextScene.Equals("Cinematic_Ending_D", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingE: shouldSplit = nextScene.Equals("Cinematic_Ending_E", StringComparison.OrdinalIgnoreCase); break;
-                case SplitName.EndingGodhome: shouldSplit = nextScene == "GG_End_Sequence"; break;
 
-                case SplitName.EndingSplit: shouldSplit = nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase) || nextScene == "GG_End_Sequence"; break;
+                case SplitName.EndingSplit: shouldSplit = nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase); break;
 
                 #endregion Start and End
 
@@ -1128,10 +1127,13 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.MarkothP: shouldSplit = currScene.StartsWith("GG_Ghost_Markoth") && (nextScene.StartsWith("GG_Watcher_Knights") || nextScene.StartsWith("GG_Grey_Prince_Zote") || nextScene.StartsWith("GG_Failed_Champion")); break;
                 case SplitName.WatcherKnightsP: shouldSplit = currScene.StartsWith("GG_Watcher_Knights") && (nextScene.StartsWith("GG_Soul_Tyrant") || nextScene.StartsWith("GG_Uumuu")); break;
                 case SplitName.SoulTyrantP: shouldSplit = currScene.StartsWith("GG_Soul_Tyrant") && (nextScene == "GG_Engine_Prime" || nextScene.StartsWith("GG_Ghost_Markoth")); break;
+                // Pure Vessel (Pantheon) can transition from PV to either GG_Door_5_Finale for first P4 cutscene, GG_End_Sequence for subsequent P4s, or GG_Radiance in P5
                 case SplitName.PureVesselP: shouldSplit = currScene.StartsWith("GG_Hollow_Knight") && (nextScene == "GG_End_Sequence" || nextScene.StartsWith("GG_Radiance") || nextScene == "GG_Door_5_Finale"); break;
 
                 case SplitName.NoskHornetP: shouldSplit = currScene.StartsWith("GG_Nosk_Hornet") && nextScene.StartsWith("GG_Sly"); break;
                 case SplitName.NightmareKingGrimmP: shouldSplit = currScene.StartsWith("GG_Grimm_Nightmare") && nextScene == "GG_Spa"; break;
+                // Absolute Radiance (Pantheon) can transition from AbsRad to either Cinematic_Ending_D for void ending or Cinematic_Ending_E for flower ending
+                case SplitName.RadianceP: shouldSplit = currScene.StartsWith("GG_Radiance") && nextScene.StartsWith("Cinematic_Ending"); break;
 
                 #endregion Pantheons
 

@@ -82,8 +82,6 @@ namespace LiveSplit.HollowKnight {
         EndingD,
         [Description("Ending E (Ending)"), ToolTip("Splits on Delicate Flower ending")]
         EndingE,
-        [Description("Finished Pantheon (Ending)"), ToolTip("Splits when on completion of a pantheon")]
-        EndingGodhome,
         
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
         AbyssShriek,
@@ -489,6 +487,8 @@ namespace LiveSplit.HollowKnight {
         NoskHornetP,
         [Description("Nightmare King Grimm (Pantheon)"), ToolTip("Splits after killing Nightmare King Grimm in Pantheon 5")]
         NightmareKingGrimmP,
+        [Description("Absolute Radiance (Pantheon)"), ToolTip("Splits after killing Absolute Radiance in Pantheon 5")]
+        RadianceP,
 
         [Description("Herrah the Beast (Dreamer)"), ToolTip("Splits when you see the mask for Herrah")]
         Hegemol,
