@@ -835,7 +835,7 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EternalOrdealUnlocked: shouldSplit = mem.PlayerData<bool>(Offset.zoteStatueWallBroken); break;
                 case SplitName.MineLiftOpened: shouldSplit = mem.PlayerData<bool>(Offset.mineLiftOpened); break;
                 case SplitName.PlayerDeath: shouldSplit = mem.PlayerData<int>(Offset.health) == 0; break;
-                case SplitName.RidingStag: shouldSplit = mem.PlayerData<bool>(Offset.travelling) && !store.SplitThisTransition; break;
+                case SplitName.RidingStag: shouldSplit = mem.PlayerData<bool>(Offset.travelling) && nextScene != currScene && !store.SplitThisTransition; break;
                 case SplitName.SoulTyrantEssenceWithSanctumGrub:
                     shouldSplit =
                         mem.PlayerData<bool>(Offset.mageLordOrbsCollected)
