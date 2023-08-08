@@ -37,7 +37,7 @@ namespace LiveSplit.HollowKnight {
             "LookFor"
         };
         private HollowKnightMemory mem;
-        private int currentSplitIndex = -1, state = 0, lastLogCheck = 0;
+        private int currentSplitIndex = 0, state = 0, lastLogCheck = 0;
         private bool hasLog = false;
         private Dictionary<string, string> currentValues = new Dictionary<string, string>();
         private HollowKnightSettings settings;
@@ -133,29 +133,19 @@ namespace LiveSplit.HollowKnight {
             GameState gameState = mem.GameState();
             UIState uiState = mem.UIState();
 
-            var _GetStartSplit = () => {
-                if (settings.AutosplitStartRuns != null)
-                    return settings.AutosplitStartRuns.Value;
-                return SplitName.LegacyStart;
-            };
-
             var _GetCurrentSplit = () => {
-                // if the timer hasn't started
-                if (currentSplitIndex == -1) { return _GetStartSplit(); }
-
-                // if the timer has started
-                var s = SplitName.LegacyEnd; // defaults to ending split if there is no current split
+                SplitName s;
                 try { s = settings.Splits[currentSplitIndex]; } // gets the current split
-                catch { }
+                catch { s = SplitName.ForgottenCrossroads; } // default split
                 return s;
             };
 
             var split = _GetCurrentSplit();
 
             if (
-                Model.CurrentState.CurrentPhase == TimerPhase.Running // timer is running
-                && settings.Splits.Count > 0 // there are splits
-                || currentSplitIndex < 0 // current split is the start
+                settings.Splits.Count > 0 // there are splits
+                && (Model.CurrentState.CurrentPhase == TimerPhase.Running // timer is running
+                    || currentSplitIndex == 0) // current split is the start
             ) {
                 action = GetAction(split, sceneNext, sceneCurr); // check for split
             }
@@ -174,6 +164,8 @@ namespace LiveSplit.HollowKnight {
             LoadRemoval(gameState, uiState, sceneNext, sceneCurr);
 
             DoAction(action);
+
+            return;
         }
 
         private void LoadRemoval(GameState gameState, UIState uIState, string nextScene, string sceneName) {
@@ -267,8 +259,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EndingC: shouldSplit = nextScene.Equals("Cinematic_Ending_C", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingD: shouldSplit = nextScene.Equals("Cinematic_Ending_D", StringComparison.OrdinalIgnoreCase); break;
                 case SplitName.EndingE: shouldSplit = nextScene.Equals("Cinematic_Ending_E", StringComparison.OrdinalIgnoreCase); break;
-
-                case SplitName.EndingSplit: shouldSplit = nextScene.StartsWith("Cinematic_Ending", StringComparison.OrdinalIgnoreCase); break;
 
                 #endregion Start and End
 
@@ -1224,7 +1214,7 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.MenuDreamGate: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamGate)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamer3: if (menuSplitHelper || mem.PlayerData<int>(Offset.guardiansDefeated) == 3) { goto case SplitName.Menu; } break;
                 case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
-                
+
                 /*
                 case SplitName.MenuCloak:
                     if (mem.PlayerData<bool>(Offset.hasDash)) menuSplitHelper = true;
@@ -2003,7 +1993,7 @@ namespace LiveSplit.HollowKnight {
                     splitAdvanced = true;
                 }
             } else if (action == SplitterAction.Split) {
-                if (currentSplitIndex < 0) { // if start of run
+                if (currentSplitIndex == 0) { // if start of run
                     Model.Start();
                 } else { // if anywhere else in run
                     Model.Split();
@@ -2108,7 +2098,7 @@ namespace LiveSplit.HollowKnight {
         }
 
         public void OnReset(object sender, TimerPhase e) {
-            currentSplitIndex = -1;
+            currentSplitIndex = 0; // index zero now has the auto-start split
             state = 0;
             menuSplitHelper = false;
             lookForTeleporting = false;
@@ -2123,7 +2113,7 @@ namespace LiveSplit.HollowKnight {
             WriteLog("---------Paused---------------------------------");
         }
         public void OnStart(object sender, EventArgs e) {
-            currentSplitIndex = 0;
+            currentSplitIndex = 1;
             state = 0;
             menuSplitHelper = false;
             Model.CurrentState.IsGameTimePaused = true;

@@ -9,8 +9,6 @@ using System.Xml;
 namespace LiveSplit.HollowKnight {
     public partial class HollowKnightSettings : UserControl {
         public List<SplitName> Splits { get; private set; }
-        public bool AutosplitEndRuns { get; set; }
-        public SplitName? AutosplitStartRuns { get; set; }
         private bool isLoading;
         private List<string> availableSplits = new List<string>();
         private List<string> availableSplitsAlphaSorted = new List<string>();
@@ -35,6 +33,7 @@ namespace LiveSplit.HollowKnight {
         private void Settings_Load(object sender, EventArgs e) {
             LoadSettings();
         }
+
         public void LoadSettings() {
             isLoading = true;
             this.flowMain.SuspendLayout();
@@ -42,9 +41,6 @@ namespace LiveSplit.HollowKnight {
             for (int i = flowMain.Controls.Count - 1; i > 0; i--) {
                 flowMain.Controls.RemoveAt(i);
             }
-
-            chkAutosplitEndRuns.Checked = AutosplitEndRuns;
-            chkAutosplitStartRuns.Checked = AutosplitStartRuns != null;
 
             foreach (SplitName split in Splits) {
                 MemberInfo info = typeof(SplitName).GetMember(split.ToString())[0];
@@ -62,6 +58,7 @@ namespace LiveSplit.HollowKnight {
             isLoading = false;
             this.flowMain.ResumeLayout(true);
         }
+
         private void AddHandlers(HollowKnightSplitSettings setting) {
             setting.cboName.SelectedIndexChanged += new EventHandler(ControlChanged);
             setting.btnRemove.Click += new EventHandler(btnRemove_Click);
@@ -133,13 +130,11 @@ namespace LiveSplit.HollowKnight {
             UpdateSplits();
         }
         public void UpdateSplits() {
+
             if (isLoading) return;
 
-            AutosplitEndRuns = chkAutosplitEndRuns.Checked;
-            AutosplitStartRuns = chkAutosplitStartRuns.Checked ?
-                HollowKnightSplitSettings.GetSplitName(cboStartTriggerName.Text) : null;
-
             Splits.Clear();
+
             foreach (Control c in flowMain.Controls) {
                 if (c is HollowKnightSplitSettings) {
                     HollowKnightSplitSettings setting = (HollowKnightSplitSettings)c;
@@ -151,10 +146,12 @@ namespace LiveSplit.HollowKnight {
             }
         }
         public XmlNode UpdateSettings(XmlDocument document) {
+
             XmlElement xmlSettings = document.CreateElement("Settings");
-            
+
             // TODO: have livesplit automatically change starting and ending split to just another split
-            
+
+            /*
             XmlElement xmlAutosplitEndRuns = document.CreateElement("AutosplitEndRuns");
             xmlAutosplitEndRuns.InnerText = AutosplitEndRuns.ToString();
             xmlSettings.AppendChild(xmlAutosplitEndRuns);
@@ -162,6 +159,7 @@ namespace LiveSplit.HollowKnight {
             XmlElement xmlAutosplitStartRuns = document.CreateElement("AutosplitStartRuns");
             xmlAutosplitStartRuns.InnerText = AutosplitStartRuns.ToString();
             xmlSettings.AppendChild(xmlAutosplitStartRuns);
+            */
 
             XmlElement xmlSplits = document.CreateElement("Splits");
             xmlSettings.AppendChild(xmlSplits);
@@ -176,34 +174,49 @@ namespace LiveSplit.HollowKnight {
             return xmlSettings;
         }
         public void SetSettings(XmlNode settings) {
-            XmlNode AutosplitEndRunsNode = settings.SelectSingleNode(".//AutosplitEndRuns");
-            XmlNode AutosplitStartRunsNode = settings.SelectSingleNode(".//AutosplitStartRuns");
-            bool isAutosplitEndRuns = false;
 
-            if (AutosplitEndRunsNode != null) {
-                bool.TryParse(AutosplitEndRunsNode.InnerText, out isAutosplitEndRuns);
-            }
-            if (AutosplitStartRunsNode != null) {
-                string splitDescription = AutosplitStartRunsNode.InnerText.Trim();
-                if (!string.IsNullOrEmpty(splitDescription)) {
-                    cboStartTriggerName.DataSource = GetAvailableSplits();
-                    AutosplitStartRuns = HollowKnightSplitSettings.GetSplitName(splitDescription);
-                    MemberInfo info = typeof(SplitName).GetMember(AutosplitStartRuns.ToString())[0];
-                    DescriptionAttribute description = (DescriptionAttribute)info.GetCustomAttributes(typeof(DescriptionAttribute), false)[0];
-                    cboStartTriggerName.Text = description.Description;
-                    chkAutosplitStartRuns.Checked = true;
-                }
-            }
-            AutosplitEndRuns = isAutosplitEndRuns;
+            Splits.Clear(); // reset the splits
 
-            Splits.Clear();
             XmlNodeList splitNodes = settings.SelectNodes(".//Splits/Split");
             foreach (XmlNode splitNode in splitNodes) {
-                string splitDescription = splitNode.InnerText;
-                SplitName split = HollowKnightSplitSettings.GetSplitName(splitDescription);
+                SplitName split = HollowKnightSplitSettings.GetSplitName(splitNode.InnerText);
                 Splits.Add(split);
             }
+
+            // legacy auto-start and auto-end splits
+
+            XmlNode AutosplitStartRunsNode = settings.SelectSingleNode(".//AutosplitStartRuns"); // will be null if it's the new version (or really really old version, that'll be broken i guess)
+            if (AutosplitStartRunsNode != null) { // if it's the an old .lss file
+                string splitDescription = AutosplitStartRunsNode.InnerText.Trim();
+
+                // if there's an explicit auto-start split, add it to the list, if not, add legacy start
+                if (!string.IsNullOrEmpty(splitDescription)) {
+                    cboStartTriggerName.DataSource = GetAvailableSplits();
+                    Splits.Insert(0, HollowKnightSplitSettings.GetSplitName(splitDescription));
+                } else { // implicit auto-start in .lss, add it to the list
+                    Splits.Insert(0, SplitName.LegacyStart); // add the legacy start split for now
+                }
+
+            }
+
+            XmlNode AutosplitEndRunsNode = settings.SelectSingleNode(".//AutosplitEndRuns"); // will be null if it's the new version... same as above
+            if (AutosplitEndRunsNode != null) { // if it's an old .lss file
+
+                // check if autoend split
+                bool isAutosplitEndRuns = false;
+                bool.TryParse(AutosplitEndRunsNode.InnerText, out isAutosplitEndRuns);
+
+                // if there's an explicit auto-end, leave it, if there's not, add legacy ending split to list
+                if (!isAutosplitEndRuns) {
+                    Splits.Add(SplitName.LegacyEnd);
+                }
+
+            }
+
+            return;
+
         }
+
         private HollowKnightSplitSettings createSetting() {
             HollowKnightSplitSettings setting = new HollowKnightSplitSettings();
             List<string> splitNames = GetAvailableSplits();
@@ -249,12 +262,6 @@ namespace LiveSplit.HollowKnight {
                     }
                 }
             }
-
-            if (chkAutosplitStartRuns.Checked) {
-                string text = cboStartTriggerName.Text;
-                cboStartTriggerName.DataSource = GetAvailableSplits();
-                cboStartTriggerName.Text = text;
-            }
         }
         private void flowMain_DragDrop(object sender, DragEventArgs e) {
             UpdateSplits();
@@ -279,22 +286,6 @@ namespace LiveSplit.HollowKnight {
                     destination.Invalidate();
                 }
             }
-        }
-        private void AutosplitEndChanged(object sender, EventArgs e) {
-            UpdateSplits();
-        }
-
-        private void AutosplitStartChanged(object sender, EventArgs e) {
-            if (chkAutosplitStartRuns.Checked) {
-                cboStartTriggerName.Enabled = true;
-                cboStartTriggerName.DataSource = GetAvailableSplits();
-            }
-            else {
-                cboStartTriggerName.Text = "";
-                cboStartTriggerName.Enabled = false;
-                cboStartTriggerName.DataSource = new List<string>();
-            }
-            UpdateSplits();
         }
 
         private void cboStartTriggerName_SelectedIndexChanged(object sender, EventArgs e) {

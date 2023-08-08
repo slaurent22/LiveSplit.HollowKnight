@@ -29,10 +29,8 @@
             this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.Options_GroupBox = new System.Windows.Forms.GroupBox();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.RunBehaviour_GroupBox = new System.Windows.Forms.GroupBox();
+
             this.cboStartTriggerName = new System.Windows.Forms.ComboBox();
-            this.chkAutosplitStartRuns = new System.Windows.Forms.CheckBox();
-            this.chkAutosplitEndRuns = new System.Windows.Forms.CheckBox();
             this.SortBy_GroupBox = new System.Windows.Forms.GroupBox();
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
@@ -40,7 +38,7 @@
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
-            this.RunBehaviour_GroupBox.SuspendLayout();
+
             this.SortBy_GroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +86,6 @@
             // 
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
             this.Options_GroupBox.Controls.Add(this.versionLabel);
-            this.Options_GroupBox.Controls.Add(this.RunBehaviour_GroupBox);
             this.Options_GroupBox.Controls.Add(this.SortBy_GroupBox);
             this.Options_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.Options_GroupBox.Name = "Options_GroupBox";
@@ -104,19 +101,6 @@
             this.versionLabel.Size = new System.Drawing.Size(182, 24);
             this.versionLabel.TabIndex = 7;
             this.versionLabel.Text = "Autosplitter Version: x.x.x.x";
-            this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // RunBehaviour_GroupBox
-            // 
-            this.RunBehaviour_GroupBox.Controls.Add(this.cboStartTriggerName);
-            this.RunBehaviour_GroupBox.Controls.Add(this.chkAutosplitStartRuns);
-            this.RunBehaviour_GroupBox.Controls.Add(this.chkAutosplitEndRuns);
-            this.RunBehaviour_GroupBox.Location = new System.Drawing.Point(143, 15);
-            this.RunBehaviour_GroupBox.Name = "RunBehaviour_GroupBox";
-            this.RunBehaviour_GroupBox.Size = new System.Drawing.Size(301, 71);
-            this.RunBehaviour_GroupBox.TabIndex = 7;
-            this.RunBehaviour_GroupBox.TabStop = false;
-            this.RunBehaviour_GroupBox.Text = "Explicit Start and End Autosplits (Recommended)";
             // 
             // cboStartTriggerName
             // 
@@ -127,30 +111,6 @@
             this.cboStartTriggerName.Size = new System.Drawing.Size(145, 21);
             this.cboStartTriggerName.TabIndex = 7;
             this.cboStartTriggerName.SelectedIndexChanged += new System.EventHandler(this.cboStartTriggerName_SelectedIndexChanged);
-            // 
-            // chkAutosplitStartRuns
-            // 
-            this.chkAutosplitStartRuns.AutoSize = true;
-            this.chkAutosplitStartRuns.Location = new System.Drawing.Point(6, 17);
-            this.chkAutosplitStartRuns.Name = "chkAutosplitStartRuns";
-            this.chkAutosplitStartRuns.Size = new System.Drawing.Size(139, 17);
-            this.chkAutosplitStartRuns.TabIndex = 6;
-            this.chkAutosplitStartRuns.Text = "Explicit start autosplit:";
-            this.ToolTips.SetToolTip(this.chkAutosplitStartRuns, "The specified autosplit starts the timer\nIt is recommended you turn this on and add a start split for your run");
-            this.chkAutosplitStartRuns.UseVisualStyleBackColor = true;
-            this.chkAutosplitStartRuns.CheckedChanged += new System.EventHandler(this.AutosplitStartChanged);
-            // 
-            // chkAutosplitEndRuns
-            // 
-            this.chkAutosplitEndRuns.AutoEllipsis = true;
-            this.chkAutosplitEndRuns.Location = new System.Drawing.Point(6, 42);
-            this.chkAutosplitEndRuns.Name = "chkAutosplitEndRuns";
-            this.chkAutosplitEndRuns.Size = new System.Drawing.Size(133, 19);
-            this.chkAutosplitEndRuns.TabIndex = 5;
-            this.chkAutosplitEndRuns.Text = "Explicit ending autosplit";
-            this.ToolTips.SetToolTip(this.chkAutosplitEndRuns, "Any autosplit can stop the timer on final split to finish a run\nIt is recommended you turn this on and add an ending split to all runs");
-            this.chkAutosplitEndRuns.UseVisualStyleBackColor = true;
-            this.chkAutosplitEndRuns.CheckedChanged += new System.EventHandler(this.AutosplitEndChanged);
             // 
             // SortBy_GroupBox
             // 
@@ -207,8 +167,6 @@
             this.flowMain.PerformLayout();
             this.flowOptions.ResumeLayout(false);
             this.Options_GroupBox.ResumeLayout(false);
-            this.RunBehaviour_GroupBox.ResumeLayout(false);
-            this.RunBehaviour_GroupBox.PerformLayout();
             this.SortBy_GroupBox.ResumeLayout(false);
             this.SortBy_GroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -222,13 +180,10 @@
         private System.Windows.Forms.FlowLayoutPanel flowOptions;
         private System.Windows.Forms.RadioButton rdType;
         private System.Windows.Forms.RadioButton rdAlpha;
-        private System.Windows.Forms.CheckBox chkAutosplitEndRuns;
         private System.Windows.Forms.GroupBox Options_GroupBox;
         private System.Windows.Forms.ToolTip ToolTips;
         private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.GroupBox RunBehaviour_GroupBox;
         private System.Windows.Forms.GroupBox SortBy_GroupBox;
-        private System.Windows.Forms.CheckBox chkAutosplitStartRuns;
         private System.Windows.Forms.ComboBox cboStartTriggerName;
     }
 }
