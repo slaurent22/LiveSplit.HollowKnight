@@ -59,30 +59,30 @@ namespace LiveSplit.HollowKnight {
     }
     public enum SplitName {
 
-        [Description("[DEPRECATED] Start Run (Start)"), ToolTip("Splits when autosplitter would have previously automatically started runs")]
+        [Description("[DEPRECATED] Start Run (Start)"), ToolTip("Splits when autosplitter version 3 would have automatically started runs")]
         LegacyStart,
 
-        [Description("Start New Game (Start)"), ToolTip("Splits on entry into King's Pass when starting a new game")]
+        [Description("Start New Game (Normal/Steel Soul) (Start)"), ToolTip("Splits on entry into King's Pass when starting a new game")]
         StartNewGame,
-        [Description("Start Pantheon (Start)"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
-        StartPantheon,
         [Description("Start New Godseeker Game (Start)"), ToolTip("Splits when starting a Godseeker save")]
         StartGodhome,
+        [Description("Start Pantheon (Start)"), ToolTip("Splits when starting a Godhome save file or Pantheon run")]
+        StartPantheon,
 
-        [Description("[DEPRECATED] End Run (Ending)"), ToolTip("Splits when autosplitter would have previously automatically ended runs")]
+        [Description("[DEPRECATED] End Run (Ending)"), ToolTip("Splits when autosplitter version 3 would have automatically ended runs")]
         LegacyEnd,
 
-        [Description("Ending A (Ending)"), ToolTip("Splits on The Hollow Knight ending")]
+        [Description("The Hollow Knight (Ending)"), ToolTip("Splits on The Hollow Knight ending")]
         EndingA,
-        [Description("Ending B (Ending)"), ToolTip("Splits on Sealed Siblings ending")]
+        [Description("Sealed Siblings (Ending)"), ToolTip("Splits on Sealed Siblings ending")]
         EndingB,
-        [Description("Ending C (Ending)"), ToolTip("Splits on Dream No More ending")]
+        [Description("Dream No More (Ending)"), ToolTip("Splits on Dream No More ending")]
         EndingC,
-        [Description("Ending D (Ending)"), ToolTip("Splits on Embrace the Void ending")]
+        [Description("Embrace the Void (Ending)"), ToolTip("Splits on Embrace the Void ending")]
         EndingD,
-        [Description("Ending E (Ending)"), ToolTip("Splits on Delicate Flower ending")]
+        [Description("Delicate Flower (Ending)"), ToolTip("Splits on Delicate Flower ending")]
         EndingE,
-        
+
         [Description("Abyss Shriek (Skill)"), ToolTip("Splits when obtaining Abyss Shriek")]
         AbyssShriek,
         [Description("Crystal Heart (Skill)"), ToolTip("Splits when obtaining Crystal Heart")]

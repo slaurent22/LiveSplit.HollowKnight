@@ -395,7 +395,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.RadianceBoss: shouldSplit = mem.PlayerData<bool>(Offset.killedFinalBoss); break;
                 case SplitName.SoulMaster: shouldSplit = mem.PlayerData<bool>(Offset.killedMageLord); break;
                 case SplitName.SoulMasterEncountered: shouldSplit = mem.PlayerData<bool>(Offset.mageLordEncountered); break;
-                case SplitName.SoulMasterPhase1: shouldSplit = mem.PlayerData<bool>(Offset.mageLordEncountered_2); break;
                 case SplitName.TraitorLord: shouldSplit = mem.PlayerData<bool>(Offset.killedTraitorLord); break;
                 case SplitName.Uumuu: shouldSplit = mem.PlayerData<bool>(Offset.killedMegaJellyfish); break;
                 case SplitName.UumuuEncountered: shouldSplit = mem.PlayerData<bool>(Offset.encounteredMegaJelly); break;
@@ -469,7 +468,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.NotchSalubra4: shouldSplit = mem.PlayerData<bool>(Offset.salubraNotch4); break;
                 case SplitName.NotchShrumalOgres: shouldSplit = mem.PlayerData<bool>(Offset.notchShroomOgres); break;
                 case SplitName.NotchGrimm: shouldSplit = mem.PlayerData<bool>(Offset.gotGrimmNotch); break;
-                case SplitName.OnObtainCharmNotch: shouldSplit = store.CheckIncreased(Offset.charmSlots); break;
 
                 // Relics
                 case SplitName.OnObtainWanderersJournal: shouldSplit = store.CheckIncremented(Offset.trinket1); break;
@@ -606,7 +604,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EnterHiveKnight: shouldSplit = nextScene.StartsWith("Hive_05") && nextScene != currScene; break;
                 case SplitName.EnterHornet2: shouldSplit = nextScene.StartsWith("Deepnest_East_Hornet") && nextScene != currScene; break;
                 case SplitName.EnterBroodingMawlek: shouldSplit = nextScene.StartsWith("Crossroads_09") && nextScene != currScene; break;
-                case SplitName.EnterNosk: shouldSplit = nextScene.StartsWith("Deepnest_32") && nextScene != currScene; break;
                 case SplitName.EnterTMG:
                     shouldSplit = nextScene.StartsWith("Grimm_Main_Tent") && nextScene != currScene
                         && mem.PlayerData<int>(Offset.grimmChildLevel) == 2
@@ -619,11 +616,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.MegaMossChargerTrans: shouldSplit = mem.PlayerData<bool>(Offset.megaMossChargerDefeated) && nextScene != currScene; break;
                 case SplitName.ElderHuTrans: shouldSplit = mem.PlayerData<bool>(Offset.killedGhostHu) && nextScene != currScene; break;
                 case SplitName.BlackKnightTrans: shouldSplit = mem.PlayerData<bool>(Offset.killedBlackKnight) && nextScene != currScene; break;
-                case SplitName.BrokenVesselTrans:
-                    shouldSplit = nextScene != currScene
-                        && mem.PlayerData<bool>(Offset.killedInfectedKnight)
-                        && mem.PlayerData<int>(Offset.health) > 0;
-                    break;
                 case SplitName.LumaflyLanternTransition: shouldSplit = mem.PlayerData<bool>(Offset.hasLantern) && !currScene.StartsWith("Room_shop"); break;
 
                 // White palace and path of pain transition splits are in the White Palace & Path of Pain #region
@@ -835,7 +827,7 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.EternalOrdealUnlocked: shouldSplit = mem.PlayerData<bool>(Offset.zoteStatueWallBroken); break;
                 case SplitName.MineLiftOpened: shouldSplit = mem.PlayerData<bool>(Offset.mineLiftOpened); break;
                 case SplitName.PlayerDeath: shouldSplit = mem.PlayerData<int>(Offset.health) == 0; break;
-                case SplitName.RidingStag: shouldSplit = mem.PlayerData<bool>(Offset.travelling) && nextScene != currScene && !store.SplitThisTransition; break;
+                case SplitName.RidingStag: shouldSplit = mem.PlayerData<bool>(Offset.travelling); break;
                 case SplitName.SoulTyrantEssenceWithSanctumGrub:
                     shouldSplit =
                         mem.PlayerData<bool>(Offset.mageLordOrbsCollected)
@@ -1221,7 +1213,6 @@ namespace LiveSplit.HollowKnight {
                 case SplitName.MenuDreamNail: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamNail)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamGate: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasDreamGate)) { goto case SplitName.Menu; } break;
                 case SplitName.MenuDreamer3: if (menuSplitHelper || mem.PlayerData<int>(Offset.guardiansDefeated) == 3) { goto case SplitName.Menu; } break;
-                case SplitName.MenuIsmasTear: if (menuSplitHelper || mem.PlayerData<bool>(Offset.hasAcidArmour)) { goto case SplitName.Menu; }; break;
                 case SplitName.MenuVoidHeart: if (menuSplitHelper || mem.PlayerData<bool>(Offset.gotShadeCharm)) { goto case SplitName.Menu; } break;
 
                 /*
@@ -1263,12 +1254,6 @@ namespace LiveSplit.HollowKnight {
 
                 case SplitName.MenuDreamer3:
                     if (mem.PlayerData<int>(Offset.guardiansDefeated) == 3) menuSplitHelper = true;
-                    if (menuSplitHelper) goto case SplitName.Menu;
-                    shouldSplit = false;
-                    break;
-
-                case SplitName.MenuIsmasTear:
-                    if (mem.PlayerData<bool>(Offset.hasAcidArmour)) menuSplitHelper = true;
                     if (menuSplitHelper) goto case SplitName.Menu;
                     shouldSplit = false;
                     break;
@@ -1336,7 +1321,7 @@ namespace LiveSplit.HollowKnight {
 
                 case SplitName.OnObtainMaskShard:
                     shouldSplit =
-                        store.CheckIncremented(Offset.maxHealthBase)
+                        store.CheckIncremented(Offset.maxHealthBase) // && mem.UIState() != UIState.PLAYING
                         || store.CheckIncremented(Offset.heartPieces) && mem.PlayerData<int>(Offset.heartPieces) < 4;
                     break;
 
@@ -1987,8 +1972,6 @@ namespace LiveSplit.HollowKnight {
                 action = SplitterAction.Skip;
             } else if (shouldSplit) {
                 action = SplitterAction.Split;
-            } else {
-                action = SplitterAction.Pass;
             }
 
             return action;
@@ -1996,7 +1979,11 @@ namespace LiveSplit.HollowKnight {
         }
 
         private void DoAction(SplitterAction action, bool shouldReset = false) {
-            bool splitAdvanced = false;
+
+            var update = () => {
+                store.SplitThisTransition = true;
+                store.Update();
+            };
 
             if (action == SplitterAction.Reset || shouldReset) {
                 if (currentSplitIndex >= 0) {
@@ -2005,7 +1992,7 @@ namespace LiveSplit.HollowKnight {
             } else if (action == SplitterAction.Skip) {
                 if (currentSplitIndex >= 0) {
                     Model.SkipSplit();
-                    splitAdvanced = true;
+                    update();
                 }
             } else if (action == SplitterAction.Split) {
                 if (currentSplitIndex == 0) { // if start of run
@@ -2013,15 +2000,10 @@ namespace LiveSplit.HollowKnight {
                 } else { // if anywhere else in run
                     Model.Split();
                 }
-                splitAdvanced = true;
+                update();
             }
 
-            if (splitAdvanced) {
-                store.SplitThisTransition = true;
-                store.Update();
-            }
-
-        }
+        }//2007
 #endif
         private void LogValues() {
             if (lastLogCheck == 0) {
