@@ -740,6 +740,10 @@ namespace LiveSplit.HollowKnight {
         TransTear,
         [Description("Isma's Tear with Grub (Transition)"), ToolTip("Splits on transition after collecting Isma's Tear and saving the grub in Isma's Grove")]
         TransTearWithGrub,
+        [Description("Has Dream Nail (Transition)"), ToolTip("Splits on transition after Dream Nail acquired")]
+        TransDreamNail,
+        [Description("Has Lantern (Transition)"), ToolTip("Splits on transition after Lumafly Lantern acquired")]
+        TransLumaflyLantern,
         [Description("Junk Pit (Transition)"), ToolTip("Splits on transition into Junk Pit")]
         EnterJunkPit,
         [Description("Hive (Transition)"), ToolTip("Splits on transition to Hive")]
@@ -1128,34 +1132,62 @@ namespace LiveSplit.HollowKnight {
 
         [Description("Whispering Root (Ancestral Mound)"), ToolTip("Splits upon completing the whispering root in the Ancestral Mound")]
         TreeMound,
+        [Description("Ancestral Mound Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Ancestral Mound")]
+        TransTreeMound,
         [Description("Whispering Root (City of Tears)"), ToolTip("Splits upon completing the whispering root in the City of Tears")]
         TreeCity,
+        [Description("City Storerooms Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root in the City of Tears")]
+        MenuTreeCity,
         [Description("Whispering Root (Crystal Peak)"), ToolTip("Splits upon completing the whispering root in Crystal Peak")]
         TreePeak,
+        [Description("Crystal Peak Route (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in Crystal Peak")]
+        TransTreePeak,
         [Description("Whispering Root (Deepnest)"), ToolTip("Splits upon completing the whispering root in Deepnest")]
         TreeDeepnest,
+        [Description("Deepnest Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in Deepnest")]
+        TransTreeDeepnest,
         [Description("Whispering Root (Forgotten Crossroads)"), ToolTip("Splits upon completing the whispering root in the Forgotten Crossroads")]
         TreeCrossroads,
+        [Description("Forgotten Crossroads Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Forgotten Crossroads")]
+        TransTreeCrossroads,
         [Description("Whispering Root (Leg Eater)"), ToolTip("Splits upon completing the whispering root left from Leg Eater")]
         TreeLegEater,
+        [Description("Leg Eater Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root left from Leg Eater")]
+        TransTreeLegEater,
         [Description("Whispering Root (Mantis Village)"), ToolTip("Splits upon completing the whispering root above the Mantis Village")]
         TreeMantisVillage,
+        [Description("Mantis Village Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root above the Mantis Village")]
+        MenuTreeMantisVillage,
         [Description("Whispering Root (Greenpath)"), ToolTip("Splits upon completing the whispering root in Greenpath")]
         TreeGreenpath,
+        [Description("Greenpath Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root in Greenpath")]
+        MenuTreeGreenpath,
         [Description("Whispering Root (Hive)"), ToolTip("Splits upon completing the whispering root in the Hive")]
         TreeHive,
+        [Description("Hive Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root in the Hive")]
+        MenuTreeHive,
         [Description("Whispering Root (Howling Cliffs)"), ToolTip("Splits upon completing the whispering root in the Howling Cliifs")]
         TreeCliffs,
+        [Description("Howling Cliffs Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root in the Howling Cliifs")]
+        MenuTreeCliffs,
         [Description("Whispering Root (Kingdom's Edge)"), ToolTip("Splits upon completing the whispering root in the Kingdom's Edge")]
         TreeKingdomsEdge,
         [Description("Whispering Root (Queen's Gardens)"), ToolTip("Splits upon completing the whispering root in the Queen's Gardens")]
         TreeQueensGardens,
+        [Description("Queen's Gardens Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Queen's Gardens")]
+        TransTreeQueensGardens,
         [Description("Whispering Root (Resting Grounds)"), ToolTip("Splits upon completing the whispering root in the Resting Grounds")]
         TreeRestingGrounds,
+        [Description("Resting Grounds Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Resting Grounds")]
+        TransTreeRestingGrounds,
         [Description("Whispering Root (Royal Waterways)"), ToolTip("Splits upon completing the whispering root in the Royal Waterways")]
         TreeWaterways,
+        [Description("Broken Elevator Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Royal Waterways")]
+        TransTreeWaterways,
         [Description("Whispering Root (Spirits' Glade)"), ToolTip("Splits upon completing the whispering root in the Spirits' Glade")]
         TreeGlade,
+        [Description("Spirits' Glade Root (Menu)"), ToolTip("Splits upon reaching the main menu after completing the whispering root in the Spirits' Glade")]
+        MenuTreeGlade,
 
         [Description("100 Essence (Essence)"), ToolTip("Splits upon obtaining 100 Essence")]
         Essence100,
@@ -1397,6 +1429,16 @@ namespace LiveSplit.HollowKnight {
         MenuGorgeousHusk,
         [Description("Main Menu w/ Isma's Tear (Menu)"), ToolTip("Splits on transition to the main menu after Isma's Tear acquired")]
         MenuIsmasTear,
+        [Description("Main Menu w/ Mothwing Cloak (Menu)"), ToolTip("Splits on transition to the main menu after Mothwing Cloak acquired")]
+        MenuMothwingCloak,
+        [Description("Main Menu w/ Crystal Heart (Menu)"), ToolTip("Splits on transition to the main menu after Crystal Heart acquired")]
+        MenuCrystalHeart,
+        [Description("Main Menu w/ Shade Cloak (Menu)"), ToolTip("Splits on transition to the main menu after Shade Cloak acquired")]
+        MenuShadeCloak,
+        [Description("Main Menu w/ Queen Fragment (Menu)"), ToolTip("Splits on transition to the main menu after White Fragment acquired from White Lady")]
+        MenuWhiteFragmentLeft,
+        [Description("Main Menu w/ Void Heart (Menu)"), ToolTip("Splits on transition to the main menu after Void Heart acquired")]
+        MenuVoidHeart,
         
         [Description("Cornifer at Home (Transition)"), ToolTip("Splits when entering Iselda's hut while Cornifer is sleeping")]
         CorniferAtHome,
