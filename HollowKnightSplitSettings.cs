@@ -1140,7 +1140,7 @@ namespace LiveSplit.HollowKnight {
         MenuTreeCity,
         [Description("Whispering Root (Crystal Peak)"), ToolTip("Splits upon completing the whispering root in Crystal Peak")]
         TreePeak,
-        [Description("Crystal Peak Route (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in Crystal Peak")]
+        [Description("Crystal Peak Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in Crystal Peak")]
         TransTreePeak,
         [Description("Whispering Root (Deepnest)"), ToolTip("Splits upon completing the whispering root in Deepnest")]
         TreeDeepnest,
@@ -1182,7 +1182,7 @@ namespace LiveSplit.HollowKnight {
         TransTreeRestingGrounds,
         [Description("Whispering Root (Royal Waterways)"), ToolTip("Splits upon completing the whispering root in the Royal Waterways")]
         TreeWaterways,
-        [Description("Broken Elevator Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Royal Waterways")]
+        [Description("Royal Waterways Root (Transition)"), ToolTip("Splits upon reaching a transition after completing the whispering root in the Royal Waterways")]
         TransTreeWaterways,
         [Description("Whispering Root (Spirits' Glade)"), ToolTip("Splits upon completing the whispering root in the Spirits' Glade")]
         TreeGlade,
